@@ -7,6 +7,7 @@
   - [Descrição](#descrição)
   - [Funcionalidades](#funcionalidades)
   - [Tipos de usuarios](#tipos-de-usuarios)
+  - [Tecnologias utilizadas](#tecnologias-utilizadas)
 
 ## Descrição
 
@@ -20,3 +21,10 @@ Já na visão do gerente/funcionario, as principais funcionalidades são: adicio
 ## Tipos de usuarios
 
 Os tipos de usuários previstos são os clientes desse respectivo restaurante, e também quem gerencia e trabalha com o sistema.
+
+## Tecnologias utilizadas 
+
+- JavaScript
+- HTML
+- CSS
+- MySQL
