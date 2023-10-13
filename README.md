@@ -2,20 +2,21 @@
 
 >Grupo: Bruno Henrique, Cauã Marcos e Gabriel Furtado. Turma 10A
 
-## Visao geral
+## Visão geral
 
-  - [Descricao](#descricao)
+  - [Descrição](#descrição)
   - [Funcionalidades](#funcionalidades)
-  - [Tipos usuarios](#tipos-usuarios)
+  - [Tipos de usuarios](#tipos-de-usuarios)
 
-## Descricao
+## Descrição
 
-O sistema é um sistema web que permite a realização de pedidos de um determinado restaurante online.
+Consiste em um sistema web que permite a realização de pedidos de um determinado restaurante mexicano online.
 
 ## Funcionalidades
 
-As principais funcionalidades são: visualizar o cardápio, realizar o pedido e efetuar o pagamento.
+As principais funcionalidades na visão do cliente são: visualizar o cardápio, realizar o pedido e efetuar o pagamento.
+Já na visão do gerente/funcionario, as principais funcionalidades são: adicionar, alterar e excluir produtos, como também visualizar pedidos.
 
-## Tipos usuarios
+## Tipos de usuarios
 
-Os tipos de usuários previstos são clientes desse respectivo restaurante, e também quem gerencia o sistema web.
+Os tipos de usuários previstos são os clientes desse respectivo restaurante, e também quem gerencia e trabalha com o sistema.
