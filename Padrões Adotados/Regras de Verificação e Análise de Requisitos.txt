@@ -1,0 +1,6 @@
+Características do Requisitos:
+	Nomenclatura: RNF
+	Regras a serem seguidas:
+		- Defina somente um requisito por vez
+		- Evite frases grandes
+		- Utilize um vocabulário fechado
