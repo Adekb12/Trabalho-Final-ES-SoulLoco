@@ -1,5 +1,6 @@
 Características do Requisitos:
-	Nomenclatura: RNF
+	Nomenclatura: RF é utilizado para identificar Requisitos Funcionais e RNF é utilizado para identificar Requisitos 	Não Funcionais. 
+		      Ambas siglas vem acompahada de um número que é o identificador único do requisitos.
 	Regras a serem seguidas:
 		- Defina somente um requisito por vez
 		- Evite frases grandes
