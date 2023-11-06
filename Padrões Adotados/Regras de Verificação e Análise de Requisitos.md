@@ -17,5 +17,8 @@
 
 - Definir somente um requisito por vez
 - Evitar frases grandes
+
+   Limite de 15 palavras
 - Utilizar um vocabulário fechado
+  
 
