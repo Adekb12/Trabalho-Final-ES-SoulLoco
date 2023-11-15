@@ -10,6 +10,7 @@
   - [Tecnologias utilizadas](#tecnologias-utilizadas)
   - [Regras para os Commits](#regras-para-os-commits)
   - [Regras para os Branches](#regras-para-os-branches)
+  - [Regras para boas práticas](#regras-para-boas-praticas)
 
 ## Descrição
 
@@ -88,4 +89,30 @@ referenciar as issues do GitHub que este commit **Close**.
 O modelo será composto por dois branches, o principal e o de features:
 
 - O origin/master é o branch principal que vai sempre refletir o estado do código do projeto em produção;
-- Features branches são usados para desenvolver novas funcionalidades para um realease futuro. Esses branches existem enquanto a funcionalidade está sendo desenvolvida, mas acabará quando essa for mesclada de volta ao branch principal 
+- Features branches são usados para desenvolver novas funcionalidades para um realease futuro. Esses branches existem enquanto a funcionalidade está sendo desenvolvida, mas acabará quando essa for mesclada de volta ao branch principal
+
+## Regras para boas práticas
+
+### Padrão de Notação de Código
+
+**Regra:** Adotar e manter um padrão consistente de notação de código em todo o projeto. Utilizar camelCase para variáveis, PascalCase para nomes de classes, e seguir outras convenções de nomenclatura para garantir consistência e clareza no código.
+
+### Comentários e Documentação
+
+**Regra:** Incluir comentários relevantes quando necessário para explicar trechos complexos ou algoritmos. Evitar comentários redundantes e priorizar um código autoexplicativo.
+
+### Princípios SOLID
+
+**Regra:** Aplicar os princípios SOLID no design de código para promover a coesão e a flexibilidade, principalmente com relação ao princípio da responsabilidade única.
+
+### CLEAN CODE
+
+**Regra:** Seguir as diretrizes do CLEAN CODE, mantendo funções curtas e focadas, evitando duplicação de código, escolhendo nomes descritivos e adotando outras práticas que contribuem para um código claro, legível e de fácil manutenção.
+
+### Testes Unitários
+
+**Regra:** Escrever testes unitários para validar a funcionalidade correta do código. Adotar práticas de Desenvolvimento Orientado a Testes (TDD) quando possível para garantir que o código seja testado desde o início do desenvolvimento.
+
+### Controle de Versão
+
+**Regra:** Utilizar um sistema de controle de versão, como Git, para rastrear mudanças no código. Realizar commits frequentes e significativos, proporcionando um histórico claro e reversível das alterações. Integrar a colaboração e facilitar a gestão do desenvolvimento em equipe.
