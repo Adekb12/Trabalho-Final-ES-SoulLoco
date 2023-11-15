@@ -1,6 +1,14 @@
 CREATE TABLE cardapio (
-    titulo VARCHAR(100) PRIMARY KEY,
+    nome VARCHAR(100) PRIMARY KEY,
     imagem VARCHAR(255) NOT NULL,
-    descricao VARCHAR(255),
+    descricao TEXT,
     preco DECIMAL(10, 2) NOT NULL
 );
+
+
+{
+    "nome":  ,
+    "imagem":  ,
+    "descricao":  ,
+    "preco":  
+}
