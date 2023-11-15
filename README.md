@@ -10,7 +10,7 @@
   - [Tecnologias utilizadas](#tecnologias-utilizadas)
   - [Regras para os Commits](#regras-para-os-commits)
   - [Regras para os Branches](#regras-para-os-branches)
-  - [Regras para boas práticas](#regras-para-boas-praticas)
+  - [Regras para boas práticas](#regras-para-boas-práticas)
 
 ## Descrição
 
