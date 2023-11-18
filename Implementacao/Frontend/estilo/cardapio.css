@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+* {
+    color: white;
+}
+
+body {
+    height: 89vh;
+    background-image: url('../imagens/fundo02.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 40px;
+    padding-top: 10px;
+}
+
+div {
+    background-color: rgba(0, 0, 0, 0.623);
+    width: 380px;
+    padding: 2px 10px 2px 10px;
+    border-radius: 25px;
+    text-align: center;
+    margin: 0px 0px 20px 0px;
+}
+
+#laranja {
+    color:  rgb(221, 108, 2);
+}
+
+.icone {
+    height: 40px;
+    margin-left: 25px;
+}
+
+form {
+    position: absolute;
+    left: 77%;
+    top: 0%;
+}
+
+form > p {
+    text-align: right;
+}
+
+.formHeader {
+    width: 250px;
+    height: 50px;
+    border-radius: 30px;
+    border: 0px;
+    font-family: 'Montserrat';
+    font-style: italic;
+}
+
+#historico {
+    background-color: #50301E;
+    margin-bottom: 10px;
+}
+
+#historico:hover {
+    background-color: #964B00;
+}
+
+#detalhes {
+    background-color: rgb(221, 108, 2);
+}
+
+#detalhes:hover {
+    background-color: rgb(250, 164, 66);
+}
+
+main {
+    background-color: rgba(165, 42, 42, 0.432);
+    max-width: fit-content;
+    padding: 10px;
+    margin: auto;
+    border-radius: 25px;
+}

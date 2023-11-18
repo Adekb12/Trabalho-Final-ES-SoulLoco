@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    height: 95vh;
+    background-image: url('../imagens/fundo01.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+form {
+    height: 350px;
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(237, 232, 241, 0.534);
+    border-radius: 25px;
+    position: relative;
+    left: 70%;
+    top: 18%
+}
+
+h1 {
+    color: rgb(221, 108, 2);
+    font-family: 'Montserrat';
+    font-style: italic;
+}
+
+input {
+    height: 30px;
+    width: 110px;
+    border: 0px;
+    padding: 8px;
+    margin-top: 25px;
+    border-radius: 25px;
+    font-size: medium;
+}
+
+.campoDigitavel {
+    width: 260px;
+}   
+
+#cadastrar {
+    background-color: rgb(221, 108, 2);
+    color: white;
+    margin-right: 20px;
+    height: 40px;
+}
+
+#cadastrar:hover {
+    background-color: rgb(250, 164, 66);
+}
+
+#entrar {
+    background-color: rgb(148, 6, 6);
+    color: white;
+    height: 40px;
+}
+
+#entrar:hover {
+    background-color: red;
+}
