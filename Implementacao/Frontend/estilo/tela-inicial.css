@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+* {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    height: fit-content;
+    background-image: url('../imagens/fundo01.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 30px;
+}
+
+form {
+    font-size: 1.6em;
+    font-style: italic;
+    height: 280px;
+    width: 900px;
+    margin: auto;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.87);
+    border-radius: 30px;
+    padding: 150px 100px;
+}
+
+input {
+    height: 45px;
+    width: 200px;
+    border: 0px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 25px;
+    font-size: medium;
+}
+
+#texto {
+    font-family: 'Montserrat';
+    color: rgb(221, 108, 2);
+}
+
+#realizar {
+    background-color: rgb(221, 108, 2);
+    margin-right: 40px;
+}
+
+#realizar:hover {
+    background-color: rgb(250, 164, 66);
+}
+
+#sair {
+    background-color: rgb(148, 6, 6);
+}
+
+#sair:hover {
+    background-color: red;
+}

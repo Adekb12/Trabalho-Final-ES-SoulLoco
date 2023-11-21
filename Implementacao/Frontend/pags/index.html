@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bem-Vindo</title>
     <link rel="stylesheet" href="../estilo/index.css">
+    <script defer src="../script/login.js"></script>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="/umarota" method="post" data-form>
         <h1>Bem-Vindo</h1>
         <p>
             <input class="campoDigitavel" type="email" name="email" id="idemail" required placeholder="Digite seu e-mail" autocomplete="email">
@@ -18,7 +19,7 @@
         </p>
         <p>
             <input id="cadastrar" type="submit" value="Cadastrar">
-            <input id="entrar" type="submit" value="Entrar">
+            <input id="entrar" type="submit" value="Entrar" data-button>
         </p>
     </form>
 </body>
