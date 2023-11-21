@@ -9,7 +9,6 @@ CREATE TABLE cardapio (
 create table cliente (
     idCliente SERIAL PRIMARY KEY NOT NULL,
     nome VARCHAR(100) NOT NULL,
-    cpf VARCHAR(11) UNIQUE NOT NULL,
     email VARCHAR(200) UNIQUE NOT NULL,
     senha VARCHAR(100) NOT NULL
 );
@@ -26,7 +25,7 @@ CREATE TABLE endereco (
     FOREIGN KEY (idCliente) REFERENCES cliente(idCliente)
 );
 
-CREATE TABLE pedidos (
+CREATE TABLE pedidw (
     idPedido SERIAL PRIMARY KEY NOT NULL,
     idCliente INT NOT NULL,
     idEndereco INT,
