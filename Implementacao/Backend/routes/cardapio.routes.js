@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('', cardapioController.visualizarItens)
 router.post('', cardapioController.adicionarItem)
-router.delete('/:nome', cardapioController.removerItem)
-router.put('/:nome', cardapioController.alterarItem)
+router.delete('/:idItem', cardapioController.removerItem)
+router.put('/:idItem', cardapioController.alterarItem)
 
 export default router

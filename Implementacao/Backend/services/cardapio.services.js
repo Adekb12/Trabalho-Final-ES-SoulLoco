@@ -7,8 +7,9 @@ async function visualizarItens() {
 async function adicionarItem(nome, imagem, descricao, preco) {
     //regras de negócio
     var resultado = null;
-    var isItem = await cardapioPersistence.existeItem(nome)
-    if (!isItem) {
+    var isNItem = await cardapioPersistence.existeNomeItem(nome)
+
+    if (!isNItem) {
         resultado = await cardapioPersistence.adicionarItem(nome, imagem, descricao, preco)
     }
 
@@ -16,25 +17,27 @@ async function adicionarItem(nome, imagem, descricao, preco) {
 }
 
 //!!!!!!!!!!!!!!!!!!!
-async function removerItem(nome) {
+async function removerItem(idItem) {
     //regras de negócio ///// vai ter que adicionaar a verificação se o item está presente em algum pedido antes dde removê-lo
 
     var resultado = null;
-    var isItem = await cardapioPersistence.existeItem(nome)
-    if (isItem) {
-        resultado = await cardapioPersistence.removerItem(nome)
+    var isItem = await cardapioPersistence.existeItem(idItem)
+    var isITemPedido = await cardapioPersistence.existeItemPedido(idItem)
+    if (isItem && !isITemPedido) {
+        resultado = await cardapioPersistence.removerItem(idItem)
     }
 
     return resultado
 }
 
-async function alterarItem(nomeNew, imagem, descricao, preco, nomeOld) {
+async function alterarItem(idItem, nome, imagem, descricao, preco) {
 
     //regras de negócio
     var resultado = null;
-    var isItem1 = await cardapioPersistence.existeItem(nomeOld)
-    if (isItem1) {
-        resultado = await cardapioPersistence.alterarItem(nomeNew, imagem, descricao, preco, nomeOld)
+    var isItem = await cardapioPersistence.existeItem(idItem)
+    var isNR = await cardapioPersistence.existeNomeRepetido(idItem, nome);
+    if (isItem && !isNR) {
+        resultado = await cardapioPersistence.alterarItem(idItem, nome, imagem, descricao, preco)
     }
 
     return resultado

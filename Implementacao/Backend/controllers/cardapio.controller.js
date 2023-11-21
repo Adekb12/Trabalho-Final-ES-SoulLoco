@@ -2,7 +2,6 @@ import cardapioServices from '../services/cardapio.services.js'
 
 async function visualizarItens(req, res) {
     const resultado = await cardapioServices.visualizarItens()
-
     res.send(JSON.stringify(resultado))
 }
 
@@ -41,25 +40,34 @@ function ehPrecoValido(preco) {
 
 ////
 async function removerItem(req, res) {
-    const nome = req.params.nome;
+    const idItem = req.params.idItem;
     //validar os dados ??????????????????????????
     var resultado = null
-    resultado = await cardapioServices.removerItem(nome);
+    resultado = await cardapioServices.removerItem(idItem);
     res.send(resultado)
 }
 
 async function alterarItem(req, res) {
-    const nomeNew = req.body.nome;
+    const idItem = req.params.idItem;
+    const nome = req.body.nome;
     const imagem = req.body.imagem;
     const descricao = req.body.descricao;
     const preco = req.body.preco;
-    const nomeOld = req.params.nome;
 
     //validar os dados
 
     //chamada para Services
-    const resultado = await cardapioServices.alterarItem(nomeNew, imagem, descricao, preco, nomeOld);
+    var resultado = null;
+    if(ehPrecoValido(preco) && ehNomeValido(nome)){
+        resultado = await cardapioServices.alterarItem(idItem, nome, imagem, descricao, preco);
+    }
     res.send(resultado)
+}
+function ehNomeValido(nome){
+    if(nome == ' ' || nome.size >100){
+        return false;
+    }
+    return true;
 }
 
 export default { visualizarItens, adicionarItem, removerItem, alterarItem };
