@@ -6,7 +6,7 @@ async function criarPedido(req, res) {
     const statusPedido = "Andamento";
 
     var resultado = null;
-    resultado = await perdidosServices.criarPedido(idCliente, dataPedido, statusPedido);
+    resultado = await pedidosServices.criarPedido(idCliente, dataPedido, statusPedido);
 
     res.send(resultado)
 }
@@ -17,10 +17,16 @@ async function visualizarPedidos(req, res) {
     res.send(JSON.stringify(resultado))
 }
 
+async function visualizarPedidosCliente(req, res) {
+    const idCliente = req.params.idCliente;
+    const resultado = await pedidosServices.visualizarPedidosCliente(idCliente)
+
+    res.send(JSON.stringify(resultado))
+}
+
 async function cancelarPedido(req, res) {
     const idPedido = req.params.idPedido;
 
-    //validar os dados ??????????????????????????
     var resultado = null
     if (pedidosServices.existePedido(idPedido)) {
         resultado = await pedidosServices.cancelarPedido(idPedido);
@@ -29,4 +35,4 @@ async function cancelarPedido(req, res) {
     res.send(resultado)
 }
 
-export default { criarPedido, visualizarPedidos, cancelarPedido };
+export default { criarPedido, visualizarPedidos, visualizarPedidosCliente, cancelarPedido };

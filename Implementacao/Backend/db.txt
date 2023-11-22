@@ -25,7 +25,7 @@ CREATE TABLE endereco (
     FOREIGN KEY (idCliente) REFERENCES cliente(idCliente)
 );
 
-CREATE TABLE pedidw (
+CREATE TABLE pedidos (
     idPedido SERIAL PRIMARY KEY NOT NULL,
     idCliente INT NOT NULL,
     idEndereco INT,

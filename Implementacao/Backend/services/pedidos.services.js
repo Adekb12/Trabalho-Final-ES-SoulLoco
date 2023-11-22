@@ -11,6 +11,10 @@ async function visualizarPedidos() {
     return await pedidosPersistence.visualizarPedidos()
 }
 
+async function visualizarPedidosCliente(idCliente) {
+    return await pedidosPersistence.visualizarPedidosCliente(idCliente)
+}
+
 async function existePedido(idPedido) {
     //regras de negócio
     var resultado = null;
@@ -26,4 +30,4 @@ async function cancelarPedido(idPedido) {
     return resultado
 }
 
-export default { criarPedido, visualizarPedidos, existePedido, cancelarPedido }
+export default { criarPedido, visualizarPedidos, visualizarPedidosCliente, existePedido, cancelarPedido }

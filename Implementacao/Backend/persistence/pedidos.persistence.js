@@ -33,6 +33,22 @@ async function visualizarPedidos() {
     return resultado
 }
 
+async function visualizarPedidosCliente(idCliente) {
+    var resultado = null;
+    const conn = await BD.conectar();
+    try {
+        var query = await conn.query("select* from pedidos where idCliente=$1", [idCliente]);
+        console.log(query.rows)
+        resultado = query.rows;
+    } catch (err) {
+        console.log(err)
+    } finally {
+        conn.release()
+    }
+
+    return resultado
+}
+
 async function existePedido(idPedido) {
     // conectar no BD
     // executar operação SQL
@@ -67,4 +83,4 @@ async function cancelarPedido(idPedido) {
 
     return resultado
 }
-export default { criarPedido, visualizarPedidos, existePedido, cancelarPedido }
+export default { criarPedido, visualizarPedidos, visualizarPedidosCliente, existePedido, cancelarPedido }
