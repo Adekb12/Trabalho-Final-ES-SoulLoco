@@ -1,14 +1,46 @@
 CREATE TABLE cardapio (
-    nome VARCHAR(100) PRIMARY KEY,
+    idItem SERIAL PRIMARY KEY NOT NULL,
+    nome VARCHAR(100) NOT NULL,
     imagem VARCHAR(255) NOT NULL,
     descricao TEXT,
     preco DECIMAL(10, 2) NOT NULL
 );
 
+create table cliente (
+    idCliente SERIAL PRIMARY KEY NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
 
-{
-    "nome":  ,
-    "imagem":  ,
-    "descricao":  ,
-    "preco":  
-}
+CREATE TABLE endereco (
+    idEndereco SERIAL PRIMARY KEY NOT NULL,
+    idCliente INT NOT NULL,
+    logradouro VARCHAR(250) NOT NULL,
+    numero INT NOT NULL,
+    cep VARCHAR(9) NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    bairro VARCHAR(100) NOT NULL,
+    FOREIGN KEY (idCliente) REFERENCES cliente(idCliente)
+);
+
+CREATE TABLE pedidos (
+    idPedido SERIAL PRIMARY KEY NOT NULL,
+    idCliente INT NOT NULL,
+    idEndereco INT,
+    dataPedido DATE,
+    statusPedido VARCHAR(50),
+    FOREIGN KEY (idCliente) REFERENCES cliente(idCliente),
+    FOREIGN KEY (idEndereco) REFERENCES endereco(IDEndereco)
+);
+
+
+CREATE TABLE itensPedidos (
+    idItemPedido SERIAL PRIMARY KEY NOT NULL,
+    idPedido INT NOT NULL,
+    idItemCardapio INT NOT NULL,
+    quantidade INT NOT NULL,
+    FOREIGN KEY (idPedido) REFERENCES pedidos(idPedido),
+    FOREIGN KEY (idItemCardapio) REFERENCES cardapio(idItem)
+);

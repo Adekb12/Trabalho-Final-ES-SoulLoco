@@ -1,41 +1,23 @@
 import clientePersistence from "../persistence/cliente.persistence.js";
 
-async function getTodosCliente(){ 
+async function logarCliente(email, senha) {
     //regras de negócio
     //chama persistence
-    return await clientePersistence.getTodosCliente()
-}
-
-async function getUmCliente(cpf){ 
-    //regras de negócio
-    //chama persistence
-    return await clientePersistence.getUmCliente(cpf)
-}
-
-async function criaCliente(cpf, nome, salario, nasc){
-    // //regras de negócio
-    // var cliente = null;
-    // cliente = await getUmCliente(cpf)
-    // //chama persistence
-    // var resultado = null;
-    // if(cliente === null){
-    //     resultado = await clientePersistence.criaCliente(cpf,nome,salario,nasc)
-    // }
     var resultado = null;
-    resultado = await clientePersistence.criaCliente(cpf,nome,salario,nasc)
+    if (await clientePersistence.existeCliente(email)) {
+        resultado = await clientePersistence.logarCliente(email, senha)
+    }
     return resultado
 }
 
-async function excluiCliente(cpf){ 
-    //regras de negócio
-    //chama persistence
-    return await clientePersistence.excluiCliente(cpf)
-}
-
-async function alteraCliente(cpfNew, nome, salario, nasc, cpfOld){
+async function criaCliente(nome, email, senha) {
     var resultado = null;
-    resultado = await clientePersistence.alteraCliente(cpfNew,nome,salario,nasc,cpfOld)
+    if (!await clientePersistence.existeCliente(email)) {
+        resultado = await clientePersistence.criarCliente(nome, email, senha)
+    }
+
     return resultado
 }
 
-export default {getTodosCliente, criaCliente, getUmCliente, excluiCliente, alteraCliente}
+
+export default { criaCliente, logarCliente }
