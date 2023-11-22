@@ -30,7 +30,7 @@ Os tipos de usuários previstos são os clientes desse respectivo restaurante, e
 - JavaScript
 - HTML
 - CSS
-- MySQL
+- ElephantSQL
 
 ## Regras para os Commits
 Deve-se estruturar a mensagem do commit da seguinte forma:
