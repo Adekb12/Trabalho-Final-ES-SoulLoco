@@ -3,16 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soul Loco</title>
-    <link rel="stylesheet" href="../estilo/cardapio.css">
+    <link rel="stylesheet" href="../estilo/cardapio-cliente.css">
     <script>
         const params = new URLSearchParams(window.location.search);
-        // Obtém o valor do parâmetro 'idCliente'
         const idPedido = params.get('idPedido');
-
-        // Agora, 'idCliente' contém o valor passado na URL
         console.log('ID do Pedido:', idPedido);
     </script>
 </head>
@@ -22,7 +18,7 @@
         <div>
             <p id="laranja">
                 Bem-vindo ao Soul Loco!<br>
-                Aqui o sabor vem com a alma mexicana <br><br>
+                Aqui o sabor vem com a alma mexicana <br>
             </p>
             <p>
                 Selcione os itens que você gostaria de pedir e clique em <br>
@@ -32,8 +28,7 @@
         <form action="" method="post">
             <p>
                 <button onclick=""><img class="icone" src="../imagens/home.png" alt="Principal" srcset=""></button>
-                <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair"
-                        srcset=""></button><br>
+                <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair" srcset=""></button><br>
                 <input id="historico" class="formHeader" type="submit" value="Visualizar Histórico de Pedidos"><br>
                 <input id="detalhes" class="formHeader" type="submit" value="Visualizar Detalhes do Pedido">
             </p>
