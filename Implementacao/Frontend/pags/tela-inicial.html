@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soul Loco</title>
     <link rel="stylesheet" href="../estilo/tela-inicial.css">
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        // Obtém o valor do parâmetro 'idCliente'
+        const idCliente = params.get('idCliente');
+
+        // Agora, 'idCliente' contém o valor passado na URL
+        console.log('ID do Cliente:', idCliente);</script>
 </head>
+
 <body>
     <form action="" method="post">
         <p id="texto">
@@ -19,4 +28,5 @@
         </p>
     </form>
 </body>
+
 </html>
