@@ -5,7 +5,7 @@ async function criarPedido(idCliente, dataPedido, statusPedido) {
     var resultado = null;
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("insert into pedidos (idCliente, dataPedido, statusPedido) values ($1, $2, $3) returning *", [idCliente, dataPedido, statusPedido]);
+        var query = await conn.query("insert into pedidos (idCliente, dataPedido, statusPedido) values ($1, $2, $3) returning idPedido", [idCliente, dataPedido, statusPedido]);
         console.log(query.rows)
         resultado = query.rows;
     } catch (err) {

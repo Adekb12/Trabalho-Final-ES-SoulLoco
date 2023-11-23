@@ -33,7 +33,7 @@
                     } else {
                         // Se a resposta contiver dados (por exemplo, um id), redirecione para outra página
                         const idCliente = response.data[0].idcliente;
-                        window.location.href = `tela-inicial.html?${idCliente}`;
+                        window.location.href = `tela-inicial.html?idCliente=${idCliente}`;
                         // Faça o redirecionamento para outra página aqui
                     }
                 } catch (error) {

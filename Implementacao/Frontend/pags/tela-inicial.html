@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soul Loco</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="../estilo/tela-inicial.css">
     <script>
         const params = new URLSearchParams(window.location.search);
@@ -13,7 +14,43 @@
         const idCliente = params.get('idCliente');
 
         // Agora, 'idCliente' contém o valor passado na URL
-        console.log('ID do Cliente:', idCliente);</script>
+        console.log('ID do Cliente:', idCliente);
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            document.getElementById('realizar').addEventListener('click', realizar);
+            document.getElementById('sair').addEventListener('click', sair);
+
+            async function realizar() {
+                const dataAtual = new Date();
+
+                // Formata a data como uma string no formato "AAAA-MM-DD"
+                const dataPedido = `${dataAtual.getFullYear()}-${(dataAtual.getMonth() + 1).toString().padStart(2, '0')}-${dataAtual.getDate().toString().padStart(2, '0')}`;
+
+                try {
+                    const response = await axios.post(`http://localhost:3000/pedidos/${idCliente}`, {
+                        dataPedido: dataPedido
+                    });
+
+                    if (response.data.length === 0) {
+                        console.log('Não foi possível criar um pedido');
+                    } else {
+                        const idPedido = response.data[0].idpedido;
+                        window.location.href = `cardapio.html?idPedido=${idPedido}`;
+                        // Faça o redirecionamento para outra página aqui
+                    }
+                } catch (error) {
+                    // Trate os erros, se necessário
+                    console.error('Erro na requisição:', error);
+                }
+            }
+
+            async function sair() {
+                console.log("Entrou em sair!!")
+                window.location.href = `index.html`;
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -23,8 +60,8 @@
             Deseja realizar o seu pedido? <br> <br> <br> <br> <br>
         </p>
         <p>
-            <input id="realizar" type="submit" value="Realizar pedido">
-            <input id="sair" type="submit" value="Sair">
+            <input id="realizar" type="button" value="Realizar pedido">
+            <input id="sair" type="button" value="Sair">
         </p>
     </form>
 </body>
