@@ -17,6 +17,7 @@ body {
 
 div {
     background-color: rgba(0, 0, 0, 0.623);
+    height: fit-content;
     width: 380px;
     padding: 2px 10px;
     border-radius: 25px;
@@ -26,6 +27,7 @@ div {
 
 #laranja {
     color:  rgb(221, 108, 2);
+    line-height: 30px;
 }
 
 .icone {
