@@ -6,6 +6,7 @@ async function visualizarItens() {
     try {
         var query = await conn.query("select* from cardapio");
         resultado = query.rows;
+        console.log(resultado)
     } catch (err) {
         console.log(err)
     } finally {
@@ -104,11 +105,12 @@ async function removerItem(idItem) {
     var resultado = null;
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("delete from cardapio where idItem=$1 returning *", [idItem]);
+        var query = await conn.query("delete from cardapio where idItem=$1", [idItem]);
         console.log(query.rows)
-        resultado = query.rows;
+        resultado = { success: true, mensagem: "Removido com sucesso!" };
     } catch (err) {
         console.log(err)
+        resultado = { success: false, mensagem: "Erro ao remover do DB" };
     } finally {
         conn.release()
     }

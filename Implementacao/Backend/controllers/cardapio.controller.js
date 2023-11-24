@@ -43,7 +43,6 @@ function ehPrecoValido(preco) {
 ////
 async function removerItem(req, res) {
     const idItem = req.params.idItem;
-    //validar os dados ??????????????????????????
     var resultado = null
     resultado = await cardapioServices.removerItem(idItem);
     res.send(resultado)

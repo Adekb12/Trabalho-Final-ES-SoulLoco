@@ -1,54 +1,66 @@
+@charset "UTF-8";
+
+* {
+    border: 0px;
+}
+
 #cardapio-container {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    /* Ou utilize 'space-between' para distribuir os itens uniformemente */
     gap: 20px;
 }
 
 .card-item {
+    display: flex;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
-    width: 300px;
+    width: 1200px;
+    align-items: stretch;
 }
 
 .card-item-imagem {
-    width: 100%;
+    height: 150px;
+    width: 300px;
     border-radius: 8px;
 }
 
 .card-item-nome {
-    margin-top: 10px;
-    text-decoration-color: aqua;
+    color: white;
+    font-family: 'Montserrat';
+    font-style: italic;
+    text-align: center;
 }
 
 .card-item-descricao {
+    color: white;
+    font-family: 'Montserrat';
+    font-style: italic;
+    font-size: medium;
     margin: 10px 0;
 }
 
 .card-item-preco {
+    color: white;
+    font-family: 'Montserrat';
+    font-style: italic;
+    font-size: medium;
     margin: 10px;
 }
 
 .card-item-editar {
-    /* background-color: #3498db; */
     color: #fff;
     border: none;
     padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 .card-item-remover {
-    /* background-color: #3498db; */
     color: #fff;
     border: none;
     padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 .card-item-icone {

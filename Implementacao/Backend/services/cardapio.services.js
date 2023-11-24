@@ -25,6 +25,8 @@ async function removerItem(idItem) {
     var isITemPedido = await cardapioPersistence.existeItemPedido(idItem)
     if (isItem && !isITemPedido) {
         resultado = await cardapioPersistence.removerItem(idItem)
+    }else{
+        resultado = { success: false, mensagem: "Item está em algum pedido"}
     }
 
     return resultado

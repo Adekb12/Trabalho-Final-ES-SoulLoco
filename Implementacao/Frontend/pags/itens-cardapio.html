@@ -4,10 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio</title>
+    <link rel="stylesheet" href="../estilo/itens-cardapio-gerente.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+
+            // document.getElementById('botaoRemover').addEventListener('click', function(){
+            //     const idItem = this.getAttribute('dataidItem');
+            //     removerItem(idItem);
+            // });
+
+            // Função para carregar os itens do cardápio
+            async function carregarItensCardapio() {
+                try {
+                    // Fazer uma requisição para o backend para obter os itens do cardápio
+                    const response = await axios.get(`http://localhost:3000/cardapio`);
+
+                    // Preencher a página com os itens do cardápio
+                    const cardapioContainer = document.querySelector('#cardapio-container');
+                    response.data.forEach(item => {
+                        const cardItem = document.createElement('div');
+                        cardItem.id = `cardapio-item-${item.idItem}`;
+                        cardItem.classList.add('card-item');
+                        cardItem.innerHTML = `
+                            <img class="card-item-imagem" src="${item.imagem}" alt="${item.nome}" >
+
+                            <p class="coluna1">
+                                <h2 class="card-item-nome">${item.nome}</h2>
+                                <p class="card-item-descricao">${item.descricao}</p>
+                            </p>
+
+                            <p class="card-item-preco">R$ ${item.preco}</p>
+
+                            <button onclick="editarItem(${item.idItem})"><img class="card-item-icone-editar" src="../icones/iconeEditar.svg" alt="Editar item"></button>
+                            
+                            <button id="botaoRemover" dataidItem=${item.idItem}><img class="card-item-icone" src="../icones/iconeLixeira.svg" alt="Remover item"</button>
+                        `;
+                        cardapioContainer.appendChild(cardItem);
+                    });
+                } catch (error) {
+                    console.error('Erro ao carregar itens do cardápio:', error);
+                }
+            }
+
+            // Chamar a função para carregar os itens do cardápio quando a página é carregada
+            carregarItensCardapio();
+
+            // Funções para editar e remover itens (a serem implementadas)
+            function editarItem(idItem) {
+                // Implemente a lógica para editar o item com o idItem fornecido
+                console.log(`Editar item com id ${idItem}`);
+            }
+
+            async function removerItem(idItem) {
+                try {
+                    // Fazer uma requisição para o backend para remover o item do cardápio
+                    const response = await axios.delete(`http://localhost:3000/cardapio/${idItem}`);
+
+                    // Verificar se a remoção foi bem-sucedida
+                    if (response.data.success) {
+                        // Remover o elemento HTML correspondente ao item do cardápio
+                        const cardItem = document.getElementById(`cardapio-item-${idItem}`);
+                        if (cardItem) {
+                            cardItem.remove();
+                        } else {
+                            console.error('Elemento do cardápio não encontrado para remoção:', idItem);
+                        }
+                    } else {
+                        console.error('Erro ao remover item do cardápio:', response.data.message);
+                    }
+                } catch (error) {
+                    console.error('Erro ao remover item do cardápio:', error);
+                }
+            }
+        });
+    </script>
 </head>
 <body>
-    <form action="" method="post">
-        
-    </form>
+    <div id="cardapio-container"></div>
 </body>
 </html>
