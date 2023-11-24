@@ -29,16 +29,18 @@
                         cardItem.innerHTML = `
                             <img class="card-item-imagem" src="${item.imagem}" alt="${item.nome}" >
 
-                            <p class="coluna1">
-                                <h2 class="card-item-nome">${item.nome}</h2>
-                                <p class="card-item-descricao">${item.descricao}</p>
+                            <p class="texto">
+                                <span class="titulo">${item.nome}</span> <br> <br> <br>
+                                ${item.descricao}
                             </p>
 
-                            <p class="card-item-preco">R$ ${item.preco}</p>
+                            <p class="card-item-preco"><span id="menor">Preço:</span> <br> <br> R$ ${item.preco}</p>
 
-                            <button onclick="editarItem(${item.idItem})"><img class="card-item-icone-editar" src="../icones/iconeEditar.svg" alt="Editar item"></button>
-                            
-                            <button id="botaoRemover" dataidItem=${item.idItem}><img class="card-item-icone" src="../icones/iconeLixeira.svg" alt="Remover item"</button>
+                            <p>
+                                <button id="editar" onclick="editarItem(${item.idItem})"><img class="card-item-icone" src="../imagens/editar.png" alt="Editar item"></button> <br>
+                                
+                                <button id="remover" dataidItem=${item.idItem}><img class="card-item-icone" src="../imagens/lixeira.png" alt="Remover item"</button>
+                            </p>
                         `;
                         cardapioContainer.appendChild(cardItem);
                     });
@@ -83,4 +85,11 @@
 <body>
     <div id="cardapio-container"></div>
 </body>
+<dialog>
+    <p>Deseja realmente remover esse item?</p>
+        <p>
+            <input id="confirmar" type="button" value="Confirmar">
+            <input id="cancelar" type="button" value="Cancelar">
+        </p>
+</dialog>
 </html>

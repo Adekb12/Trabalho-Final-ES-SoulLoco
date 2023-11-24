@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-Vindo</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../estilo/editar-item.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('cadastrar').addEventListener('click', cadastrar);
+
+            async function cadastrar() {
+                var nome = document.getElementById('idnome').value;
+                var email = document.getElementById('idemail').value;
+                var senha = document.getElementById('idsenha').value;
+
+                try {
+                    const response = await axios.post(`http://localhost:3000/usuarios/${email}`, {
+                        nome: nome,
+                        senha: senha,
+                        isCliente: true
+                    });
+
+                    if (response.data.length === 0) {
+                        console.log('O e-mail já existe. Avisar o usuário ou realizar outra ação.');
+                    } else {
+
+                        const idCliente = response.data[0].idusuario;
+                        window.location.href = `tela-inicial.html?idCliente=${idCliente}`;
+                    }
+                } catch (error) {
+                    console.error('Erro na requisição:', error);
+                }
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <form action="http://localhost:3000/usuarios" method="post">
+        <label for="imagem">Alterar imagem</label>
+        <input type="file">
+        <div>
+            <p>
+                <label for="nome">Nome</label><br>
+                <input class="campoDigitavel" type="text" name="nome" id="idnome" required placeholder="Digite seu nome">
+            </p>
+            <p>
+                <label for="email">E-mail</label><br>
+                <input class="campoDigitavel" type="email" name="email" id="idemail" required
+                    placeholder="Digite seu e-mail">
+            </p>
+            <p>
+                <label for="senha">Senha</label><br>
+                <input class="campoDigitavel" type="password" name="senha" id="idsenha" required minlength="8"
+                    placeholder="Digite sua senha">
+            </p>
+            <p>
+                <input id="cadastrar" type="button" value="Cadastrar">
+            </p>
+        </div>
+    </form>
+
+</body>
+
+</html>
