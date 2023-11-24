@@ -1,6 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import clienteRouter from './routes/cliente.routes.js'
+import usuariosRouter from './routes/usuarios.routes.js'
 import cardapioRouter from './routes/cardapio.routes.js'
 import pedidosRouter from './routes/pedidos.routes.js'
 import itensPedidosRouter from './routes/itensPedidos.routes.js'
@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extend: true }))
 
-app.use("/cliente", clienteRouter)
+app.use("/usuarios", usuariosRouter)
 app.use("/cardapio", cardapioRouter)
 app.use("/pedidos", pedidosRouter)
 app.use("/pedidos/itensPedidos", itensPedidosRouter)

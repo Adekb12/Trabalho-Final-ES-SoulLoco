@@ -35,11 +35,9 @@
                         console.log('Não foi possível criar um pedido');
                     } else {
                         const idPedido = response.data[0].idpedido;
-                        window.location.href = `cardapio.html?idPedido=${idPedido}`;
-                        // Faça o redirecionamento para outra página aqui
+                        window.location.href = `cardapio-cliente.html?idPedido=${idPedido}`;
                     }
                 } catch (error) {
-                    // Trate os erros, se necessário
                     console.error('Erro na requisição:', error);
                 }
             }

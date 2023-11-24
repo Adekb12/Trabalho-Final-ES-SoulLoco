@@ -1,14 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bem-Vindo</title>
     <link rel="stylesheet" href="../estilo/index.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            document.getElementById('cadastrar').addEventListener('click', cadastrar);
+            document.getElementById('entrar').addEventListener('click', entrar);
+
+            async function entrar() {
+                var email = document.getElementById('idemail').value;
+                var senha = document.getElementById('idsenha').value;
+                try {
+                    const response = await axios.post(`http://localhost:3000/usuarios`, {
+                        email: email,
+                        senha: senha
+                    });
+
+                    if (response.data.success) {
+                        const usuario = response.data.usuario;
+                        const idUsuario = usuario.idUsuario;
+                        const isCliente = usuario.isCliente;
+                        if (isCliente) {
+                            window.location.href = `tela-inicial.html?idCliente=${idUsuario}`
+                        } else {
+                            window.location.href = `cardapio-gerente.html`
+                        }
+                    } else {
+                        if (response.data.mensagem == "Email nao cadastrado") {
+                            console.log("Email usuário não cadastrado")
+                            //tratar para aparecer uma mensagem para o usuário que ele ainda não se cadastrou no sistema
+                        } else if (response.data.mensagem == "Senha incorreta") {
+                            console.log("Senha do usuário incorreta")
+                            //tratar para aparecer uma mensagem para o usuário que a senha está incorreta
+                        } else {
+                            console.error('Erro no login:', response.data.mensagem);
+                        }
+
+                    }
+                } catch (error) {
+                    console.error('Erro na requisição:', error);
+                }
+            }
+
+            async function cadastrar() {
+                window.location.href = `cadastro.html`;
+            }
+        });
+    </script>
 </head>
+
 <body>
-    <form action="http://localhost:3000/cliente" method="post">
+    <form action="http://localhost:3000/usuarios" method="post">
         <h1>Bem-Vindo</h1>
         <p>
             <input class="campoDigitavel" type="email" name="email" id="idemail" required
@@ -19,9 +67,10 @@
                 placeholder="Digite sua senha">
         </p>
         <p>
-            <input id="cadastrar" type="submit" value="Cadastrar">
-            <input id="entrar" type="button" value="Entrar" onclick="logar()">
+            <input id="cadastrar" type="button" value="Cadastrar">
+            <input id="entrar" type="button" value="Entrar">
         </p>
     </form>
 </body>
+
 </html>

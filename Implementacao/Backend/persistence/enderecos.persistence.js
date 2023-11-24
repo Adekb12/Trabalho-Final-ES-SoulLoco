@@ -4,7 +4,7 @@ async function visualizarEnderecos(idCliente) {
     var resultado = null;
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("select* from endereco where idCliente=$1", [idCliente]);
+        var query = await conn.query("select* from enderecos where idCliente=$1", [idCliente]);
         console.log(query.rows)
         resultado = query.rows;
     } catch (err) {
@@ -21,7 +21,7 @@ async function adicionarEndereco(idCliente, logradouro, numero, cep, estado, cid
     var resultado = null;
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("insert into endereco (idCliente, logradouro, numero, cep, estado, cidade, bairro) values ($1, $2, $3, $4, $5, $6, $7) returning *", [idCliente, logradouro, numero, cep, estado, cidade, bairro]);
+        var query = await conn.query("insert into enderecos (idCliente, logradouro, numero, cep, estado, cidade, bairro) values ($1, $2, $3, $4, $5, $6, $7) returning *", [idCliente, logradouro, numero, cep, estado, cidade, bairro]);
         console.log(query.rows)
         resultado = query.rows;
     } catch (err) {
@@ -40,7 +40,7 @@ async function removerEndereco(idEndereco) {
     var resultado = null;
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("delete from endereco where idEndereco=$1 returning *", [idEndereco]);
+        var query = await conn.query("delete from enderecos where idEndereco=$1 returning *", [idEndereco]);
         console.log(query.rows)
         resultado = query.rows;
     } catch (err) {

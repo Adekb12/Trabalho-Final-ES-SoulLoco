@@ -7,36 +7,30 @@
     <title>Bem-Vindo</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="../estilo/cadastro.css">
-    <!-- <script type="module" src="../script/login.js"></script> -->
     <script>
-        // Aguarde o carregamento completo do documento
         document.addEventListener('DOMContentLoaded', function () {
-            // Associe a função cadastrar ao evento de clique do botão
             document.getElementById('cadastrar').addEventListener('click', cadastrar);
 
-            // Defina a função cadastrar
             async function cadastrar() {
                 var nome = document.getElementById('idnome').value;
                 var email = document.getElementById('idemail').value;
                 var senha = document.getElementById('idsenha').value;
 
                 try {
-                    const response = await axios.post(`http://localhost:3000/cliente/${email}`, {
+                    const response = await axios.post(`http://localhost:3000/usuarios/${email}`, {
                         nome: nome,
-                        senha: senha
+                        senha: senha,
+                        isCliente: true
                     });
 
                     if (response.data.length === 0) {
-                        // Se a resposta estiver vazia, você pode avisar o usuário ou fazer outra ação
                         console.log('O e-mail já existe. Avisar o usuário ou realizar outra ação.');
                     } else {
-                        // Se a resposta contiver dados (por exemplo, um id), redirecione para outra página
-                        const idCliente = response.data[0].idcliente;
+
+                        const idCliente = response.data[0].idusuario;
                         window.location.href = `tela-inicial.html?idCliente=${idCliente}`;
-                        // Faça o redirecionamento para outra página aqui
                     }
                 } catch (error) {
-                    // Trate os erros, se necessário
                     console.error('Erro na requisição:', error);
                 }
             }
@@ -45,7 +39,7 @@
 </head>
 
 <body>
-    <form action="http://localhost:3000/cliente" method="post">
+    <form action="http://localhost:3000/usuarios" method="post">
         <h1>Cadastre-se</h1>
         <p>
             <label for="nome">Nome</label><br>
@@ -53,7 +47,8 @@
         </p>
         <p>
             <label for="email">E-mail</label><br>
-            <input class="campoDigitavel" type="email" name="email" id="idemail" required placeholder="Digite seu e-mail">
+            <input class="campoDigitavel" type="email" name="email" id="idemail" required
+                placeholder="Digite seu e-mail">
         </p>
         <p>
             <label for="senha">Senha</label><br>

@@ -6,14 +6,15 @@ CREATE TABLE cardapio (
     preco DECIMAL(10, 2) NOT NULL
 );
 
-create table cliente (
-    idCliente SERIAL PRIMARY KEY NOT NULL,
+create table usuarios (
+    idUsuario SERIAL PRIMARY KEY NOT NULL,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(200) UNIQUE NOT NULL,
-    senha VARCHAR(100) NOT NULL
+    senha VARCHAR(100) NOT NULL,
+    isCliente BOOLEAN NOT NULL
 );
 
-CREATE TABLE endereco (
+CREATE TABLE enderecos (
     idEndereco SERIAL PRIMARY KEY NOT NULL,
     idCliente INT NOT NULL,
     logradouro VARCHAR(250) NOT NULL,
@@ -22,7 +23,7 @@ CREATE TABLE endereco (
     estado VARCHAR(50) NOT NULL,
     cidade VARCHAR(100) NOT NULL,
     bairro VARCHAR(100) NOT NULL,
-    FOREIGN KEY (idCliente) REFERENCES cliente(idCliente)
+    FOREIGN KEY (idCliente) REFERENCES usuarios(idUsuario)
 );
 
 CREATE TABLE pedidos (
@@ -31,8 +32,8 @@ CREATE TABLE pedidos (
     idEndereco INT,
     dataPedido DATE,
     statusPedido VARCHAR(50),
-    FOREIGN KEY (idCliente) REFERENCES cliente(idCliente),
-    FOREIGN KEY (idEndereco) REFERENCES endereco(IDEndereco)
+    FOREIGN KEY (idCliente) REFERENCES usuarios(idUsuario),
+    FOREIGN KEY (idEndereco) REFERENCES enderecos(IDEndereco)
 );
 
 
