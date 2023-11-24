@@ -1,0 +1,62 @@
+#cardapio-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Ou utilize 'space-between' para distribuir os itens uniformemente */
+    gap: 20px;
+}
+
+.card-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 300px;
+}
+
+.card-item-imagem {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card-item-nome {
+    margin-top: 10px;
+    text-decoration-color: aqua;
+}
+
+.card-item-descricao {
+    margin: 10px 0;
+}
+
+.card-item-preco {
+    margin: 10px;
+}
+
+.card-item-editar {
+    /* background-color: #3498db; */
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.card-item-remover {
+    /* background-color: #3498db; */
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.card-item-icone {
+    width: 20px;
+    height: 20px;
+    fill: #F6F6F6;
+}
+
+.card-item-:hover {
+    background-color: #2980b9;
+}

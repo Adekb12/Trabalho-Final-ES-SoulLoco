@@ -1,7 +1,9 @@
 import cardapioServices from '../services/cardapio.services.js'
 
 async function visualizarItens(req, res) {
-    const resultado = await cardapioServices.visualizarItens()
+    var resultado = null
+    resultado = await cardapioServices.visualizarItens()
+    console.log(resultado)
     res.send(JSON.stringify(resultado))
 }
 
@@ -58,13 +60,13 @@ async function alterarItem(req, res) {
 
     //chamada para Services
     var resultado = null;
-    if(ehPrecoValido(preco) && ehNomeValido(nome)){
+    if (ehPrecoValido(preco) && ehNomeValido(nome)) {
         resultado = await cardapioServices.alterarItem(idItem, nome, imagem, descricao, preco);
     }
     res.send(resultado)
 }
-function ehNomeValido(nome){
-    if(nome == ' ' || nome.size >100){
+function ehNomeValido(nome) {
+    if (nome == ' ' || nome.size > 100) {
         return false;
     }
     return true;

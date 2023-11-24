@@ -1,11 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soul Loco</title>
     <link rel="stylesheet" href="../estilo/cardapio-gerente.css">
+    <link rel="stylesheet" href="../estilo/itens-cardapio-gerente.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Função para carregar os itens do cardápio
+            async function carregarItensCardapio() {
+                try {
+                    // Fazer uma requisição para o backend para obter os itens do cardápio
+                    const response = await axios.get(`http://localhost:3000/cardapio`);
+
+                    // Preencher a página com os itens do cardápio
+                    const cardapioContainer = document.querySelector('#cardapio-container');
+                    response.data.forEach(item => {
+                        const cardItem = document.createElement('div');
+                        cardItem.classList.add('card-item');
+                        cardItem.innerHTML = `
+                            <img class="card-item-imagem" src="${item.imagem}" alt="${item.nome}" >
+                            <h3 class="card-item-nome">${item.nome}</h3>
+                            <p class="card-item-descricao">${item.descricao}</p>
+                            <p class="card-item-preco">R$ ${item.preco}</p>
+                            <button onclick="editarItem(${item.idItem})"><img class="card-item-icone-editar" src="../icones/iconeEditar.svg" alt="Editar item"></button>
+                            <button onclick="removerItem(${item.idItem})"><img class="card-item-icone" src="../icones/iconeLixeira.svg" alt="Remover item"</button>
+                        `;
+                        cardapioContainer.appendChild(cardItem);
+                    });
+                } catch (error) {
+                    console.error('Erro ao carregar itens do cardápio:', error);
+                }
+            }
+
+            // Chamar a função para carregar os itens do cardápio quando a página é carregada
+            carregarItensCardapio();
+
+            // Funções para editar e remover itens (a serem implementadas)
+            function editarItem(idItem) {
+                // Implemente a lógica para editar o item com o idItem fornecido
+                console.log(`Editar item com id ${idItem}`);
+            }
+
+            function removerItem(idItem) {
+                // Implemente a lógica para remover o item com o idItem fornecido
+                console.log(`Remover item com id ${idItem}`);
+            }
+        });
+    </script>
 </head>
+
 <body>
     <header>
         <div>
@@ -20,15 +67,18 @@
         </div>
         <form action="" method="post">
             <p>
-                <button onclick=""><img class="icone" src="../imagens/home.png" alt="Principal" srcset=""></button> 
-                <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair" srcset=""></button><br><br><br>
+                <button onclick=""><img class="icone" src="../imagens/home.png" alt="Principal" srcset=""></button>
+                <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair"
+                        srcset=""></button><br><br><br>
                 <input id="add" class="formHeader" type="submit" value="Adicionar Item">
                 <input id="live" class="formHeader" type="submit" value="Pedidos em andamento">
             </p>
         </form>
     </header>
     <main>
-        <iframe src="itens-cardapio.html" frameborder="0"></iframe>
+        <!-- <iframe src="itens-cardapio.html" frameborder="0"></iframe> -->
+        <div id="cardapio-container"></div>
     </main>
 </body>
+
 </html>

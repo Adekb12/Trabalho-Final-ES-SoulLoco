@@ -5,7 +5,6 @@ async function visualizarItens() {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("select* from cardapio");
-        console.log(query.rows)
         resultado = query.rows;
     } catch (err) {
         console.log(err)
