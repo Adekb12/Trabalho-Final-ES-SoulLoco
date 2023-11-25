@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../estilo/editar-item.css">
+    <link rel="stylesheet" href="../estilo/adicionar-item.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Editar item</title>
     <script>
@@ -20,7 +20,7 @@
                 window.location.href = `itens-cardapio-gerente.html`
             });
 
-            document.querySelector('.btn-edit').addEventListener('click', function () {
+            document.querySelector('.btn-add').addEventListener('click', function () {
                 // Obtém os valores atuais dos campos do formulário
                 const imagemAtual = document.getElementById('imageInput').value;
                 const nomeAtual = document.getElementById('nameInput').value;
@@ -69,24 +69,24 @@
 
         <!-- Campo para inserir a imagem ou o caminho -->
         <div class="form-group">
-            <label for="imageInput">Novo caminho(URL) da imagem:</label>
+            <label for="imageInput">Caminho(URL) da imagem:</label>
             <input type="text" id="imageInput" name="imageInput">
         </div>
 
         <!-- Formulário com a classe "form-container" adicionada -->
         <div class="form-container">
             <div class="form-group">
-                <label for="nameInput">Novo nome:</label>
+                <label for="nameInput">Nome:</label>
                 <input type="text" id="nameInput" name="nameInput">
             </div>
 
             <div class="form-group">
-                <label for="descriptionInput">Nova descrição:</label>
+                <label for="descriptionInput">Descrição:</label>
                 <input type="text" id="descriptionInput" name="descriptionInput">
             </div>
 
             <div class="form-group">
-                <label for="priceInput">Novo preço:</label>
+                <label for="priceInput">Preço:</label>
                 <input type="text" id="priceInput" name="priceInput">
             </div>
         </div>
@@ -94,7 +94,7 @@
         <!-- Botões -->
         <div class="btn-container">
             <div class="btn-cancel">Cancelar</div>
-            <div class="btn-edit">Alterar</div>
+            <div class="btn-add">Adicionar</div>
         </div>
     </div>
 

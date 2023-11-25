@@ -4,7 +4,7 @@ async function visualizarItens() {
     var resultado = null;
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("select* from cardapio");
+        var query = await conn.query("select* from cardapio order by nome");
         resultado = query.rows;
         console.log(resultado)
     } catch (err) {

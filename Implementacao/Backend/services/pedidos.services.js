@@ -25,8 +25,10 @@ async function existePedido(idPedido) {
 async function cancelarPedido(idPedido) {
 
     var resultado = null;
-    resultado = await pedidosPersistence.cancelarPedido(idPedido)
-
+    //verifica se o pedido nao esta vazio para ser cancelado
+    if (existePedido(idPedido)){
+        resultado = await pedidosPersistence.cancelarPedido(idPedido)
+    }
     return resultado
 }
 

@@ -48,18 +48,13 @@ body {
     margin-top: 20px;
 }
 
-/* .btn {
-    padding: 10px 20px;
-    cursor: pointer;
-} */
-
 .btn-cancel {
     padding: 10px 20px;
     cursor: pointer;
     background-color: #ee0e0e;
 }
 
-.btn-edit {
+.btn-add {
     padding: 10px 20px;
     cursor: pointer;
     background-color: #4caf50;

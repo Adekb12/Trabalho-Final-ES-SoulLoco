@@ -26,12 +26,8 @@ async function visualizarPedidosCliente(req, res) {
 
 async function cancelarPedido(req, res) {
     const idPedido = req.params.idPedido;
-
     var resultado = null
-    if (pedidosServices.existePedido(idPedido)) {
-        resultado = await pedidosServices.cancelarPedido(idPedido);
-    }
-
+    resultado = await pedidosServices.cancelarPedido(idPedido);
     res.send(resultado)
 }
 
