@@ -18,7 +18,7 @@ async function adicionarItemPedido(idPedido, idItemCardapio, quantidade) {
 async function removerItemPedido(idPedido, idItemCardapio) {
 
     var resultado = null;
-    //verifica se exitem pelo menos um item no pedido para ser remover=
+    //verifica se exitem pelo menos um item no pedido para remover
     var existeItem = await itensPedidosPersistence.existeItemPedido(idPedido)
     if(existeItem){
         resultado = await itensPedidosPersistence.removerItemPedido(idPedido, idItemCardapio)
