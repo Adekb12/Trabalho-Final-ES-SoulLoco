@@ -13,6 +13,14 @@ body {
     background-attachment: fixed;
     padding: 10px 30px;
     margin: 0px;
+    display: flex;
+    flex-flow: column;
+    height: 95vh;
+}
+
+header {
+    flex-grow: 0;
+    flex-basis: auto;
 }
 
 div {
@@ -41,6 +49,10 @@ button {
     margin-left: 25px;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 form {
     height: fit-content;
     width: 450px;
@@ -49,7 +61,7 @@ form {
     top: 2%;
 }
 
-form>p {
+form > p {
     text-align: right;
 }
 
@@ -84,10 +96,12 @@ main {
     padding: 20px;
     margin: auto;
     border-radius: 25px;
-    min-height: 100vh;
+    flex-grow: 1;
+    flex-basis: auto;
+    width: 90vw;
 }
 
 iframe {
-    height: 410px;
+    height: 100%;
     width: 1270px;
 }
