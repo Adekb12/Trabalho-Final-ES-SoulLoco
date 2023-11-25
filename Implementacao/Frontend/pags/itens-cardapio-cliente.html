@@ -33,12 +33,14 @@
 
                             <p class="card-item-preco"><span id="menor">Preço:</span> <br> <br> R$ ${item.preco}</p>
 
-                            <div id="quantidade">
-                                <label for="qtd">QTD:</label>
-                                <input id="qtd" placeholder="0"></input>
-                                <p id="icone">
-                                    <button class="adicionar" data-id="${item.iditem}" data-img="${item.imagem}" data-nm="${item.nome}" data-dcs="${item.descricao}" data-pc="${item.preco}"><img id="add" src="../imagens/mais.png" alt="Adicionar unidade"></button>
-                                </p>
+                            <div id="ultima">
+                                <div id="quantidade">
+                                    <label for="qtd">QTD:</label>
+                                    <input id="qtd" placeholder="0"></input>
+                                    <p id="icone">
+                                        <button class="adicionar" data-id="${item.iditem}" data-img="${item.imagem}" data-nm="${item.nome}" data-dcs="${item.descricao}" data-pc="${item.preco}"><img id="add" src="../imagens/mais.png" alt="Adicionar unidade"></button>
+                                    </p>
+                                </div>
                             </div>
                         `;
                         cardapioContainer.appendChild(cardItem);

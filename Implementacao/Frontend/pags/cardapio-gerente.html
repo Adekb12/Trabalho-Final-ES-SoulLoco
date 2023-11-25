@@ -12,25 +12,28 @@
 
 <body>
     <header>
-        <div>
-            <p id="laranja">
-                Bem-vindo ao Soul Loco!<br>
-                Aqui o sabor vem com a alma mexicana <br>
-            </p>
-            <p>
-                Selcione os itens que você gostaria de pedir e clique em <br>
-                "Visualizar Detalhes do Pedido" para realizar o pedido
-            </p>
+        <div id="container">
+            <div>
+                <p id="laranja">
+                    Bem-vindo ao Soul Loco!<br>
+                    Aqui o sabor vem com a alma mexicana <br> <br>
+                </p>
+                <p>
+                    Selcione os itens que você gostaria de pedir e clique em <br>
+                    "Visualizar Detalhes do Pedido" para realizar o pedido
+                </p>
+            </div>
         </div>
-        <form action="" method="post">
-            <p>
-                <button onclick=""><img class="icone" src="../imagens/home.png" alt="Principal" srcset=""></button>
-                <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair"
-                        srcset=""></button><br><br><br>
-                <input id="add" class="formHeader" type="submit" value="Adicionar Item">
-                <input id="live" class="formHeader" type="submit" value="Pedidos em andamento">
-            </p>
-        </form>
+        <div id="menu">
+            <form method="post">
+                <p>
+                    <button onclick=""><img class="icone" src="../imagens/home.png" alt="Principal"></button>
+                    <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair"></button><br><br><br>
+                    <input id="add" class="botaoForm" type="submit" value="Adicionar Item">
+                    <input id="live" class="botaoForm" type="submit" value="Pedidos em andamento">
+                </p>
+            </form>
+        </div>
     </header>
     <main>
         <iframe src="itens-cardapio-gerente.html" frameborder="0"></iframe>

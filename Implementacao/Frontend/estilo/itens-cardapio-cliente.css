@@ -20,7 +20,7 @@
 
 .card-item-imagem {
     height: 150px;
-    width: 300px;
+    width: 20%;
     border-radius: 8px;
     margin-right: 20px;
 }
@@ -30,7 +30,7 @@
 }
 
 .texto {
-    width: 600px;
+    width: 60%;
     color: white;
     font-family: 'Montserrat';
     font-style: italic;
@@ -43,13 +43,12 @@
     background-color: rgb(221, 108, 2);
     padding: 10px;
     height: fit-content;
-    width: 100px;
+    width: 8%;
     border-radius: 10px;
     font-family: 'Montserrat';
     font-style: italic;
     font-size: medium;
     margin: 40px 40px;
-    align-items: center;
 }
 
 #menor {
@@ -60,6 +59,13 @@
     text-align: center;
     font-family: 'Montserrat';
     font-style: italic;
+}
+
+#ultima {
+    height: fit-content;
+    width: 12%;
+    margin-top: 15px;
+    text-align: right;
 }
 
 #icone {

@@ -64,6 +64,7 @@ button:hover {
 }
 
 #menu {
+    width: 20%;
     padding: 0px;
     text-align: right;
     background-color: transparent;
