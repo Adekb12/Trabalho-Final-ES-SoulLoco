@@ -94,11 +94,10 @@ form > p {
 main {
     background-color: rgba(165, 42, 42, 0.432);
     padding: 20px;
-    margin: auto;
     border-radius: 25px;
     flex-grow: 1;
     flex-basis: auto;
-    width: 90vw;
+    width: 93vw;
 }
 
 iframe {

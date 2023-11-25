@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio</title>
+    <link rel="stylesheet" href="../estilo/itens-cardapio-cliente.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const cardapioContainer = document.querySelector('#cardapio-container');
+            // Função para carregar os itens do cardápio
+            async function carregarItensCardapio() {
+                try {
+                    // Fazer uma requisição para o backend para obter os itens do cardápio
+                    const response = await axios.get(`http://localhost:3000/cardapio`);
+                    // Preencher a página com os itens do cardápio
+
+                    response.data.forEach(item => {
+                        const cardItem = document.createElement('div');
+                        cardItem.id = item.iditem;
+                        //console.log(item.iditem)
+                        cardItem.classList.add('card-item');
+                        cardItem.innerHTML = `
+                            <img class="card-item-imagem" src="${item.imagem}" alt="${item.nome}" >
+
+                            <p class="texto">
+                                <span class="titulo">${item.nome}</span> <br> <br> <br>
+                                ${item.descricao}
+                            </p>
+
+                            <p class="card-item-preco"><span id="menor">Preço:</span> <br> <br> R$ ${item.preco}</p>
+
+                            <p>
+                                <button class="adicionar" data-id="${item.iditem}" data-img="${item.imagem}" data-nm="${item.nome}" data-dcs="${item.descricao}" data-pc="${item.preco}"><img id="add" src="../imagens/mais.png" alt="Adicionar unidade"></button> <br>
+                                
+                                <button class="reduzir" data-id="${item.iditem}" data-nome="${item.nome}"><img id="less" src="../imagens/menos.png" alt="Reduzir unidade"</button>
+                            </p>
+                        `;
+                        cardapioContainer.appendChild(cardItem);
+                    });
+                } catch (error) {
+                    console.error('Erro ao carregar itens do cardápio:', error);
+                }
+            }
+            // Chamar a função para carregar os itens do cardápio quando a página é carregada
+            carregarItensCardapio();
+        });
+    </script>
+</head>
+
+<body>
+    <div id="cardapio-container"></div>
+</body>
+
+</html>
