@@ -2,6 +2,8 @@
 
 * {
     color: white;
+    margin: 0px;
+    padding: 0px;
 }
 
 body {
@@ -13,16 +15,32 @@ body {
     background-attachment: fixed;
     padding: 10px 30px;
     margin: 0px;
+    display: flex;
+    flex-flow: column;
+    height: 95vh;
+}
+
+header {
+    display: flex;
+    flex-grow: 0;
+    flex-basis: auto;
+    padding-bottom: 20px;
+}
+
+#container {
+    height: fit-content;
+    width: 80%;
+    background-color: transparent;
+    margin: 0px;
+    padding: 0px;
 }
 
 div {
     background-color: rgba(0, 0, 0, 0.623);
-    height: fit-content;
     width: 380px;
-    padding: 2px 10px;
+    padding: 20px;
     border-radius: 25px;
     text-align: center;
-    margin: 0px 0px 20px 0px;
 }
 
 #laranja {
@@ -35,7 +53,7 @@ div {
 }
 
 button {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
     width: 50px;
     border: 0px;
     margin-left: 25px;
@@ -45,10 +63,10 @@ button:hover {
     cursor: pointer;
 }
 
-form {
-    position: absolute;
-    left: 79%;
-    top: 0%;
+#menu {
+    padding: 0px;
+    text-align: right;
+    background-color: transparent;
 }
 
 form > p {

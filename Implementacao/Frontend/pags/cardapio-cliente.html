@@ -15,24 +15,28 @@
 
 <body>
     <header>
-        <div>
-            <p id="laranja">
-                Bem-vindo ao Soul Loco!<br>
-                Aqui o sabor vem com a alma mexicana <br>
-            </p>
-            <p>
-                Selcione os itens que você gostaria de pedir e clique em <br>
-                "Visualizar Detalhes do Pedido" para realizar o pedido
-            </p>
+        <div id="container">
+            <div>
+                <p id="laranja">
+                    Bem-vindo ao Soul Loco!<br>
+                    Aqui o sabor vem com a alma mexicana <br> <br>
+                </p>
+                <p>
+                    Selcione os itens que você gostaria de pedir e clique em <br>
+                    "Visualizar Detalhes do Pedido" para realizar o pedido
+                </p>
+            </div>
         </div>
-        <form method="post">
-            <p>
-                <button onclick=""><img class="icone" src="../imagens/home.png" alt="Principal" srcset=""></button>
-                <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair" srcset=""></button><br>
-                <input id="historico" class="formHeader" type="submit" value="Visualizar Histórico de Pedidos"><br>
-                <input id="detalhes" class="formHeader" type="submit" value="Visualizar Detalhes do Pedido">
-            </p>
-        </form>
+        <div id="menu">
+            <form method="post">
+                <p>
+                    <button onclick=""><img class="icone" src="../imagens/home.png" alt="Principal" srcset=""></button>
+                    <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair" srcset=""></button><br>
+                    <input id="historico" class="formHeader" type="submit" value="Visualizar Histórico de Pedidos"><br>
+                    <input id="detalhes" class="formHeader" type="submit" value="Visualizar Detalhes do Pedido">
+                </p>
+            </form>
+        </div>
     </header>
     <main>
         <iframe src="itens-cardapio-cliente.html" frameborder="0"></iframe>

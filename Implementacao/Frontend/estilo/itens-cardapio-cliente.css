@@ -15,7 +15,7 @@
     background-color: rgb(221, 71, 2);
     border-radius: 8px;
     padding: 10px;
-    width: 1200px;
+    width: 98%;
 }
 
 .card-item-imagem {
@@ -62,8 +62,7 @@
     font-style: italic;
 }
 
-#icones {
-    display: flex;
+#icone {
     height: fit-content;
     margin: 0px;
 }
@@ -73,7 +72,7 @@ label {
     font-size: medium;
 }
 
-output {
+input {
     background-color: white;
     margin-top: 10px;
     font-size: larger;
@@ -87,7 +86,7 @@ output {
 }
 
 button {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
     margin: 0px;
 }
 
@@ -97,11 +96,4 @@ button:hover {
 
 #add {
     height: 50px;
-    margin-right: 10px;
-}
-
-#less {
-    margin-top: 12px;
-    height: 38px;
-    padding-left: 5px;
 }
