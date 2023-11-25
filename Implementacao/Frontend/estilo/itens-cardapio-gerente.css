@@ -57,7 +57,7 @@
 }
 
 button {
-    background-color: rgba(0, 0, 0, 0); 
+    background-color: rgba(0, 0, 0, 0);
 }
 
 button:hover {
@@ -68,6 +68,10 @@ button:hover {
     margin-bottom: 20px;
 }
 
-.card-item-icone {
+.card-item-icone-editar {
+    height: 40px;
+}
+
+.card-item-icone-remover {
     height: 40px;
 }

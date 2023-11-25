@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio</title>
     <link rel="stylesheet" href="../estilo/itens-cardapio-gerente.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
-
-            // document.getElementById('botaoRemover').addEventListener('click', function(){
-            //     const idItem = this.getAttribute('dataidItem');
-            //     removerItem(idItem);
-            // });
-
+            const cardapioContainer = document.querySelector('#cardapio-container');
             // Função para carregar os itens do cardápio
             async function carregarItensCardapio() {
                 try {
                     // Fazer uma requisição para o backend para obter os itens do cardápio
                     const response = await axios.get(`http://localhost:3000/cardapio`);
-
                     // Preencher a página com os itens do cardápio
-                    const cardapioContainer = document.querySelector('#cardapio-container');
+
                     response.data.forEach(item => {
                         const cardItem = document.createElement('div');
-                        cardItem.id = `cardapio-item-${item.idItem}`;
+                        cardItem.id = item.iditem;
+                        //console.log(item.iditem)
                         cardItem.classList.add('card-item');
                         cardItem.innerHTML = `
                             <img class="card-item-imagem" src="${item.imagem}" alt="${item.nome}" >
@@ -37,9 +34,9 @@
                             <p class="card-item-preco"><span id="menor">Preço:</span> <br> <br> R$ ${item.preco}</p>
 
                             <p>
-                                <button id="editar" onclick="editarItem(${item.idItem})"><img class="card-item-icone" src="../imagens/editar.png" alt="Editar item"></button> <br>
+                                <button class="editar-item" data-id="${item.iditem}"><img class="card-item-icone-editar" src="../imagens/editar.png" alt="Editar item"></button> <br>
                                 
-                                <button id="remover" dataidItem=${item.idItem}><img class="card-item-icone" src="../imagens/lixeira.png" alt="Remover item"</button>
+                                <button class="remover-item" data-id="${item.iditem}" data-nome="${item.nome}"><img class="card-item-icone-remover" src="../imagens/lixeira.png" alt="Remover item"</button>
                             </p>
                         `;
                         cardapioContainer.appendChild(cardItem);
@@ -48,25 +45,44 @@
                     console.error('Erro ao carregar itens do cardápio:', error);
                 }
             }
-
             // Chamar a função para carregar os itens do cardápio quando a página é carregada
             carregarItensCardapio();
 
-            // Funções para editar e remover itens (a serem implementadas)
-            function editarItem(idItem) {
-                // Implemente a lógica para editar o item com o idItem fornecido
-                console.log(`Editar item com id ${idItem}`);
+            cardapioContainer.addEventListener('click', function (event) {
+                const botaoRemover = event.target.closest('.remover-item');
+                const botaoEditar = event.target.closest('.editar-item');
+
+                if (botaoRemover) {
+                    const idItem = botaoRemover.getAttribute('data-id');
+                    const nome = botaoRemover.getAttribute('data-nome');
+                    exibirDialogoRemocao(idItem, nome);
+                } else if (botaoEditar) {
+
+                }
+            });
+
+            function exibirDialogoRemocao(idItem, nome) {
+                Swal.fire({
+                    title: 'Remover item?',
+                    text: `Deseja realmente remover o item ${nome}?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sim, remover!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        removerItem(idItem);
+                    }
+                }); s
             }
 
             async function removerItem(idItem) {
                 try {
-                    // Fazer uma requisição para o backend para remover o item do cardápio
                     const response = await axios.delete(`http://localhost:3000/cardapio/${idItem}`);
-
-                    // Verificar se a remoção foi bem-sucedida
                     if (response.data.success) {
-                        // Remover o elemento HTML correspondente ao item do cardápio
-                        const cardItem = document.getElementById(`cardapio-item-${idItem}`);
+                        const cardItem = document.querySelector(`[data-id="${idItem}"]`).closest('.card-item');
                         if (cardItem) {
                             cardItem.remove();
                         } else {
@@ -76,20 +92,22 @@
                         console.error('Erro ao remover item do cardápio:', response.data.message);
                     }
                 } catch (error) {
-                    console.error('Erro ao remover item do cardápio:', error);
+                    console.error('Erro ao remover item do cardápio do DB:', error);
                 }
             }
         });
     </script>
 </head>
+
 <body>
     <div id="cardapio-container"></div>
 </body>
 <dialog>
     <p>Deseja realmente remover esse item?</p>
-        <p>
-            <input id="confirmar" type="button" value="Confirmar">
-            <input id="cancelar" type="button" value="Cancelar">
-        </p>
+    <p>
+        <input id="confirmar" type="button" value="Confirmar">
+        <input id="cancelar" type="button" value="Cancelar">
+    </p>
 </dialog>
+
 </html>

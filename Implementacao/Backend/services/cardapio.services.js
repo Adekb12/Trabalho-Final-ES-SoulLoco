@@ -18,15 +18,14 @@ async function adicionarItem(nome, imagem, descricao, preco) {
 
 //!!!!!!!!!!!!!!!!!!!
 async function removerItem(idItem) {
-    //regras de negócio ///// vai ter que adicionaar a verificação se o item está presente em algum pedido antes dde removê-lo
 
     var resultado = null;
     var isItem = await cardapioPersistence.existeItem(idItem)
     var isITemPedido = await cardapioPersistence.existeItemPedido(idItem)
     if (isItem && !isITemPedido) {
         resultado = await cardapioPersistence.removerItem(idItem)
-    }else{
-        resultado = { success: false, mensagem: "Item está em algum pedido"}
+    } else {
+        resultado = { success: false, mensagem: "Item está em algum pedido" }
     }
 
     return resultado
