@@ -41,6 +41,10 @@ button {
     margin-left: 25px;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 form {
     position: absolute;
     left: 79%;
