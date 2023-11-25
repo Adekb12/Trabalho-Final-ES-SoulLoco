@@ -13,10 +13,26 @@ body {
     background-attachment: fixed;
     padding: 10px 30px;
     margin: 0px;
+    display: flex;
+    flex-flow: column;
+    height: 95vh;
 }
 
 header {
+    display: flex;
+    flex-grow: 0;
+    flex-basis: auto;
+    padding-bottom: 20px;
     width: 100%;
+}
+
+#metade1 {
+    width: 50%;
+    padding-top: 15px;
+}
+
+#metade2 {
+    width: 50%;
     text-align: right;
 }
 
@@ -36,8 +52,15 @@ button:hover {
 }
 
 main {
-    background-color: rgba(165, 42, 42, 0.432);
+    background-color: rgba(49, 18, 18, 0.644);
     padding: 20px;
-    margin: auto;
     border-radius: 25px;
+    flex-grow: 1;
+    flex-basis: auto;
+    width: 93vw;
+}
+
+iframe {
+    height: 60%;
+    width: 100%;
 }
