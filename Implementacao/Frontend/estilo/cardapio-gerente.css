@@ -26,7 +26,7 @@ div {
 }
 
 #laranja {
-    color:  rgb(221, 108, 2);
+    color: rgb(221, 108, 2);
     line-height: 30px;
 }
 
@@ -49,7 +49,7 @@ form {
     top: 2%;
 }
 
-form > p {
+form>p {
     text-align: right;
 }
 
@@ -84,6 +84,7 @@ main {
     padding: 20px;
     margin: auto;
     border-radius: 25px;
+    min-height: 100vh;
 }
 
 iframe {

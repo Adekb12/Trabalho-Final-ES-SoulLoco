@@ -34,7 +34,7 @@
                             <p class="card-item-preco"><span id="menor">Preço:</span> <br> <br> R$ ${item.preco}</p>
 
                             <p>
-                                <button class="editar-item" data-id="${item.iditem}"><img class="card-item-icone-editar" src="../imagens/editar.png" alt="Editar item"></button> <br>
+                                <button class="editar-item" data-id="${item.iditem}" data-img="${item.imagem}" data-nm="${item.nome}" data-dcs="${item.descricao}" data-pc="${item.preco}"><img class="card-item-icone-editar" src="../imagens/editar.png" alt="Editar item"></button> <br>
                                 
                                 <button class="remover-item" data-id="${item.iditem}" data-nome="${item.nome}"><img class="card-item-icone-remover" src="../imagens/lixeira.png" alt="Remover item"</button>
                             </p>
@@ -57,7 +57,12 @@
                     const nome = botaoRemover.getAttribute('data-nome');
                     exibirDialogoRemocao(idItem, nome);
                 } else if (botaoEditar) {
-
+                    const idItem = botaoEditar.getAttribute('data-id');
+                    const imagem = botaoEditar.getAttribute('data-img');
+                    const nome = botaoEditar.getAttribute('data-nm');
+                    const descricao = botaoEditar.getAttribute('data-dcs');
+                    const preco = botaoEditar.getAttribute('data-pc');
+                    abrirPopUpEdicao(idItem, imagem, nome, descricao, preco);
                 }
             });
 
@@ -75,7 +80,7 @@
                     if (result.isConfirmed) {
                         removerItem(idItem);
                     }
-                }); s
+                }); 
             }
 
             async function removerItem(idItem) {
@@ -94,6 +99,10 @@
                 } catch (error) {
                     console.error('Erro ao remover item do cardápio do DB:', error);
                 }
+            }
+
+            function abrirPopUpEdicao(idItem, imagem, nome, descricao, preco) {
+                window.location.href = `editar-item-2.html?idItem=${idItem}imagem=${imagem}&nome=${nome}&descricao=${descricao}$preco=${preco}`;
             }
         });
     </script>

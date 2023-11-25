@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../estilo/editar-item.css">
+    <title>Edit Window</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Recupera os parâmetros da URL
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Obtém os valores dos parâmetros
+            const idItem = urlParams.get('idItem');
+            const imagem = urlParams.get('imagem');
+            const nome = urlParams.get('nome');
+            const descricao = urlParams.get('descricao');
+            const preco = urlParams.get('preco');
+        });</script>
+</head>
+
+<body>
+
+    <div class="edit-window">
+        <h2>Tela de Edição</h2>
+
+        <!-- Campo para inserir a imagem ou o caminho -->
+        <div class="form-group">
+            <label for="imageInput">Novo caminho(URL) da imagem:</label>
+            <input type="text" id="imageInput" name="imageInput">
+        </div>
+
+        <!-- Formulário com a classe "form-container" adicionada -->
+        <div class="form-container">
+            <div class="form-group">
+                <label for="nameInput">Novo nome:</label>
+                <input type="text" id="nameInput" name="nameInput">
+            </div>
+
+            <div class="form-group">
+                <label for="descriptionInput">Nova descrição:</label>
+                <input type="text" id="descriptionInput" name="descriptionInput">
+            </div>
+
+            <div class="form-group">
+                <label for="priceInput">Novo preço:</label>
+                <input type="text" id="priceInput" name="priceInput">
+            </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="btn-container">
+            <div class="btn btn-cancel">Cancelar</div>
+            <div class="btn btn-edit">Alterar</div>
+        </div>
+    </div>
+
+</body>
+
+</html>
