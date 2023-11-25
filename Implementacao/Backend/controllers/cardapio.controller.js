@@ -11,11 +11,11 @@ async function adicionarItem(req, res) {
     const nome = req.body.nome;
     const imagem = req.body.imagem;
     const descricao = req.body.descricao;
-    const preco = req.body.preco;
+    const preco = parseFloat(req.body.preco).toFixed(2);
 
-    //validação do preço do item
+    //validação do preço do item e do nome
     var resultado = null;
-    if (ehPrecoValido(preco)) {
+    if (ehPrecoValido(preco) && ehNomeValido(nome)) {
         resultado = await cardapioServices.adicionarItem(nome, imagem, descricao, preco);
     }
 
@@ -23,9 +23,6 @@ async function adicionarItem(req, res) {
 }
 
 function ehPrecoValido(preco) {
-    if (typeof preco !== 'number') {
-        return false;
-    }
     // Converte para string para facilitar a verificação do formato
     const precoString = preco.toString();
     // Verificar se é um número decimal no formato (10,2)
@@ -54,16 +51,19 @@ async function alterarItem(req, res) {
     const imagem = req.body.imagem;
     const descricao = req.body.descricao;
     const preco = req.body.preco;
+    console.log(preco)
 
-    //validar os dados
-
-    //chamada para Services
+    //valida o nome e o preco que vai ser alterado e faz a chamada para Services
     var resultado = null;
     if (ehPrecoValido(preco) && ehNomeValido(nome)) {
         resultado = await cardapioServices.alterarItem(idItem, nome, imagem, descricao, preco);
+    } else {
+        console.log(ehPrecoValido(preco))
+        resultado = { success: false, mensagem: "Preço inválido!" };
     }
     res.send(resultado)
 }
+
 function ehNomeValido(nome) {
     if (nome == ' ' || nome.size > 100) {
         return false;

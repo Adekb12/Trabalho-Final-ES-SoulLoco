@@ -9,16 +9,6 @@
     <title>Editar item</title>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Recupera os parâmetros da URL
-            const urlParams = new URLSearchParams(window.location.search);
-
-            // Obtém os valores dos parâmetros
-            const idItem = urlParams.get('idItem');
-            const imagem = urlParams.get('imagem');
-            const nome = urlParams.get('nome');
-            const descricao = urlParams.get('descricao');
-            const preco = urlParams.get('preco');
-
             // Preenche os campos do formulário com as informações recuperadas
             document.getElementById('imageInput').value = imagem;
             document.getElementById('nameInput').value = nome;
@@ -75,7 +65,7 @@
 <body>
 
     <div class="edit-window">
-        <h2>Tela de Edição</h2>
+        <h2>Adicione as informações do item</h2>
 
         <!-- Campo para inserir a imagem ou o caminho -->
         <div class="form-group">

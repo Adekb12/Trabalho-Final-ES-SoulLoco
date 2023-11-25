@@ -127,9 +127,10 @@ async function alterarItem(idItem, nome, imagem, descricao, preco) {
     try {
         var query = await conn.query("update cardapio set nome=$2, imagem=$3, descricao=$4, preco=$5 where idItem=$1 returning *", [idItem, nome, imagem, descricao, preco]);
         console.log(query.rows)
-        resultado = query.rows;
+        resultado = { success: true, mensagem: "Alterado com sucesso!" };
     } catch (err) {
         console.log(err)
+        resultado = { success: false, mensagem: "Erro ao alterar do BD!" };
     } finally {
         conn.release()
     }

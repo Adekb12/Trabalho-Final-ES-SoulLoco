@@ -7,4 +7,5 @@ router.get('/:idCliente', enderecosController.visualizarEnderecos)
 router.post('/:idCliente', enderecosController.adicionarEndereco)
 router.delete('/:idEndereco', enderecosController.removerEndereco)
 
+
 export default router

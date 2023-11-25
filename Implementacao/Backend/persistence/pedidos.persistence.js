@@ -83,4 +83,5 @@ async function cancelarPedido(idPedido) {
 
     return resultado
 }
+
 export default { criarPedido, visualizarPedidos, visualizarPedidosCliente, existePedido, cancelarPedido }

@@ -66,4 +66,18 @@ async function existeEnderecoPedidos(idEndereco, idPedido) {
     }
 }
 
-export default { adicionarEndereco, visualizarEnderecos, removerEndereco, existeEnderecoPedidos }
+async function existeEndereco(logradouro,numero,cep,estado,cidade,bairro){
+    const conn = await BD.conectar();
+    try {
+        var query = await conn.query("select * from enderecos where logradouro=$1, numero=$2, cep=$3, estado=$4, cidade=$5, bairro=$6", [logradouro,numero,cep,estado,cidade,bairro]);
+        return query.rows.length > 0
+    } catch (err) {
+        console.log(err)
+        return false
+    } finally {
+        conn.release()
+    }
+}
+
+
+export default { adicionarEndereco, visualizarEnderecos, removerEndereco, existeEnderecoPedidos, existeEndereco }

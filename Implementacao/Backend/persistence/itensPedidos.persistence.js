@@ -69,5 +69,33 @@ async function alterarQuantidadeItemPedido(idPedido, idItemCardapio, quantidade)
     }
     return resultado
 }
+async function existeItemCardapio(idItemCardapio) {
+    // conectar no BD
+    // executar operação SQL
 
-export default { visualizarItensPedido, adicionarItemPedido, removerItemPedido, alterarQuantidadeItemPedido }
+    const conn = await BD.conectar();
+    try {
+        var query = await conn.query("select * from cardapio where idItem=$1", [idItemCardapio]);
+        return query.rows.length > 0
+    } catch (err) {
+        console.log(err)
+        return false
+    } finally {
+        conn.release()
+    }
+}
+async function existeItemPedido(idPedido) {
+
+    const conn = await BD.conectar();
+    try {
+        var query = await conn.query("select * from itensPedidos where idPedido =$1", [idPedido]);
+        return query.rows.length > 0
+    } catch (err) {
+        console.log(err)
+        return false
+    } finally {
+        conn.release()
+    }
+}
+
+export default { visualizarItensPedido, adicionarItemPedido, removerItemPedido, alterarQuantidadeItemPedido, existeItemCardapio,existeItemPedido }
