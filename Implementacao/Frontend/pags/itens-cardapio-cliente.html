@@ -33,11 +33,15 @@
 
                             <p class="card-item-preco"><span id="menor">Preço:</span> <br> <br> R$ ${item.preco}</p>
 
-                            <p>
-                                <button class="adicionar" data-id="${item.iditem}" data-img="${item.imagem}" data-nm="${item.nome}" data-dcs="${item.descricao}" data-pc="${item.preco}"><img id="add" src="../imagens/mais.png" alt="Adicionar unidade"></button> <br>
-                                
-                                <button class="reduzir" data-id="${item.iditem}" data-nome="${item.nome}"><img id="less" src="../imagens/menos.png" alt="Reduzir unidade"</button>
-                            </p>
+                            <div id="quantidade">
+                                <label for="qtd">QTD:</label>
+                                <output id="qtd">0</output>
+                                <p id="icones">
+                                    <button class="adicionar" data-id="${item.iditem}" data-img="${item.imagem}" data-nm="${item.nome}" data-dcs="${item.descricao}" data-pc="${item.preco}"><img id="add" src="../imagens/mais.png" alt="Adicionar unidade"></button>
+                                    
+                                    <button class="reduzir" data-id="${item.iditem}" data-nome="${item.nome}"><img id="less" src="../imagens/menos.png" alt="Reduzir unidade"</button>
+                                </p>
+                            </div>
                         `;
                         cardapioContainer.appendChild(cardItem);
                     });
@@ -47,6 +51,17 @@
             }
             // Chamar a função para carregar os itens do cardápio quando a página é carregada
             carregarItensCardapio();
+
+            cardapioContainer.addEventListener('click', function (event) {
+                const mais = event.target.closest('.adicionar');
+                const menos = event.target.closest('.reduzir');
+
+                if (mais) {
+                    qtd.innerHTML = Number(qtd.innerHTML.value) + Number(1);
+                } else if (menos) {
+                    qtd.innerHTML = Number(qtd.innerHTML.value) - Number(1);
+                }
+            });
         });
     </script>
 </head>

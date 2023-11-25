@@ -56,24 +56,52 @@
     font-size: smaller;
 }
 
+#quantidade {
+    text-align: center;
+    font-family: 'Montserrat';
+    font-style: italic;
+}
+
+#icones {
+    display: flex;
+    height: fit-content;
+    margin: 0px;
+}
+
+label {
+    color: white;
+    font-size: medium;
+}
+
+output {
+    background-color: white;
+    margin-top: 10px;
+    font-size: larger;
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    height: fit-content;
+    width: 80px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
 button {
     background-color: rgba(0, 0, 0, 0);
+    margin: 0px;
 }
 
 button:hover {
     cursor: pointer;
 }
 
-.adicionar {
-    margin-bottom: 20px;
-    margin-top: 5px;
-}
-
 #add {
     height: 50px;
+    margin-right: 10px;
 }
 
 #less {
-    height: 40px;
+    margin-top: 12px;
+    height: 38px;
     padding-left: 5px;
 }
