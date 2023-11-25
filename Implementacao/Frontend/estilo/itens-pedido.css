@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+* {
+    border: 0px;
+}
+
+#cardapio-container {
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.card-item {
+    margin: 10px 0px;
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    width: 98%;
+}
+
+.card-item-imagem {
+    height: 150px;
+    width: 20%;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.titulo {
+    font-size: 1.6em;
+}
+
+.texto {
+    width: 60%;
+    font-family: 'Montserrat';
+    font-style: italic;
+    font-size: medium;
+    margin: 10px 20px;
+}
+
+#icone {
+    margin-top: 25px;
+}
+
+.card-item-preco {
+    padding: 10px;
+    height: fit-content;
+    border-radius: 10px;
+    font-family: 'Montserrat';
+    font-style: italic;
+    font-size: large;
+}   
+
+#ultima {
+    width: 20%;
+    text-align: right;
+    margin-right: 20px;
+}
+
+#total {
+    text-align: center;
+}
+
+button {
+    background-color: transparent;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#x {
+    height: 40px;
+}
