@@ -41,7 +41,9 @@
 
                                 <p class="texto">
                                     <span class="titulo">${nome}</span> <br> <br> <br>
-                                    QTD: <span class="quantidade">${qtd}</span>
+                                    <label for="qtd">QTD: </label>
+                                    <input id="qtd-${item.iditem}" class="qntd" type="number" min="0" placeholder="${qtd}"></input>
+                                    <p id="icone">
                                 </p>
 
                                 <div id="ultima">
@@ -51,8 +53,7 @@
                                         </p>
                                         <p class="item-ped-preco">Preço: R$ ${preco}</p>
                                     </div>
-                                </div>
-                                `;
+                                </div>`;
                             }
                         } catch (error) {
                             console.error('Erro ao carregar itens do cardápio:', error);
