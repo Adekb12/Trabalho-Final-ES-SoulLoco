@@ -119,3 +119,8 @@ label {
     font-style: italic;
     font-size: medium;
 }
+
+iframe {
+    height: 100%;
+    width: 100%;
+}

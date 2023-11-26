@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+* {
+    border: 0px;
+}
+
+#endereco-container {
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.end {
+    margin: 10px 0px;
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    width: 98%;
+}
+
+.texto {
+    width: 60%;
+    font-family: 'Montserrat';
+    font-style: italic;
+    font-size: medium;
+    margin: 10px 20px;
+} 
+
+#ultima {
+    width: 40%;
+    text-align: right;
+    margin-right: 20px;
+}
+
+.icone {
+    height: 40px;
+    margin-left: 20px;
+}
+
+button {
+    background-color: transparent;
+}
+
+button:hover {
+    cursor: pointer;
+}
