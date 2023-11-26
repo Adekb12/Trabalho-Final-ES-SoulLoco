@@ -11,6 +11,8 @@ async function adicionarItemPedido(idPedido, idItemCardapio, quantidade) {
     //verifica se existem o item no cardapio
     if(isItemCardapio){
         resultado = await itensPedidosPersistence.adicionarItemPedido(idPedido, idItemCardapio, quantidade)
+    }else{
+        resultado = { success: false, mensagem: "Erro: item não encontrado!"}
     }
     return resultado
 }

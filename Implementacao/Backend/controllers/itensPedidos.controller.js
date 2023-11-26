@@ -13,7 +13,7 @@ async function visualizarItensPedido(req, res) {
 
 async function adicionarItemPedido(req, res) {
     const idPedido = req.params.idPedido;
-    const idItemCardapio = req.body.idItemCardapio;
+    const idItemCardapio = req.body.idItem;
     const quantidade = req.body.quantidade;
 
     var resultado = null;

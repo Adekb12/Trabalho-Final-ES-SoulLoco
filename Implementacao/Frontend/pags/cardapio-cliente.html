@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="../estilo/cardapio-cliente.css">
     <link rel="shortcut icon" href="../imagens/favicon.png" type="image/x-icon">
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const idPedido = params.get('idPedido');
-        console.log('ID do Pedido:', idPedido);
+        document.addEventListener('DOMContentLoaded', function () {
+
+            document.getElementById('detalhes').addEventListener('click', function () {
+                window.location.href = `detalhes-pedido.html?idPedido=${idPedido}`;
+            });
+        });
     </script>
 </head>
 
@@ -34,13 +37,21 @@
                     <button onclick=""><img class="icone" src="../imagens/home.png" alt="Principal"></button>
                     <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair"></button><br>
                     <input id="historico" class="formHeader" type="submit" value="Visualizar Histórico de Pedidos"><br>
-                    <input id="detalhes" class="formHeader" type="submit" value="Visualizar Detalhes do Pedido">
+                    <input id="detalhes" class="formHeader" type="button" value="Visualizar Detalhes do Pedido">
                 </p>
             </form>
         </div>
     </header>
     <main>
-        <iframe src="itens-cardapio-cliente.html" frameborder="0"></iframe>
+        <iframe id="iframeCardapio" frameborder="0"></iframe>
+
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const idPedido = params.get('idPedido');
+
+            // Atualizar o src do iframe usando JavaScript
+            document.getElementById('iframeCardapio').src = `itens-cardapio-cliente.html?idPedido=${idPedido}`;
+        </script>
     </main>
 </body>
 

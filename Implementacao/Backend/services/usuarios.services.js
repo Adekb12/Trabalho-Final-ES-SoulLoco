@@ -8,7 +8,6 @@ async function logaUsuario(email, senha) {
     if (await usuariosPersistence.existeUsuario(email)) {
         resultado = await usuariosPersistence.logarUsuario(email, senha)
     } else {
-        console.log("Aqui")
         resultado = { success: false, usuario, mensagem: "Email nao cadastrado" }
     }
     return resultado

@@ -4,44 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../estilo/cardapio-gerente.css"> -->
     <link rel="stylesheet" href="../estilo/adicionar-item.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Editar item</title>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Preenche os campos do formulário com as informações recuperadas
-            document.getElementById('imageInput').value = imagem;
-            document.getElementById('nameInput').value = nome;
-            document.getElementById('descriptionInput').value = descricao;
-            document.getElementById('priceInput').value = preco;
-
             // Adiciona eventos aos botões
             document.querySelector('.btn-cancel').addEventListener('click', function () {
-                window.location.href = `itens-cardapio-gerente.html`
+                window.location.href = `cardapio-gerente.html`
             });
 
             document.querySelector('.btn-add').addEventListener('click', function () {
                 // Obtém os valores atuais dos campos do formulário
-                const imagemAtual = document.getElementById('imageInput').value;
-                const nomeAtual = document.getElementById('nameInput').value;
-                const descricaoAtual = document.getElementById('descriptionInput').value;
-                const precoAtual = document.getElementById('priceInput').value;
+                const imagem = document.getElementById('imageInput').value;
+                const nome = document.getElementById('nameInput').value;
+                const descricao = document.getElementById('descriptionInput').value;
+                const preco = document.getElementById('priceInput').value;
 
-                // Chama a função para atualizar no banco de dados
-                atualizarItemNoBanco(idItem, imagemAtual, nomeAtual, descricaoAtual, precoAtual);
+                adicionarItemNoBanco(imagem, nome, descricao, preco);
             });
 
-            async function atualizarItemNoBanco(idItem, novaImagem, novoNome, novaDescricao, novoPreco) {
+            async function adicionarItemNoBanco(imagem, nome, descricao, preco) {
                 try {
-                    const response = await axios.put(`http://localhost:3000/cardapio/${idItem}`, {
-                        imagem: novaImagem,
-                        nome: novoNome,
-                        descricao: novaDescricao,
-                        preco: novoPreco
+                    const response = await axios.post(`http://localhost:3000/cardapio`, {
+                        imagem: imagem,
+                        nome: nome,
+                        descricao: descricao,
+                        preco: preco
                     });
 
                     if (response.data.success) {
-                        window.location.href = `itens-cardapio-gerente.html`
+                        window.location.href = `cardapio-gerente.html`
                     } else {
                         if (response.data.mensagem == "Esse nome já existe!") {
                             console.log("Esse nome já existe!")
@@ -63,41 +57,64 @@
 </head>
 
 <body>
-
-    <div class="edit-window">
-        <h2>Adicione as informações do item</h2>
-
-        <!-- Campo para inserir a imagem ou o caminho -->
-        <div class="form-group">
-            <label for="imageInput">Caminho(URL) da imagem:</label>
-            <input type="text" id="imageInput" name="imageInput">
-        </div>
-
-        <!-- Formulário com a classe "form-container" adicionada -->
-        <div class="form-container">
-            <div class="form-group">
-                <label for="nameInput">Nome:</label>
-                <input type="text" id="nameInput" name="nameInput">
-            </div>
-
-            <div class="form-group">
-                <label for="descriptionInput">Descrição:</label>
-                <input type="text" id="descriptionInput" name="descriptionInput">
-            </div>
-
-            <div class="form-group">
-                <label for="priceInput">Preço:</label>
-                <input type="text" id="priceInput" name="priceInput">
+    <header>
+        <div class="bem-vindo" id="container">
+            <div class="bem-vindo">
+                <p id="laranja">
+                    Bem-vindo ao Soul Loco!<br>
+                    Aqui o sabor vem com a alma mexicana <br> <br>
+                </p>
+                <p class="bem-vindo-text">
+                    Selecione os itens que você gostaria de pedir e clique em <br>
+                    "Visualizar Detalhes do Pedido" para realizar o pedido
+                </p>
             </div>
         </div>
-
-        <!-- Botões -->
-        <div class="btn-container">
-            <div class="btn-cancel">Cancelar</div>
-            <div class="btn-add">Adicionar</div>
+        <div id="menu">
+            <form method="post">
+                <p>
+                    <button onclick=""><img class="icone" src="../imagens/home.png" alt="Principal"></button>
+                    <button onclick=""><img class="icone" src="../imagens/botao-logout.png"
+                            alt="Sair"></button><br><br><br>
+                </p>
+            </form>
         </div>
-    </div>
+    </header>
+    <main>
+        <div class="edit-window">
+            <h2>Adicione as informações do item</h2>
 
+            <!-- Campo para inserir a imagem ou o caminho -->
+            <div class="form-group">
+                <label for="imageInput">Caminho(URL) da imagem:</label>
+                <input type="text" id="imageInput" name="imageInput">
+            </div>
+
+            <!-- Formulário com a classe "form-container" adicionada -->
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="nameInput">Nome:</label>
+                    <input type="text" id="nameInput" name="nameInput">
+                </div>
+
+                <div class="form-group">
+                    <label for="descriptionInput">Descrição:</label>
+                    <input type="text" id="descriptionInput" name="descriptionInput">
+                </div>
+
+                <div class="form-group">
+                    <label for="priceInput">Preço:</label>
+                    <input type="text" id="priceInput" name="priceInput">
+                </div>
+            </div>
+
+            <!-- Botões -->
+            <div class="btn-container">
+                <div class="btn-cancel">Cancelar</div>
+                <div class="btn-add">Adicionar</div>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>

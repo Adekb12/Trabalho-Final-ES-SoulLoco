@@ -15,7 +15,7 @@
             async function carregarItensPedido() {
                 try {
                     // Fazer uma requisição para o backend para obter os itens do cardápio
-                    const response = await axios.get(`http://localhost:3000/itenspedido`);
+                    const response = await axios.get(`http://localhost:3000/cardapio`);
                     // Preencher a página com os itens do cardápio
 
                     response.data.forEach(item => {

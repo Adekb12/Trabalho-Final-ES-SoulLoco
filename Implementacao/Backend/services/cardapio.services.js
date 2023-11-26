@@ -12,6 +12,8 @@ async function adicionarItem(nome, imagem, descricao, preco) {
 
     if (!isNItem) {
         resultado = await cardapioPersistence.adicionarItem(nome, imagem, descricao, preco)
+    }else{
+        resultado = { success: false, mensagem: "Esse nome já existe!" };
     }
 
     return resultado
@@ -48,5 +50,13 @@ async function alterarItem(idItem, nome, imagem, descricao, preco) {
 
     return resultado
 }
-
-export default { visualizarItens, adicionarItem, removerItem, alterarItem }
+async function visualizarItem(idItem){
+    var resultado = null;
+    if(await cardapioPersistence.existeItem(idItem)){
+        resultado = await cardapioPersistence.visualizarItem(idItem)
+    }else{
+        resultado = {sucess: false, mensagem: "Item nao encontrado"}
+    }
+    return resultado
+}
+export default { visualizarItens, adicionarItem, removerItem, alterarItem, visualizarItem }

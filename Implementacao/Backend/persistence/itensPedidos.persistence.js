@@ -17,15 +17,15 @@ async function visualizarItensPedido(idPedido) {
 }
 
 async function adicionarItemPedido(idPedido, idItemCardapio, quantidade) {
-
     var resultado = null;
     const conn = await BD.conectar();
     try {
         var query = await conn.query("insert into itensPedidos (idPedido, idItemCardapio, quantidade) values ($1, $2, $3) returning *", [idPedido, idItemCardapio, quantidade]);
         console.log(query.rows)
-        resultado = query.rows;
+        resultado = { success: true, mensagem: "Item adicionado" }
     } catch (err) {
         console.log(err)
+        resultado = { success: false, mensagem: "Erro ao adicionar no BD" }
     } finally {
         conn.release()
     }
@@ -98,4 +98,4 @@ async function existeItemPedido(idPedido) {
     }
 }
 
-export default { visualizarItensPedido, adicionarItemPedido, removerItemPedido, alterarQuantidadeItemPedido, existeItemCardapio,existeItemPedido }
+export default { visualizarItensPedido, adicionarItemPedido, removerItemPedido, alterarQuantidadeItemPedido, existeItemCardapio, existeItemPedido }

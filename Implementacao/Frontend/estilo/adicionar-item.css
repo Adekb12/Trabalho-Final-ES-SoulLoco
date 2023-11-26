@@ -1,10 +1,86 @@
+.bem-vindo-text{
+    color: white;
+    padding: 0px;
+    margin: 0px;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
+    height: fit-content;
+    background-image: url('../imagens/fundo02.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 10px 30px;
+    margin: 0px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    flex-flow: column;
+    height: 95vh;
+}
+
+main {
+    background-color: rgba(165, 42, 42, 0.432);
+    padding: 20px;
+    border-radius: 25px;
+    flex-grow: 1;
+    flex-basis: auto;
+    width: 93vw;
+}
+
+#laranja {
+    color: rgb(221, 108, 2);
+    line-height: 30px;
+}
+
+form>p {
+    text-align: right;
+}
+
+.bem-vindo {
+    background-color: rgba(0, 0, 0, 0.623);
+    width: 380px;
+    padding: 20px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+#container {
+    height: fit-content;
+    width: 50%;
+    background-color: transparent;
+    margin: 0px;
+    padding: 0px;
+}
+
+.icone {
+    height: 40px;
+}
+
+button {
+    background-color: transparent;
+    width: 50px;
+    border: 0px;
+    margin-left: 25px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+#menu {
+    width: 50%;
+    padding: 0px;
+    padding-top: 20px;
+    text-align: right;
+    background-color: transparent;
+}
+
+
+header {
+    display: flex;
+    flex-grow: 0;
+    flex-basis: auto;
+    padding-bottom: 20px;
 }
 
 .edit-window {
@@ -13,7 +89,10 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    width: 80%;
+    max-width: 400px;
+    margin: auto;
+    margin-top: 10vh;
 }
 
 .edit-window h2 {

@@ -26,9 +26,10 @@ async function adicionarItem(nome, imagem, descricao, preco) {
         var query = await conn.query("insert into cardapio (nome, imagem, descricao, preco) values ($1, $2, $3, $4) returning *", [nome, imagem, descricao, preco]);
 
         console.log(query.rows)
-        resultado = query.rows;
+        resultado = { success: true, mensagem: "Adicionado com sucesso!" };
     } catch (err) {
         console.log(err)
+        resultado = { success: false, mensagem: "Erro ao adicionar no BD!" };
     } finally {
         conn.release()
     }
@@ -137,5 +138,24 @@ async function alterarItem(idItem, nome, imagem, descricao, preco) {
 
     return resultado
 }
+async function visualizarItem(idItem) {
+    var resultado = null
+    const conn = await BD.conectar();
+    try {
+        var query = await conn.query("select * from cardapio where idItem=$1", [idItem]);
+        if (query.rows.length > 0) {
+            console.log(query.rows)
+            resultado = { sucess: true, mensagem: "O item foi localizado com sucesso" }
+        } else {
+            resultado = { sucess: false, mensagem: "Nao foi possivel localizar o item" }
+        }
+    } catch (err) {
+        console.log(err)
+        resultado = { sucess: false, mensagem: "Erro na conexao" }
+    } finally {
+        conn.release()
+    }
+    return resultado
+}
 
-export default { visualizarItens, adicionarItem, existeItem, existeNomeItem, existeNomeRepetido, existeItemPedido, removerItem, alterarItem }
+export default { visualizarItens, adicionarItem, existeItem, existeNomeItem, existeNomeRepetido, existeItemPedido, removerItem, alterarItem, visualizarItem }

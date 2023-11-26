@@ -17,6 +17,8 @@ async function adicionarItem(req, res) {
     var resultado = null;
     if (ehPrecoValido(preco) && ehNomeValido(nome)) {
         resultado = await cardapioServices.adicionarItem(nome, imagem, descricao, preco);
+    } else {
+        resultado = { success: false, mensagem: "Preço inválido!" };
     }
 
     res.send(resultado)
@@ -51,14 +53,12 @@ async function alterarItem(req, res) {
     const imagem = req.body.imagem;
     const descricao = req.body.descricao;
     const preco = req.body.preco;
-    console.log(preco)
 
     //valida o nome e o preco que vai ser alterado e faz a chamada para Services
     var resultado = null;
     if (ehPrecoValido(preco) && ehNomeValido(nome)) {
         resultado = await cardapioServices.alterarItem(idItem, nome, imagem, descricao, preco);
     } else {
-        console.log(ehPrecoValido(preco))
         resultado = { success: false, mensagem: "Preço inválido!" };
     }
     res.send(resultado)
@@ -71,4 +71,11 @@ function ehNomeValido(nome) {
     return true;
 }
 
-export default { visualizarItens, adicionarItem, removerItem, alterarItem };
+async function visualizarItem(req, res){
+    const idItem = req.params.idItem;
+    var resultado = null
+    resultado = await cardapioServices.visualizarItem(idItem)
+    res.send(resultado)
+}
+
+export default { visualizarItens, adicionarItem, removerItem, alterarItem, visualizarItem };
