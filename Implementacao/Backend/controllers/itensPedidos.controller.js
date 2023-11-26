@@ -23,7 +23,7 @@ async function adicionarItemPedido(req, res) {
 }
 
 async function removerItemPedido(req, res) {
-    const idPedido = req.params.idPedido;
+    //const idPedido = req.params.idPedido;
     const idItemPedido = req.params.idItemPedido;
     var resultado = null;
 
@@ -37,21 +37,19 @@ async function removerItemPedido(req, res) {
 }
 
 async function alterarQuantidadeItemPedido(req, res) {
-    const idPedido = req.params.idPedido;
-    const idItemCardapio = req.body.idItemCardapio;
+    const idItemPedido = req.params.idItemPedido;
     const quantidade = req.body.quantidade;
-
+    console.log(idItemPedido + "?????" + quantidade)
     //validar os dados
     var resultado = null
-    if (verificarQuantidade(quantidade) && await cardapioPersistence.existeItem(idItemCardapio) && await pedidosPersistence.existePedido(idPedido)) {
-
-        resultado = await itensPedidosServices.alterarQuantidadeItemPedido(idPedido, idItemCardapio, quantidade);
+    if (verificarQuantidade(quantidade)) {
+        resultado = await itensPedidosServices.alterarQuantidadeItemPedido(idItemPedido, quantidade);
     }
     res.send(resultado)
 }
 
 function verificarQuantidade(quantidade) {
-    return quantidade > 0
+    return quantidade > 0;
 }
 
 export default { visualizarItensPedido, adicionarItemPedido, removerItemPedido, alterarQuantidadeItemPedido };

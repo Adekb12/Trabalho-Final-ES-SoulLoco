@@ -51,14 +51,14 @@ async function removerItemPedido(idItemPedido) {
     return resultado
 }
 
-async function alterarQuantidadeItemPedido(idPedido, idItemCardapio, quantidade) {
+async function alterarQuantidadeItemPedido(idItemPedido, quantidade) {
     //conectar bd
     //executar operacao bd
 
     var resultado = null;
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("update itensPedidos set quantidade = $3 where idPedido = $1 AND idItemCardapio = $2 returning *", [idPedido, idItemCardapio, quantidade]);
+        var query = await conn.query("update itensPedidos set quantidade = $2 where idItemPedido = $1 returning *", [idItemPedido, quantidade]);
         console.log(query.rows);
         resultado = query.rows;
     } catch (err) {
@@ -68,6 +68,7 @@ async function alterarQuantidadeItemPedido(idPedido, idItemCardapio, quantidade)
     }
     return resultado
 }
+
 async function existeItemCardapio(idItemCardapio) {
     // conectar no BD
     // executar operação SQL

@@ -20,16 +20,16 @@ async function adicionarItemPedido(idPedido, idItemCardapio, quantidade) {
 async function removerItemPedido(idItemPedido) {
 
     var resultado = null;
-    
+
     resultado = await itensPedidosPersistence.removerItemPedido(idItemPedido)
 
     return resultado
 }
 
-async function alterarQuantidadeItemPedido(idPedido, idItemCardapio, quantidade) {
+async function alterarQuantidadeItemPedido(idItemPedido, quantidade) {
     //regras de negocios
     var resultado = null;
-    resultado = await itensPedidosPersistence.alterarQuantidadeItemPedido(idPedido, idItemCardapio, quantidade)
+    resultado = await itensPedidosPersistence.alterarQuantidadeItemPedido(idItemPedido, quantidade)
     return resultado
 }
 
