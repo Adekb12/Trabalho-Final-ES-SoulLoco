@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soul Loco</title>
+    <link rel="stylesheet" href="../estilo/enderecos.css">
+    <link rel="shortcut icon" href="../imagens/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <div id="metade1">
+            <button onclick=""><img class="icone" src="../imagens/voltar.png" alt="Voltar" srcset=""></button>
+        </div>
+        <div id="metade2">
+            <p id="icones">
+                <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair" srcset=""></button>
+            </p>
+        </div>
+    </header>
+    <main>
+        <div id="form">
+            <p>
+                <label for="cep">CEP</label> <br>
+                <input class="campo-texto" type="text" required> <br>
+                <label for="estado">Estado</label> <br>
+                <input class="campo-texto" type="text" required> <br>
+                <label for="cidade">Cidade</label> <br>
+                <input class="campo-texto" type="text" required> <br>
+                <label for="bairro">Bairro</label> <br>
+                <input class="campo-texto" type="text" required>
+            </p>
+            <p>
+                <label for="logradouro">Logradouro</label> <br>
+                <input class="campo-texto" type="text" required> <br>
+                <label for="Numero">Número</label> <br>
+                <input class="campo-texto" type="text" required> <br>
+                <br><br><br><br><br>
+                <input id="botao" type="button" value="Adicionar endereço">
+            </p>
+        </div>
+        <div id="cadastrados">
+            <p>
+                Escolha um endereço:
+            </p>
+            <iframe id="iframeEnderecos" frameborder="0"></iframe>
+
+            <script>
+                const params = new URLSearchParams(window.location.search);
+                const idCliente = params.get('idCliente');
+
+                // Atualizar o src do iframe usando JavaScript
+                document.getElementById('iframeEnderecos').src = `enderecos-cadastrados.html?idCliente=${idCliente}`;
+            </script>
+        </div>
+    </main>
+</body>
+
+</html>

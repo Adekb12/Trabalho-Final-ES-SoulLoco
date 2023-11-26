@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedido</title>
-    <link rel="stylesheet" href="../estilo/itens-pedido.css">
+    <link rel="stylesheet" href="../estilo/enderecos-cadastrados.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const paramIdpedido = new URLSearchParams(window.location.search);
-        const idPedido = paramIdpedido.get('idPedido');
+        const idCliente = paramIdpedido.get('idCliente');
         document.addEventListener('DOMContentLoaded', async function () {
-            const pedidoContainer = document.querySelector('#pedido-container');
+            const enderecoContainer = document.querySelector('#endereco-container');
             // Função para carregar os itens do cardápio
-            async function carregarItensPedido() {
+            async function carregarEnderecos() {
                 try {
                     // Fazer uma requisição para o backend para obter os itens do cardápio
                     const response = await axios.get(`http://localhost:3000/pedidos/itensPedidos/${idPedido}`);
@@ -25,7 +25,7 @@
                         itemPed.id = itemPedido.iditempedido;
                         var idItem = itemPedido.iditemcardapio;
                         var qtd = itemPedido.quantidade;
-                        itemPed.classList.add('item-ped');
+                        itemPed.classList.add('item-end');
 
                         try {
                             const response2 = await axios.get(`http://localhost:3000/cardapio/${idItem}`);
@@ -42,7 +42,7 @@
                                 <p class="texto">
                                     <span class="titulo">${nome}</span> <br> <br> <br>
                                     <label for="qtd">QTD: </label>
-                                    <input id="qtd-${item.iditem}" class="qntd" type="number" min="0" placeholder="${qtd}"></input>
+                                    <input id="qtd-${item.iditem}" class="qntd" type="number" min="0" value="${qtd}"></input>
                                     <p id="icone">
                                 </p>
 
@@ -66,36 +66,32 @@
                 }
             }
             // Chamar a função para carregar os itens do cardápio quando a página é carregada
-            carregarItensPedido();
+            carregarEnderecos();
 
             pedidoContainer.addEventListener('click', function (event) {
+                const mais = event.target.closest('.adicionar');
+                const menos = event.target.closest('.reduzir');
                 const botaoX = event.target.closest('.remover')
-
+                // Encontrar o elemento com a classe 'quantidade' dentro do elemento clicado
                 if (botaoX) {
                     const idItemPedido = botaoX.getAttribute('data-id');
                     const nome = botaoX.getAttribute('data-nm');
                     exibirDialogoRemocao(idItemPedido, nome);
+                } else {
+                    const quantidadeElement = mais || menos ? event.target.closest('.item-ped').querySelector('.quantidade') : null;
+
+                    if (quantidadeElement) {
+                        const quantidadeAtual = Number(quantidadeElement.textContent);
+
+                        if (mais) {
+                            quantidadeElement.textContent = quantidadeAtual + 1;
+                        } else if (menos && quantidadeAtual > 0) {
+                            quantidadeElement.textContent = quantidadeAtual - 1;
+                        }
+                    }
                 }
+
             });
-
-            pedidoContainer.addEventListener('input', function (event) {
-                const quantidadeInput = event.target.closest('.qntd');
-                const itemPed = quantidadeInput.closest('.item-ped');
-                alterarQuantidade(quantidadeInput.value, itemPed.id);
-            });
-
-            async function alterarQuantidade(novaQTDE, idItemPedido) {
-                //console.log(novaQTDE + "-----" + idItemPedido)
-                try {
-                    const response = await axios.put(`http://localhost:3000/pedidos/itensPedidos/${idItemPedido}`, {
-                        quantidade: novaQTDE
-                    })
-
-
-                } catch (error) {
-                    console.error('Erro ao alterar o item: ', error);
-                }
-            }
 
             function exibirDialogoRemocao(idItemPedido, nome) {
                 Swal.fire({
