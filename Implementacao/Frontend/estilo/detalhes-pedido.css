@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-* {
-    color: white;
-}
-
 body {
     height: fit-content;
     background-image: url('../imagens/fundo02.jpg');
@@ -63,4 +59,48 @@ main {
 iframe {
     height: 60%;
     width: 100%;
+}
+
+#endereco {
+    font-family: 'Montserrat';
+    font-style: italic;
+    font-size: medium;
+    text-align: right;
+    height: 40%;
+    width: 100%;
+}
+
+.campo {
+    display: inline-block;
+    background-color: white;
+    border-radius: 8px;
+    width: fit-content;
+    padding: 10px;
+}
+
+#campo-endereco {
+    text-align: right;
+    width: 100%;
+}
+
+#end {
+    width: 70%;
+    text-align: center;
+}
+
+.botao {
+    background-color: rgb(221, 108, 2);
+    color: white;
+    font-family: 'Montserrat';
+    font-style: italic;
+    font-size: medium;
+    padding: 10px;
+    width: 150px;
+    border: 0px;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.botao:hover {
+    background-color: rgb(250, 164, 66);
 }

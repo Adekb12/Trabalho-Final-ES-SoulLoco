@@ -31,6 +31,13 @@
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframeItensPedido').src = `itens-pedido.html?idPedido=${idPedido}`;
         </script>
+        <div id="endereco">
+            <p class="campo">Total: R$ ${total.preco}</p>
+            <p id="campo-endereco">
+                <input class="botao" type="button" value="Alterar">
+                <span id="end" class="campo">Endereco</span>
+            </p>
+        </div>
     </main>
 </body>
 
