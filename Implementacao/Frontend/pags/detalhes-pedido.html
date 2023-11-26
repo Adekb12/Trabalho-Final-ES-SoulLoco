@@ -7,11 +7,6 @@
     <title>Soul Loco</title>
     <link rel="stylesheet" href="../estilo/detalhes-pedido.css">
     <link rel="shortcut icon" href="../imagens/favicon.png" type="image/x-icon">
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const idPedido = params.get('idPedido');
-        console.log('ID do Pedido:', idPedido);
-    </script>
 </head>
 
 <body>
@@ -27,7 +22,15 @@
         </div>
     </header>
     <main>
-        <iframe src="../pags/itens-pedido.html" frameborder="0"></iframe>
+        <iframe id="iframeItensPedido" frameborder="0"></iframe>
+
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const idPedido = params.get('idPedido');
+
+            // Atualizar o src do iframe usando JavaScript
+            document.getElementById('iframeItensPedido').src = `itens-pedido.html?idPedido=${idPedido}`;
+        </script>
     </main>
 </body>
 

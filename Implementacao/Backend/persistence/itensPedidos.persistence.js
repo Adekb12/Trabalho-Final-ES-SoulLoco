@@ -4,8 +4,7 @@ async function visualizarItensPedido(idPedido) {
     var resultado = null;
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("select* from itensPedidos where idPedido=$1", [idPedido]);
-        console.log(query.rows)
+        var query = await conn.query("select* from itensPedidos where idPedido=$1 order by idItemPedido", [idPedido]);
         resultado = query.rows;
     } catch (err) {
         console.log(err)
@@ -33,18 +32,18 @@ async function adicionarItemPedido(idPedido, idItemCardapio, quantidade) {
     return resultado
 }
 
-async function removerItemPedido(idPedido, idItemCardapio) {
+async function removerItemPedido(idItemPedido) {
     // conectar no BD
     // executar operação SQL
-
     var resultado = null;
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("delete from itenspedidos where idPedido=$1 and idItemCardapio=$2 returning *", [idPedido, idItemCardapio]);
+        var query = await conn.query("delete from itenspedidos where idItemPedido=$1 returning *", [idItemPedido]);
         console.log(query.rows)
-        resultado = query.rows;
+        resultado = { success: true, mensagem: "Item de pedido removido" };
     } catch (err) {
         console.log(err)
+        resultado = { success: false, mensagem: "Erro ao remover do BD" };
     } finally {
         conn.release()
     }

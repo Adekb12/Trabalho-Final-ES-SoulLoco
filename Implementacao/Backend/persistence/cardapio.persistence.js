@@ -16,6 +16,27 @@ async function visualizarItens() {
     return resultado
 }
 
+async function visualizarItem(idItem) {
+    var resultado = null
+    var item = null;
+    const conn = await BD.conectar();
+    try {
+        var query = await conn.query("select * from cardapio where idItem=$1", [idItem]);
+        if (query.rows.length > 0) {
+            item = { nome: query.rows[0].nome, imagem: query.rows[0].imagem, descricao: query.rows[0].descricao, preco: query.rows[0].preco }
+            resultado = { success: true, item, mensagem: "O item foi localizado com sucesso" }
+        } else {
+            resultado = { success: false, item, mensagem: "Nao foi possivel localizar o item" }
+        }
+    } catch (err) {
+        console.log(err)
+        resultado = { success: false, item, mensagem: "Erro na conexao" }
+    } finally {
+        conn.release()
+    }
+    return resultado
+}
+
 async function adicionarItem(nome, imagem, descricao, preco) {
     // conectar no BD
     // executar operação SQL
@@ -136,25 +157,6 @@ async function alterarItem(idItem, nome, imagem, descricao, preco) {
         conn.release()
     }
 
-    return resultado
-}
-async function visualizarItem(idItem) {
-    var resultado = null
-    const conn = await BD.conectar();
-    try {
-        var query = await conn.query("select * from cardapio where idItem=$1", [idItem]);
-        if (query.rows.length > 0) {
-            console.log(query.rows)
-            resultado = { sucess: true, mensagem: "O item foi localizado com sucesso" }
-        } else {
-            resultado = { sucess: false, mensagem: "Nao foi possivel localizar o item" }
-        }
-    } catch (err) {
-        console.log(err)
-        resultado = { sucess: false, mensagem: "Erro na conexao" }
-    } finally {
-        conn.release()
-    }
     return resultado
 }
 

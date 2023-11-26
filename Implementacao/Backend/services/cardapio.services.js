@@ -12,7 +12,7 @@ async function adicionarItem(nome, imagem, descricao, preco) {
 
     if (!isNItem) {
         resultado = await cardapioPersistence.adicionarItem(nome, imagem, descricao, preco)
-    }else{
+    } else {
         resultado = { success: false, mensagem: "Esse nome já existe!" };
     }
 
@@ -44,19 +44,17 @@ async function alterarItem(idItem, nome, imagem, descricao, preco) {
     var isNR = await cardapioPersistence.existeNomeRepetido(idItem, nome);
     if (isItem && !isNR) {
         resultado = await cardapioPersistence.alterarItem(idItem, nome, imagem, descricao, preco)
-    }else{
+    } else {
         resultado = { success: false, mensagem: "Esse nome já existe!" };
     }
 
     return resultado
 }
-async function visualizarItem(idItem){
+
+async function visualizarItem(idItem) {
     var resultado = null;
-    if(await cardapioPersistence.existeItem(idItem)){
-        resultado = await cardapioPersistence.visualizarItem(idItem)
-    }else{
-        resultado = {sucess: false, mensagem: "Item nao encontrado"}
-    }
+    resultado = await cardapioPersistence.visualizarItem(idItem)
     return resultado
 }
+
 export default { visualizarItens, adicionarItem, removerItem, alterarItem, visualizarItem }

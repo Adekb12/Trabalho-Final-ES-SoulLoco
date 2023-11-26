@@ -9,56 +9,123 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        const paramIdpedido = new URLSearchParams(window.location.search);
+        const idPedido = paramIdpedido.get('idPedido');
         document.addEventListener('DOMContentLoaded', async function () {
             const pedidoContainer = document.querySelector('#pedido-container');
             // Função para carregar os itens do cardápio
             async function carregarItensPedido() {
                 try {
                     // Fazer uma requisição para o backend para obter os itens do cardápio
-                    const response = await axios.get(`http://localhost:3000/cardapio`);
+                    const response = await axios.get(`http://localhost:3000/pedidos/itensPedidos/${idPedido}`);
                     // Preencher a página com os itens do cardápio
 
-                    response.data.forEach(item => {
-                        const cardItem = document.createElement('div');
-                        cardItem.id = item.iditem;
-                        //console.log(item.iditem)
-                        cardItem.classList.add('card-item');
-                        cardItem.innerHTML = `
-                            <img class="card-item-imagem" src="${item.imagem}" alt="${item.nome}" >
+                    response.data.forEach(async itemPedido => {
+                        const itemPed = document.createElement('div');
+                        itemPed.id = itemPedido.iditempedido;
+                        var idItem = itemPedido.iditemcardapio;
+                        var qtd = itemPedido.quantidade;
+                        itemPed.classList.add('item-ped');
 
-                            <p class="texto">
-                                <span class="titulo">${item.nome}</span> <br> <br> <br>
-                                QTD: ${item.qtd}
-                            </p>
+                        try {
+                            const response2 = await axios.get(`http://localhost:3000/cardapio/${idItem}`);
+                            if (response2.data.success) {
+                                const item = response2.data.item;
+                                const nome = item.nome;
+                                const imagem = item.imagem;
+                                const descricao = item.descricao;
+                                const preco = parseFloat(item.preco).toFixed(2);
 
-                            <div id="ultima">
-                                <div id="total">
-                                    <p id="icone">
-                                        <button class="remover" data-id="${item.iditem}" data-img="${item.imagem}" data-nm="${item.nome}" data-dcs="${item.descricao}" data-pc="${item.preco}"><img id="x" src="../imagens/X.png" alt="Adicionar unidade"></button>
-                                    </p>
-                                    <p class="card-item-preco">Preço: R$ ${item.preco}</p>
+                                itemPed.innerHTML = `
+                                <img class="item-ped-imagem" src="${imagem}" alt="${nome}" >
+
+                                <p class="texto">
+                                    <span class="titulo">${nome}</span> <br> <br> <br>
+                                    QTD: <span class="quantidade">${qtd}</span>
+                                </p>
+
+                                <div id="ultima">
+                                    <div id="total">
+                                        <p id="icone">
+                                            <button class="remover" data-id="${itemPedido.iditempedido}" data-nm="${nome}"><img id="x" src="../imagens/X.png" alt="Adicionar unidade"></button>
+                                        </p>
+                                        <p class="item-ped-preco">Preço: R$ ${preco}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        `;
-                        pedidoContainer.appendChild(cardItem);
+                                `;
+                            }
+                        } catch (error) {
+                            console.error('Erro ao carregar itens do cardápio:', error);
+                        }
+
+                        pedidoContainer.appendChild(itemPed);
                     });
                 } catch (error) {
-                    console.error('Erro ao carregar itens do cardápio:', error);
+                    console.error('Erro ao carregar itens pedidos:', error);
                 }
             }
             // Chamar a função para carregar os itens do cardápio quando a página é carregada
             carregarItensPedido();
 
-            cardapioContainer.addEventListener('click', function (event) {
+            pedidoContainer.addEventListener('click', function (event) {
                 const mais = event.target.closest('.adicionar');
                 const menos = event.target.closest('.reduzir');
+                const botaoX = event.target.closest('.remover')
+                // Encontrar o elemento com a classe 'quantidade' dentro do elemento clicado
+                if (botaoX) {
+                    const idItemPedido = botaoX.getAttribute('data-id');
+                    const nome = botaoX.getAttribute('data-nm');
+                    exibirDialogoRemocao(idItemPedido, nome);
+                } else {
+                    const quantidadeElement = mais || menos ? event.target.closest('.item-ped').querySelector('.quantidade') : null;
 
-                if (mais) {
-                    qtd.innerHTML = Number(qtd.innerHTML.value) + Number(1);
-                } else if (menos) {
-                    qtd.innerHTML = Number(qtd.innerHTML.value) - Number(1);
+                    if (quantidadeElement) {
+                        const quantidadeAtual = Number(quantidadeElement.textContent);
+
+                        if (mais) {
+                            quantidadeElement.textContent = quantidadeAtual + 1;
+                        } else if (menos && quantidadeAtual > 0) {
+                            quantidadeElement.textContent = quantidadeAtual - 1;
+                        }
+                    }
                 }
+
             });
+
+            function exibirDialogoRemocao(idItemPedido, nome) {
+                Swal.fire({
+                    title: 'Remover item?',
+                    text: `Deseja realmente remover o item ${nome} do seu pedido?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sim, remover!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        removerItemPedido(idItemPedido);
+                    }
+                });
+            }
+
+            async function removerItemPedido(idItemPedido) {
+                try {
+                    const response = await axios.delete(`http://localhost:3000/pedidos/itensPedidos/${idPedido}/${idItemPedido}`);
+                    if (response.data.success) {
+                        const itemPed = document.querySelector(`[data-id="${idItemPedido}"]`).closest('.item-ped');
+                        if (itemPed) {
+                            itemPed.remove();
+                        } else {
+                            console.error('Elemento do pedido não encontrado para remoção:', idItemPedido);
+                        }
+                    } else {
+                        console.error(response.data.message);
+                    }
+                } catch (error) {
+                    console.error('Erro ao remover item de itensPedidos do pelo back DB:', error);
+                }
+            }
         });
     </script>
 </head>

@@ -9,22 +9,20 @@ async function adicionarItemPedido(idPedido, idItemCardapio, quantidade) {
     var resultado = null;
     var isItemCardapio = await itensPedidosPersistence.existeItemCardapio(idItemCardapio)
     //verifica se existem o item no cardapio
-    if(isItemCardapio){
+    if (isItemCardapio) {
         resultado = await itensPedidosPersistence.adicionarItemPedido(idPedido, idItemCardapio, quantidade)
-    }else{
-        resultado = { success: false, mensagem: "Erro: item não encontrado!"}
+    } else {
+        resultado = { success: false, mensagem: "Erro: item não encontrado!" }
     }
     return resultado
 }
 
-async function removerItemPedido(idPedido, idItemCardapio) {
+async function removerItemPedido(idItemPedido) {
 
     var resultado = null;
-    //verifica se exitem pelo menos um item no pedido para remover
-    var existeItem = await itensPedidosPersistence.existeItemPedido(idPedido)
-    if(existeItem){
-        resultado = await itensPedidosPersistence.removerItemPedido(idPedido, idItemCardapio)
-    }
+    
+    resultado = await itensPedidosPersistence.removerItemPedido(idItemPedido)
+
     return resultado
 }
 

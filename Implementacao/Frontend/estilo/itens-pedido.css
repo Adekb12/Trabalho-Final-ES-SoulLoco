@@ -9,7 +9,7 @@
     gap: 20px;
 }
 
-.card-item {
+.item-ped {
     margin: 10px 0px;
     display: flex;
     background-color: white;
@@ -18,7 +18,7 @@
     width: 98%;
 }
 
-.card-item-imagem {
+.item-ped-imagem {
     height: 150px;
     width: 20%;
     border-radius: 8px;
@@ -41,7 +41,7 @@
     margin-top: 25px;
 }
 
-.card-item-preco {
+.item-ped-preco {
     padding: 10px;
     height: fit-content;
     border-radius: 10px;

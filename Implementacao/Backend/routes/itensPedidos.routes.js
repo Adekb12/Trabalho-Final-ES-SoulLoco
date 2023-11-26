@@ -6,6 +6,6 @@ const router = express.Router()
 router.get('/:idPedido', itensPedidosController.visualizarItensPedido)
 router.post('/:idPedido', itensPedidosController.adicionarItemPedido)
 router.put('/:idPedido', itensPedidosController.alterarQuantidadeItemPedido)
-router.delete('/:idPedido', itensPedidosController.removerItemPedido)
+router.delete('/:idPedido/:idItemPedido', itensPedidosController.removerItemPedido)
 
 export default router

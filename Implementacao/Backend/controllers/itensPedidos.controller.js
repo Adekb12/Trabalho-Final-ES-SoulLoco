@@ -24,12 +24,13 @@ async function adicionarItemPedido(req, res) {
 
 async function removerItemPedido(req, res) {
     const idPedido = req.params.idPedido;
-    const idItemCardapio = req.body.idItemCardapio;
+    const idItemPedido = req.params.idItemPedido;
+    var resultado = null;
 
-    var resultado = null
-    if (await pedidosPersistence.existePedido(idPedido) && await cardapioPersistence.existeItem(idItemCardapio)) {
-
-        resultado = await itensPedidosServices.removerItemPedido(idPedido, idItemCardapio);
+    if (true) { //seu coloco await pedidosPersistence.existePedido(idPedido) dá erro de muitas conexões
+        resultado = await itensPedidosServices.removerItemPedido(idItemPedido);
+    } else {
+        resultado = { success: false, mensagem: "Id do pedido não existe" };
     }
 
     res.send(resultado)

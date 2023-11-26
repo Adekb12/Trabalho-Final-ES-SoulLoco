@@ -7,6 +7,13 @@ async function visualizarItens(req, res) {
     res.send(JSON.stringify(resultado))
 }
 
+async function visualizarItem(req, res) {
+    const idItem = req.params.idItem;
+    var resultado = null
+    resultado = await cardapioServices.visualizarItem(idItem)
+    res.send(resultado)
+}
+
 async function adicionarItem(req, res) {
     const nome = req.body.nome;
     const imagem = req.body.imagem;
@@ -69,13 +76,6 @@ function ehNomeValido(nome) {
         return false;
     }
     return true;
-}
-
-async function visualizarItem(req, res){
-    const idItem = req.params.idItem;
-    var resultado = null
-    resultado = await cardapioServices.visualizarItem(idItem)
-    res.send(resultado)
 }
 
 export default { visualizarItens, adicionarItem, removerItem, alterarItem, visualizarItem };
