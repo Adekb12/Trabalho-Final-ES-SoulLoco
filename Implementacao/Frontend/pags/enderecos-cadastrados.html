@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedido</title>
-    <link rel="stylesheet" href="../estilo/itens-pedido.css">
+    <link rel="stylesheet" href="../estilo/enderecos-cadastrados.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const paramIdpedido = new URLSearchParams(window.location.search);
-        const idPedido = paramIdpedido.get('idPedido');
+        const idCliente = paramIdpedido.get('idCliente');
         document.addEventListener('DOMContentLoaded', async function () {
-            const pedidoContainer = document.querySelector('#pedido-container');
+            const enderecoContainer = document.querySelector('#endereco-container');
             // Função para carregar os itens do cardápio
-            async function carregarItensPedido() {
+            async function carregarEnderecos() {
                 try {
                     // Fazer uma requisição para o backend para obter os itens do cardápio
                     const response = await axios.get(`http://localhost:3000/pedidos/itensPedidos/${idPedido}`);
@@ -25,7 +25,7 @@
                         itemPed.id = itemPedido.iditempedido;
                         var idItem = itemPedido.iditemcardapio;
                         var qtd = itemPedido.quantidade;
-                        itemPed.classList.add('item-ped');
+                        itemPed.classList.add('item-end');
 
                         try {
                             const response2 = await axios.get(`http://localhost:3000/cardapio/${idItem}`);
@@ -66,7 +66,7 @@
                 }
             }
             // Chamar a função para carregar os itens do cardápio quando a página é carregada
-            carregarItensPedido();
+            carregarEnderecos();
 
             pedidoContainer.addEventListener('click', function (event) {
                 const mais = event.target.closest('.adicionar');
