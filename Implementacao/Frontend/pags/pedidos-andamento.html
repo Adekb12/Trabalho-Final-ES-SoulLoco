@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos</title>
-    <link rel="stylesheet" href="../estilo/pedidos-historico.css">
+    <link rel="stylesheet" href="../estilo/pedidos-andamento.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
@@ -15,21 +15,20 @@
         document.addEventListener('DOMContentLoaded', async function () {
             const pedidosContainer = document.querySelector('#pedidos-container');
             // Função para carregar os itens do cardápio
-            async function carregarPedidosRealizados() {
+            async function carregarPedidosAndamento() {
                 try {
                     const response = await axios.get(`http://localhost:3000/pedidos/${idCliente}`);
 
-                    response.data.forEach(async pedido => {
+                    response.data.forEach(async endereco => {
                         const pedido = document.createElement('div');
-                        pedido.id = pedido.idPedido;
-                        pedido.
+                        pedido.id = endereco.idendereco;
                         
                         pedido.classList.add('ped');
                         pedido.innerHTML = `
                         <p>Id: ${idPedido}</p>
                         <div class="ped">
                             <div class="texto">
-                                <p>${idEndereco}</p>
+                                <p>${logradouro}, ${numero} - ${cidade}, ${cep}</p>
                             </div>
                             <div id="ultima">
                                 <button class="aceitar-endc"><img class="icone" src="../imagens/check.png" alt="Selecionar"></button>
@@ -43,7 +42,7 @@
                 }
             }
             // Chamar a função para carregar os itens do cardápio quando a página é carregada
-            carregarPedidosRealizados();
+            carregarPedidosAndamento();
         });
     </script>
 </head>

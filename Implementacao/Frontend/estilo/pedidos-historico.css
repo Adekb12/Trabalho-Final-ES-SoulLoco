@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+* {
+    border: 0px;
+}
+
+.ped {
+    margin: 10px 0px;
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    width: 98%;
+}
+
+.texto {
+    width: 100%;
+    font-family: 'Montserrat';
+    font-style: italic;
+    font-size: medium;
+    margin: 10px 20px;
+    display: inline;
+}
+
+.icone {
+    height: 40px;
+    margin-left: 20px;
+}
+
+button {
+    background-color: transparent;
+}
+
+button:hover {
+    cursor: pointer;
+}
