@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedido</title>
-    <!-- <link rel="stylesheet" href="../estilo/enderecos-cadastrados.css">  ???? Fazer -->
+    <title>Enderecos</title>
+    <link rel="stylesheet" href="../estilo/enderecos-cadastrados.css"> 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
@@ -19,7 +19,7 @@
                     // Fazer uma requisição para o backend para obter os itens do cardápio
                     const response = await axios.get(`http://localhost:3000/enderecos/${idCliente}`);
                     // Preencher a página com os itens do cardápio
-
+                    
                     response.data.forEach(async endereco => {
                         const endc = document.createElement('div'); //itemPed-->endc
                         endc.id = endereco.idendereco;
@@ -74,10 +74,10 @@
 
             });
 
-            function exibirDialogoRemocao(idItemPedido, nome) {
+            function exibirDialogoRemocao(idEndereco, nome) {
                 Swal.fire({
-                    title: 'Remover item?',
-                    text: `Deseja realmente remover o item ${nome} do seu pedido?`,
+                    title: 'Remover endereço?',
+                    text: `Deseja realmente remover este endereço?`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -86,26 +86,26 @@
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        removerItemPedido(idItemPedido);
+                        removerEndereco(idEndereco);
                     }
                 });
             }
 
-            async function removerItemPedido(idItemPedido) {
+            async function removerEndereco(idEndereco) {
                 try {
-                    const response = await axios.delete(`http://localhost:3000/pedidos/itensPedidos/${idPedido}/${idItemPedido}`);
+                    const response = await axios.delete(`http://localhost:3000/enderecos/${idCliente}/${idEndereco}`);
                     if (response.data.success) {
-                        const itemPed = document.querySelector(`[data-id="${idItemPedido}"]`).closest('.item-ped');
+                        const itemPed = document.querySelector(`[data-id="${idEndereco}"]`).closest('.item-ped');
                         if (itemPed) {
                             itemPed.remove();
                         } else {
-                            console.error('Elemento do pedido não encontrado para remoção:', idItemPedido);
+                            console.error('Endereço não encontrado para remoção:', idEndereco);
                         }
                     } else {
                         console.error(response.data.message);
                     }
                 } catch (error) {
-                    console.error('Erro ao remover item de itensPedidos do pelo back DB:', error);
+                    console.error('Erro ao remover endereço pelo back DB:', error);
                 }
             }
         });
