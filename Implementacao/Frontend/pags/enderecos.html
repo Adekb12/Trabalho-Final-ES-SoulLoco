@@ -40,7 +40,7 @@
                 <label for="Numero">Número</label> <br>
                 <input id="id-num" class="campo-texto" type="text" required> <br>
                 <br><br><br><br><br>
-                <input class="btn-add-end" type="button" value="Adicionar endereço">
+                <input class="botao" type="button" value="Adicionar endereço">
             </p>
         </div>
         <div id="cadastrados">
@@ -66,7 +66,7 @@
                         window.location.href = `detalhes-pedido.html?idPedido=${idPedido}&idEndereco=${idEnd}`;
                     }
 
-                    document.querySelector('.btn-add-end').addEventListener('click', async function () {
+                    document.querySelector('.botao').addEventListener('click', async function () {
                         var logradouro = document.getElementById('id-logra').value;
                         var numero = document.getElementById('id-num').value;
                         var cep = document.getElementById('id-cep').value;

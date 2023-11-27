@@ -28,15 +28,15 @@
                         // var estado = endereco.estado;
                         var cidade = endereco.cidade;
                         // var bairro = endereco.bairro;
-                        endc.classList.add('en-dc');
+                        endc.classList.add('endereco');
                         endc.innerHTML = `
-                        <div class="en-dc">
-                            <div class="endereco-info">
-                                <p class="texto">${logradouro}, ${numero} - ${cidade}, ${cep}</p>
+                        <div class="endereco">
+                            <div class="texto">
+                                <p>${logradouro}, ${numero} - ${cidade}, ${cep}</p>
                             </div>
                             <div id="ultima">
-                                <button class="aceitar-endc">Escolher</button>
-                                <button class="remover-endc" endbtn-id="${endereco.idendereco}">Remover</button>
+                                <button class="aceitar-endc"><img class="icone" src="../imagens/check.png" alt="Selecionar"></button>
+                                <button class="remover-endc" endbtn-id="${endereco.idendereco}"><img class="icone" src="../imagens/lixeira.png" alt="Remover"></button>
                             </div>
                         </div>`;
                         enderecoContainer.appendChild(endc);
