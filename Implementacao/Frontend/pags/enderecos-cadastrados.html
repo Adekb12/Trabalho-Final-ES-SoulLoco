@@ -5,21 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enderecos</title>
-    <link rel="stylesheet" href="../estilo/enderecos-cadastrados.css"> 
+    <link rel="stylesheet" href="../estilo/enderecos-cadastrados.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const paramIdpedido = new URLSearchParams(window.location.search);
         const idCliente = paramIdpedido.get('idCliente');
+
         document.addEventListener('DOMContentLoaded', async function () {
             const enderecoContainer = document.querySelector('#endereco-container');
             // Função para carregar os itens do cardápio
             async function carregarEnderecos() {
                 try {
-                    // Fazer uma requisição para o backend para obter os itens do cardápio
-                    const response = await axios.get(`http://localhost:3000/enderecos/${idCliente}`);
-                    // Preencher a página com os itens do cardápio
-                    
+                    const response = await axios.get(`http://localhost:3000/pedidos/enderecos/${idCliente}`);
+
                     response.data.forEach(async endereco => {
                         const endc = document.createElement('div'); //itemPed-->endc
                         endc.id = endereco.idendereco;
@@ -30,53 +29,39 @@
                         var cidade = endereco.cidade;
                         // var bairro = endereco.bairro;
                         endc.classList.add('en-dc');
-                        itemPed.innerHTML = `
-                        <div class="endereco">
+                        endc.innerHTML = `
+                        <div class="en-dc">
                             <div class="endereco-info">
-                                <p>${logradouro}, ${numero} - ${cidade}, ${cep}</p>
+                                <p class="texto">${logradouro}, ${numero} - ${cidade}, ${cep}</p>
                             </div>
-                            <div class="botoes">
-                                <button class="botao" onclick="aceitarEndereco()">Aceitar</button>
-                                <button class="botao" onclick="removerEndereco()">Remover</button>
+                            <div id="ultima">
+                                <button class="aceitar-endc">Aceitar</button>
+                                <button class="remover-endc" endbtn-id="${endereco.idendereco}">Remover</button>
                             </div>
                         </div>`;
                         enderecoContainer.appendChild(endc);
                     })
                 } catch (error) {
-                    console.error('Erro ao carregar itens pedidos:', error);
+                    console.error('Erro ao carregar endereços:', error);
                 }
             }
             // Chamar a função para carregar os itens do cardápio quando a página é carregada
             carregarEnderecos();
 
-            pedidoContainer.addEventListener('click', function (event) {
-                const mais = event.target.closest('.adicionar');
-                const menos = event.target.closest('.reduzir');
-                const botaoX = event.target.closest('.remover')
-                // Encontrar o elemento com a classe 'quantidade' dentro do elemento clicado
-                if (botaoX) {
-                    const idItemPedido = botaoX.getAttribute('data-id');
-                    const nome = botaoX.getAttribute('data-nm');
-                    exibirDialogoRemocao(idItemPedido, nome);
-                } else {
-                    const quantidadeElement = mais || menos ? event.target.closest('.item-ped').querySelector('.quantidade') : null;
+            enderecoContainer.addEventListener('click', function (event) {
+                const botaoRemover = event.target.closest('.remover-endc');
+                const botaoAceitar = event.target.closest('.aceitar-endc');
 
-                    if (quantidadeElement) {
-                        const quantidadeAtual = Number(quantidadeElement.textContent);
-
-                        if (mais) {
-                            quantidadeElement.textContent = quantidadeAtual + 1;
-                        } else if (menos && quantidadeAtual > 0) {
-                            quantidadeElement.textContent = quantidadeAtual - 1;
-                        }
-                    }
+                if (botaoRemover) {
+                    const idEndereco = botaoRemover.getAttribute('endbtn-id');
+                    exibirDialogoRemocao(idEndereco);
+                } else if (botaoAceitar) {
                 }
-
             });
 
-            function exibirDialogoRemocao(idEndereco, nome) {
+            function exibirDialogoRemocao(idEndereco) {
                 Swal.fire({
-                    title: 'Remover endereço?',
+                    title: 'Remover item?',
                     text: `Deseja realmente remover este endereço?`,
                     icon: 'warning',
                     showCancelButton: true,
@@ -93,19 +78,19 @@
 
             async function removerEndereco(idEndereco) {
                 try {
-                    const response = await axios.delete(`http://localhost:3000/enderecos/${idCliente}/${idEndereco}`);
+                    const response = await axios.delete(`http://localhost:3000/pedidos/enderecos/${idEndereco}`);
                     if (response.data.success) {
-                        const itemPed = document.querySelector(`[data-id="${idEndereco}"]`).closest('.item-ped');
-                        if (itemPed) {
-                            itemPed.remove();
+                        const endc = document.querySelector(`[endbtn-id="${idEndereco}"]`).closest('.en-dc');
+                        if (endc) {
+                            endc.remove();
                         } else {
                             console.error('Endereço não encontrado para remoção:', idEndereco);
                         }
                     } else {
-                        console.error(response.data.message);
+                        console.error('Erro ao remover endereço:', response.data.message);
                     }
                 } catch (error) {
-                    console.error('Erro ao remover endereço pelo back DB:', error);
+                    console.error('Erro ao remover item da tabela endereço:', error);
                 }
             }
         });
@@ -113,7 +98,7 @@
 </head>
 
 <body>
-    <div id="pedido-container"></div>
+    <div id="endereco-container"></div>
 </body>
 
 </html>

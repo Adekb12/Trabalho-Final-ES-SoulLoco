@@ -33,9 +33,9 @@ function validarNumero(numero) {
 
 async function removerEndereco(req, res) {
     const idEndereco = req.params.idEndereco;
-    const idPedido = req.body.idPedido;
+
     var resultado = null;
-    resultado = await enderecosServices.removerEndereco(idEndereco, idPedido);
+    resultado = await enderecosServices.removerEndereco(idEndereco);
 
     res.send(resultado)
 }

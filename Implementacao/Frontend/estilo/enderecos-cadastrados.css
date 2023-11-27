@@ -9,7 +9,7 @@
     gap: 20px;
 }
 
-.end {
+.en-dc {
     margin: 10px 0px;
     display: flex;
     background-color: white;
@@ -24,7 +24,8 @@
     font-style: italic;
     font-size: medium;
     margin: 10px 20px;
-} 
+    display: inline;
+}
 
 #ultima {
     width: 40%;
