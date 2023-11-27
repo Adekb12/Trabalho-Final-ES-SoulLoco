@@ -15,6 +15,9 @@
             document.getElementById('add').addEventListener('click', function () {
                 window.location.href = `adicionar-item.html`;
             });
+            document.getElementById('sair').addEventListener('click', function () {
+                window.location.href = `index.html`;
+            });
         });
     </script>
 </head>
@@ -36,7 +39,7 @@
         <div id="menu">
             <form method="post">
                 <p>
-                    <button><img class="icone" src="../imagens/botao-logout.png" alt="Sair"></button><br><br><br>
+                    <button id="sair"><img class="icone" src="../imagens/botao-logout.png" alt="Sair"></button><br><br><br>
                     <input id="add" class="botaoForm" type="button" value="Adicionar Item">
                     <input id="live" class="botaoForm" type="submit" value="Pedidos em andamento">
                 </p>

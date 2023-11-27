@@ -13,6 +13,12 @@
             document.getElementById('detalhes').addEventListener('click', function () {
                 window.location.href = `detalhes-pedido.html?idPedido=${idPedido}`;
             });
+            document.getElementById('historico').addEventListener('click', function () {
+                window.location.href = `historico.html?idCliente=${idCliente}`;
+            });
+            document.getElementById('sair').addEventListener('click', function () {
+                window.location.href = `index.html`;
+            });
         });
     </script>
 </head>
@@ -34,7 +40,7 @@
         <div id="menu">
             <form method="post">
                 <p>
-                    <button><img class="icone" src="../imagens/botao-logout.png" alt="Sair"></button><br>
+                    <button id="sair"><img class="icone" src="../imagens/botao-logout.png" alt="Sair"></button><br>
                     <input id="historico" class="formHeader" type="submit" value="Visualizar Histórico de Pedidos"><br>
                     <input id="detalhes" class="formHeader" type="button" value="Visualizar Detalhes do Pedido">
                 </p>
