@@ -73,7 +73,7 @@ main {
     margin-bottom: 15px;
 }
 
-#form>p {
+#form > p {
     display: inline-block;
     margin-right: 30%;
 }
@@ -92,18 +92,12 @@ label {
     font-size: medium;
 }
 
-/* #botao {
-    background-color: rgb(169, 252, 16);
-    height: 40px;   
-    width: 200px;
-    border-radius: 30px;
-    border: 0px;
-    padding: 10px;
+.botao {
+    background-color: rgb(221, 108, 2);
+    color: white;
+    font-family: 'Montserrat';
+    font-style: italic;
     font-size: medium;
-} */
-
-.btn-add-end {
-    background-color: rgb(169, 252, 16);
     height: 40px;
     width: 200px;
     border-radius: 30px;
@@ -112,8 +106,8 @@ label {
     font-size: medium;
 }
 
-.btn-add-end:hover {
-    background-color: yellow;
+.botao:hover {
+    background-color: rgb(250, 164, 66);
 }
 
 #cadastrados {
@@ -131,6 +125,6 @@ label {
 }
 
 iframe {
-    height: 100%;
+    height: 90%;
     width: 100%;
 }

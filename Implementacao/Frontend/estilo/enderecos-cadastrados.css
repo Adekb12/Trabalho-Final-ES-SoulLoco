@@ -4,12 +4,7 @@
     border: 0px;
 }
 
-#endereco-container {
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.en-dc {
+.endereco {
     margin: 10px 0px;
     display: flex;
     background-color: white;
@@ -28,6 +23,7 @@
 }
 
 #ultima {
+    padding-top: 10px;
     width: 40%;
     text-align: right;
     margin-right: 20px;
