@@ -68,7 +68,10 @@
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Sim, remover!',
-                    cancelButtonText: 'Cancelar'
+                    cancelButtonText: 'Cancelar',
+                    customClass: {
+                        popup: 'custom-popup-class',
+                    }
                 }).then((result) => {
                     if (result.isConfirmed) {
                         removerEndereco(idEndereco);

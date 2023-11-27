@@ -42,6 +42,11 @@ button {
     background-color: transparent;
 }
 
+.custom-popup-class {
+    width: 280px;
+    height: 290px;
+}
+
 button:hover {
     cursor: pointer;
 }
