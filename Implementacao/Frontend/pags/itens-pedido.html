@@ -35,7 +35,7 @@
                                 const imagem = item.imagem;
                                 const descricao = item.descricao;
                                 const preco = parseFloat(item.preco).toFixed(2);
-
+                                itemPed.setAttribute('data-preco-item', preco)
                                 itemPed.innerHTML = `
                                 <img class="item-ped-imagem" src="${imagem}" alt="${nome}" >
 
@@ -51,7 +51,7 @@
                                         <p id="icone">
                                             <button class="remover" data-id="${itemPedido.iditempedido}" data-nm="${nome}"><img id="x" src="../imagens/X.png" alt="Adicionar unidade"></button>
                                         </p>
-                                        <p class="item-ped-preco">Preço: R$ ${preco}</p>
+                                        <p class="item-ped-preco">Preço: R$ ${parseFloat(preco * qtd).toFixed(2)}</p>
                                     </div>
                                 </div>`;
                             }
@@ -65,8 +65,30 @@
                     console.error('Erro ao carregar itens pedidos:', error);
                 }
             }
-            // Chamar a função para carregar os itens do cardápio quando a página é carregada
-            carregarItensPedido();
+
+            await carregarItensPedido();
+
+            pedidoContainer.addEventListener('input', function (event) {
+                const quantidadeInput = event.target.closest('.qntd');
+                const itemPed = quantidadeInput.closest('.item-ped');
+                alterarQuantidade(quantidadeInput.value, itemPed);
+            });
+
+            async function alterarQuantidade(novaQTDE, itemPed) {
+                var idItemPedido = itemPed.id;
+                try {
+                    const response = await axios.put(`http://localhost:3000/pedidos/itensPedidos/${idItemPedido}`, {
+                        quantidade: novaQTDE
+                    })
+
+                    const precoItem = parseFloat(itemPed.getAttribute('data-preco-item'));
+                    const novoPreco = precoItem * novaQTDE;
+                    const precoElement = itemPed.querySelector('.item-ped-preco');
+                    precoElement.textContent = `Preço: R$ ${novoPreco.toFixed(2)}`;
+                } catch (error) {
+                    console.error('Erro ao alterar o item: ', error);
+                }
+            }
 
             pedidoContainer.addEventListener('click', function (event) {
                 const botaoX = event.target.closest('.remover')
@@ -77,25 +99,6 @@
                     exibirDialogoRemocao(idItemPedido, nome);
                 }
             });
-
-            pedidoContainer.addEventListener('input', function (event) {
-                const quantidadeInput = event.target.closest('.qntd');
-                const itemPed = quantidadeInput.closest('.item-ped');
-                alterarQuantidade(quantidadeInput.value, itemPed.id);
-            });
-
-            async function alterarQuantidade(novaQTDE, idItemPedido) {
-                //console.log(novaQTDE + "-----" + idItemPedido)
-                try {
-                    const response = await axios.put(`http://localhost:3000/pedidos/itensPedidos/${idItemPedido}`, {
-                        quantidade: novaQTDE
-                    })
-
-
-                } catch (error) {
-                    console.error('Erro ao alterar o item: ', error);
-                }
-            }
 
             function exibirDialogoRemocao(idItemPedido, nome) {
                 Swal.fire({

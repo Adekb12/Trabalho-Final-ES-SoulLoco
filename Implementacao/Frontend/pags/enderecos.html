@@ -50,7 +50,6 @@
             <script>
                 const params = new URLSearchParams(window.location.search);
                 const idCliente = params.get('idCliente');
-
                 // Atualizar o src do iframe usando JavaScript
                 document.getElementById('iframeEnderecos').src = `enderecos-cadastrados.html?idCliente=${idCliente}`;
             </script>

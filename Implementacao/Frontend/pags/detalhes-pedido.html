@@ -7,12 +7,13 @@
     <title>Soul Loco</title>
     <link rel="stylesheet" href="../estilo/detalhes-pedido.css">
     <link rel="shortcut icon" href="../imagens/favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
     <header>
         <div id="metade1">
-            <button onclick=""><img class="icone" src="../imagens/voltar.png" alt="Voltar" srcset=""></button>
+            <button id="btn-voltar"><img class="icone" src="../imagens/voltar.png" alt="Voltar" srcset=""></button>
         </div>
         <div id="metade2">
             <p id="icones">
@@ -26,14 +27,64 @@
         <script>
             const params = new URLSearchParams(window.location.search);
             const idPedido = params.get('idPedido');
-
+            console.log(idPedido)
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframeItensPedido').src = `itens-pedido.html?idPedido=${idPedido}`;
+
+            document.addEventListener('DOMContentLoaded', async function () {
+                document.getElementById('bpt').addEventListener('click', await calcularPrecoTotal);
+
+                document.getElementById('btn-voltar').addEventListener('click', voltarCardapio);
+
+                document.getElementById('btn-alt').addEventListener('click', await irEndereco);
+
+                function voltarCardapio() {
+                    window.location.href = `cardapio-cliente.html?idPedido=${idPedido}`;
+                }
+
+                async function irEndereco() {
+                    var idCliente = null;
+                    try {
+                        const response = await axios.get(`http://localhost:3000/usuarios/${idPedido}`)
+                        idCliente = response.data[0].idcliente;
+                        window.location.href = `enderecos.html?idCliente=${idCliente}`;
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
+
+                async function calcularPrecoTotal() {
+                    var precoTotal = 0;
+                    try {
+                        const response = await axios.get(`http://localhost:3000/pedidos/itensPedidos/${idPedido}`);
+
+                        response.data.forEach(async itemPedido => {
+                            var idItem = itemPedido.iditemcardapio;
+                            var qtd = itemPedido.quantidade;
+                            try {
+                                const response2 = await axios.get(`http://localhost:3000/cardapio/${idItem}`);
+                                console.log(response2.data)
+                                if (response2.data.success) {
+                                    const item = response2.data.item;
+                                    const preco = parseFloat(item.preco).toFixed(2);
+                                    precoTotal = precoTotal + (preco * qtd);
+                                }
+                                document.querySelector('#endereco .campo').textContent = `Total: R$ ${precoTotal.toFixed(2)}`;
+                            } catch (error) {
+                                console.error('Erro ao carregar itens do cardápio:', error);
+                            }
+                        });
+                    } catch (error) {
+                        console.error('Erro ao acessar o BD de itens pedidos: ', error);
+                    }
+                }
+            });
         </script>
         <div id="endereco">
-            <p class="campo">Total: R$ ${total.preco}</p>
+            <input id="bpt" class="botao-total" type="button" value="Calcular Total">
+            <p class="campo">Total: R$ </p>
             <p id="campo-endereco">
-                <input class="botao" type="button" value="Alterar">
+                <input id="btn-alt" class="botao" type="button" value="Alterar">
                 <span id="end" class="campo">Endereco</span>
             </p>
             <p>

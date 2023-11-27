@@ -56,4 +56,20 @@ async function cadastrarCliente(nome, email, senha, idCliente) {
     return resultado
 }
 
-export default { logarUsuario, cadastrarCliente, existeUsuario }
+async function pegarIdCliente(idPedido) {
+
+    var resultado = null;
+    const conn = await BD.conectar();
+    try {
+        var query = await conn.query("select idCliente from pedidos where idPedido=$1", [idPedido]);
+        resultado = query.rows;
+    } catch (err) {
+        console.log(err)
+    } finally {
+        conn.release()
+    }
+
+    return resultado
+}
+
+export default { logarUsuario, cadastrarCliente, existeUsuario, pegarIdCliente }

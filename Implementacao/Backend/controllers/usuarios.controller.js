@@ -21,4 +21,12 @@ async function cadastrarCliente(req, res) {
     res.send(resultado)
 }
 
-export default { cadastrarCliente, logaUsuario };
+async function pegarIdCliente(req, res) {
+    const idPedido = req.params.idPedido;
+
+    var resultado = null;
+    resultado = await usuariosServices.pegarIdCliente(idPedido);
+    res.send(resultado)
+}
+
+export default { cadastrarCliente, logaUsuario, pegarIdCliente};

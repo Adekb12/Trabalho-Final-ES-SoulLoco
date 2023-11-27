@@ -22,5 +22,10 @@ async function cadastrarCliente(nome, email, senha, isCliente) {
     return resultado
 }
 
+async function pegarIdCliente(idPedido) {
+    var resultado = null;
+    resultado = await usuariosPersistence.pegarIdCliente(idPedido)
+    return resultado
+}
 
-export default { cadastrarCliente, logaUsuario }
+export default { cadastrarCliente, logaUsuario, pegarIdCliente }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedido</title>
-    <link rel="stylesheet" href="../estilo/enderecos-cadastrados.css">
+    <!-- <link rel="stylesheet" href="../estilo/enderecos-cadastrados.css">  ???? Fazer -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
@@ -17,50 +17,31 @@
             async function carregarEnderecos() {
                 try {
                     // Fazer uma requisição para o backend para obter os itens do cardápio
-                    const response = await axios.get(`http://localhost:3000/pedidos/itensPedidos/${idPedido}`);
+                    const response = await axios.get(`http://localhost:3000/enderecos/${idCliente}`);
                     // Preencher a página com os itens do cardápio
 
-                    response.data.forEach(async itemPedido => {
-                        const itemPed = document.createElement('div');
-                        itemPed.id = itemPedido.iditempedido;
-                        var idItem = itemPedido.iditemcardapio;
-                        var qtd = itemPedido.quantidade;
-                        itemPed.classList.add('item-end');
-
-                        try {
-                            const response2 = await axios.get(`http://localhost:3000/cardapio/${idItem}`);
-                            if (response2.data.success) {
-                                const item = response2.data.item;
-                                const nome = item.nome;
-                                const imagem = item.imagem;
-                                const descricao = item.descricao;
-                                const preco = parseFloat(item.preco).toFixed(2);
-
-                                itemPed.innerHTML = `
-                                <img class="item-ped-imagem" src="${imagem}" alt="${nome}" >
-
-                                <p class="texto">
-                                    <span class="titulo">${nome}</span> <br> <br> <br>
-                                    <label for="qtd">QTD: </label>
-                                    <input id="qtd-${item.iditem}" class="qntd" type="number" min="0" value="${qtd}"></input>
-                                    <p id="icone">
-                                </p>
-
-                                <div id="ultima">
-                                    <div id="total">
-                                        <p id="icone">
-                                            <button class="remover" data-id="${itemPedido.iditempedido}" data-nm="${nome}"><img id="x" src="../imagens/X.png" alt="Adicionar unidade"></button>
-                                        </p>
-                                        <p class="item-ped-preco">Preço: R$ ${preco}</p>
-                                    </div>
-                                </div>`;
-                            }
-                        } catch (error) {
-                            console.error('Erro ao carregar itens do cardápio:', error);
-                        }
-
-                        pedidoContainer.appendChild(itemPed);
-                    });
+                    response.data.forEach(async endereco => {
+                        const endc = document.createElement('div'); //itemPed-->endc
+                        endc.id = endereco.idendereco;
+                        var logradouro = endereco.logradouro;
+                        var numero = endereco.numero;
+                        var cep = endereco.cep;
+                        // var estado = endereco.estado;
+                        var cidade = endereco.cidade;
+                        // var bairro = endereco.bairro;
+                        endc.classList.add('en-dc');
+                        itemPed.innerHTML = `
+                        <div class="endereco">
+                            <div class="endereco-info">
+                                <p>${logradouro}, ${numero} - ${cidade}, ${cep}</p>
+                            </div>
+                            <div class="botoes">
+                                <button class="botao" onclick="aceitarEndereco()">Aceitar</button>
+                                <button class="botao" onclick="removerEndereco()">Remover</button>
+                            </div>
+                        </div>`;
+                        enderecoContainer.appendChild(endc);
+                    })
                 } catch (error) {
                     console.error('Erro ao carregar itens pedidos:', error);
                 }

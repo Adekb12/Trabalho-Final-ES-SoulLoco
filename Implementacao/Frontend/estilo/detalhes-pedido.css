@@ -101,6 +101,23 @@ iframe {
     margin-right: 20px;
 }
 
+.botao-total {
+    background-color: rgb(2, 17, 221);
+    color: white;
+    font-family: 'Montserrat';
+    font-style: italic;
+    font-size: medium;
+    padding: 10px;
+    width: 150px;
+    border: 0px;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.botao-total:hover {
+    background-color: rgb(45, 43, 197)
+}
+
 .botao:hover {
     background-color: rgb(250, 164, 66);
 }
