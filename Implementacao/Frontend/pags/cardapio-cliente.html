@@ -14,7 +14,7 @@
                 window.location.href = `detalhes-pedido.html?idPedido=${idPedido}`;
             });
             document.getElementById('historico').addEventListener('click', function () {
-                window.location.href = `historico.html?idCliente=${idCliente}`;
+                window.location.href = `historico.html?idPedido=${idPedido}&idCliente=${idCliente}`;
             });
             document.getElementById('sair').addEventListener('click', function () {
                 window.location.href = `index.html`;
@@ -41,7 +41,7 @@
             <form method="post">
                 <p>
                     <button id="sair"><img class="icone" src="../imagens/botao-logout.png" alt="Sair"></button><br>
-                    <input id="historico" class="formHeader" type="submit" value="Visualizar Histórico de Pedidos"><br>
+                    <input id="historico" class="formHeader" type="button" value="Visualizar Histórico de Pedidos"><br>
                     <input id="detalhes" class="formHeader" type="button" value="Visualizar Detalhes do Pedido">
                 </p>
             </form>
@@ -53,7 +53,7 @@
         <script>
             const params = new URLSearchParams(window.location.search);
             const idPedido = params.get('idPedido');
-
+            const idCliente = params.get('idCliente')
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframeCardapio').src = `itens-cardapio-cliente.html?idPedido=${idPedido}`;
         </script>

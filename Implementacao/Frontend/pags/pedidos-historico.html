@@ -9,41 +9,44 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        const paramIdpedido = new URLSearchParams(window.location.search);
-        const idCliente = paramIdpedido.get('idCliente');
+        const param = new URLSearchParams(window.location.search);
+        const idCliente = param.get('idCliente');
 
         document.addEventListener('DOMContentLoaded', async function () {
             const pedidosContainer = document.querySelector('#pedidos-container');
             // Função para carregar os itens do cardápio
-            async function carregarPedidosRealizados() {
+            async function carregarHistoricoPedidos() {
                 try {
                     const response = await axios.get(`http://localhost:3000/pedidos/${idCliente}`);
-
+                    console.log(response.data)
                     response.data.forEach(async pedido => {
-                        const pedido = document.createElement('div');
-                        pedido.id = pedido.idPedido;
-                        pedido.
+                        const pedidoCli = document.createElement('div');
+                        pedidoCli.id = pedido.idpedido;
+                        var idPedido = pedido.idpedido;
+                        var dataPedido = new Date(pedido.datapedido);
+                        var statusPedido = pedido.statuspedido;
+                        pedidoCli.classList.add('ped');
+                        pedidoCli.innerHTML = `
                         
-                        pedido.classList.add('ped');
-                        pedido.innerHTML = `
-                        <p>Id: ${idPedido}</p>
                         <div class="ped">
                             <div class="texto">
-                                <p>${idEndereco}</p>
+                                <p>ID do pedido: ${idPedido}</p>
                             </div>
-                            <div id="ultima">
-                                <button class="aceitar-endc"><img class="icone" src="../imagens/check.png" alt="Selecionar"></button>
-                                <button class="remover-endc" endbtn-id="${endereco.idendereco}"><img class="icone" src="../imagens/lixeira.png" alt="Remover"></button>
+                            <div class="texto">
+                                <p>Realizado no dia: ${dataPedido.getDate()}/${dataPedido.getMonth()}/${dataPedido.getFullYear()} ás ${dataPedido.getHours()}:${dataPedido.getMinutes()}</p>
+                            </div>
+                            <div class="texto">
+                                <p>Status do pedido: ${statusPedido}</p>
                             </div>
                         </div>`;
-                        enderecoContainer.appendChild(endc);
+                        pedidosContainer.appendChild(pedidoCli);
                     })
                 } catch (error) {
                     console.error('Erro ao carregar endereços:', error);
                 }
             }
-            // Chamar a função para carregar os itens do cardápio quando a página é carregada
-            carregarPedidosRealizados();
+
+            carregarHistoricoPedidos();
         });
     </script>
 </head>

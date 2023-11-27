@@ -26,9 +26,10 @@
 
         <script>
             const params = new URLSearchParams(window.location.search);
-            const idPedido = params.get('idPedido');
-            
-            console.log(idPedido)
+            const idPedido = params.get('idPedido')
+            const idCliente = params.get('idCliente');
+
+            console.log(idCliente)
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframePedidosRealizados').src = `pedidos-historico.html?idCliente=${idCliente}`;
 
