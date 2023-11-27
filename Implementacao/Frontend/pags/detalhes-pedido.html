@@ -27,10 +27,14 @@
         <script>
             const params = new URLSearchParams(window.location.search);
             const idPedido = params.get('idPedido');
-            
+
             console.log(idPedido)
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframeItensPedido').src = `itens-pedido.html?idPedido=${idPedido}`;
+
+            var enderecoEscolhido = localStorage.getItem('enderecoEscolhido');
+
+
 
             document.addEventListener('DOMContentLoaded', async function () {
                 document.getElementById('bpt').addEventListener('click', await calcularPrecoTotal);
@@ -53,6 +57,15 @@
                         console.log(error)
                     }
                 }
+
+                // if (enderecoEscolhido) {
+                //     console.log(enderecoEscolhido[0])
+                //     var spanEndereco = document.getElementById('end');
+                //     spanEndereco.textContent = enderecoEscolhido.logradouro + ", " + enderecoEscolhido.numero + " - " + enderecoEscolhido.cidade + ", " + enderecoEscolhido.cep
+                // } else {
+                //     var spanEndereco = document.getElementById('end');
+                //     spanEndereco.textContent = "Nenhum endereço escolhido"
+                // }
 
                 async function calcularPrecoTotal() {
                     var precoTotal = 0;

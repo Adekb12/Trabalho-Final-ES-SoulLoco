@@ -55,15 +55,18 @@
                 const idPedido = params.get('idPedido');
 
                 // Atualizar o src do iframe usando JavaScript
-                document.getElementById('iframeEnderecos').src = `enderecos-cadastrados.html?idCliente=${idCliente}`;
+                document.getElementById('iframeEnderecos').src = `enderecos-cadastrados.html?idCliente=${idCliente}&idPedido=${idPedido}`;
 
                 document.addEventListener('DOMContentLoaded', function () {
+
+                    window.addEventListener('irParaDetalhes', function () {
+                        voltarDetalhes()
+                    });
 
                     document.getElementById('btn-voltar').addEventListener('click', voltarDetalhes);
 
                     function voltarDetalhes() {
-                        var idEnd = null;
-                        window.location.href = `detalhes-pedido.html?idPedido=${idPedido}&idEndereco=${idEnd}`;
+                        window.location.href = `detalhes-pedido.html?idPedido=${idPedido}`;
                     }
 
                     document.querySelector('.botao').addEventListener('click', async function () {
