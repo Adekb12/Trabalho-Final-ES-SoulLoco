@@ -7,12 +7,14 @@
     <title>Soul Loco</title>
     <link rel="stylesheet" href="../estilo/enderecos.css">
     <link rel="shortcut icon" href="../imagens/favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
     <header>
         <div id="metade1">
-            <button onclick=""><img class="icone" src="../imagens/voltar.png" alt="Voltar" srcset=""></button>
+            <button id="btn-voltar"><img class="icone" src="../imagens/voltar.png" alt="Voltar" srcset=""></button>
         </div>
         <div id="metade2">
             <p id="icones">
@@ -24,21 +26,21 @@
         <div id="form">
             <p>
                 <label for="cep">CEP</label> <br>
-                <input class="campo-texto" type="text" required> <br>
+                <input id="id-cep" class="campo-texto" type="text" required> <br>
                 <label for="estado">Estado</label> <br>
-                <input class="campo-texto" type="text" required> <br>
+                <input id="id-estado" class="campo-texto" type="text" required> <br>
                 <label for="cidade">Cidade</label> <br>
-                <input class="campo-texto" type="text" required> <br>
+                <input id="id-city" class="campo-texto" type="text" required> <br>
                 <label for="bairro">Bairro</label> <br>
-                <input class="campo-texto" type="text" required>
+                <input id="id-bairro" class="campo-texto" type="text" required>
             </p>
             <p>
                 <label for="logradouro">Logradouro</label> <br>
-                <input class="campo-texto" type="text" required> <br>
+                <input id="id-logra" class="campo-texto" type="text" required> <br>
                 <label for="Numero">Número</label> <br>
-                <input class="campo-texto" type="text" required> <br>
+                <input id="id-num" class="campo-texto" type="text" required> <br>
                 <br><br><br><br><br>
-                <input id="botao" type="button" value="Adicionar endereço">
+                <input class="btn-add-end" type="button" value="Adicionar endereço">
             </p>
         </div>
         <div id="cadastrados">
@@ -50,8 +52,80 @@
             <script>
                 const params = new URLSearchParams(window.location.search);
                 const idCliente = params.get('idCliente');
+                const idPedido = params.get('idPedido');
+
                 // Atualizar o src do iframe usando JavaScript
                 document.getElementById('iframeEnderecos').src = `enderecos-cadastrados.html?idCliente=${idCliente}`;
+
+                document.addEventListener('DOMContentLoaded', function () {
+
+                    document.getElementById('btn-voltar').addEventListener('click', voltarDetalhes);
+
+                    function voltarDetalhes() {
+                        var idEnd = null;
+                        window.location.href = `detalhes-pedido.html?idPedido=${idPedido}&idEndereco=${idEnd}`;
+                    }
+
+                    document.querySelector('.btn-add-end').addEventListener('click', async function () {
+                        var logradouro = document.getElementById('id-logra').value;
+                        var numero = document.getElementById('id-num').value;
+                        var cep = document.getElementById('id-cep').value;
+                        var estado = document.getElementById('id-estado').value;
+                        var cidade = document.getElementById('id-city').value;
+                        var bairro = document.getElementById('id-bairro').value;
+                        await confirmarAdicao(logradouro, numero, cep, estado, cidade, bairro)
+                    })
+
+                    function confirmarAdicao(logradouro, numero, cep, estado, cidade, bairro) {
+                        Swal.fire({
+                            title: 'Adicionar endereço?',
+                            text: `Deseja realmente adicionar este endereço?`,
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sim, adicionar!',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                adicionarEndereco(logradouro, numero, cep, estado, cidade, bairro);
+                            }
+                        });
+                    }
+                    async function adicionarEndereco(logradouro, numero, cep, estado, cidade, bairro) {
+                        try {
+                            const response = await axios.post(`http://localhost:3000/pedidos/enderecos/${idCliente}`, {
+                                logradouro: logradouro,
+                                numero: numero,
+                                cep: cep,
+                                estado: estado,
+                                cidade: cidade,
+                                bairro: bairro
+                            });
+
+                            if (response.data.success) {
+                                document.getElementById('iframeEnderecos').contentWindow.location.reload();
+                            } else {
+                                if (response.data.mensagem == "Numero invalido") {
+                                    console.log("Numero invalido")
+                                    //tratar para aparecer uma mensagem para o usuário 
+                                } else if (response.data.mensagem == "CEP invalido") {
+                                    console.log("CEP invalido")
+                                    //tratar para aparecer uma mensagem para o usuário 
+                                } else if (response.data.mensagem == "Endereco ja existe") {
+                                    console.log("Endereco ja existe")
+                                    //tratar para aparecer uma mensagem para o usuário
+                                } else {
+                                    console.error('Erro no login:', response.data.mensagem);
+                                }
+
+                            }
+                        } catch (error) {
+                            console.error('Erro na requisição:', error);
+                        }
+                    }
+
+                })
             </script>
         </div>
     </main>

@@ -7,9 +7,11 @@ async function visualizarEnderecos(idCliente) {
 async function adicionarEndereco(idCliente, logradouro, numero, cep, estado, cidade, bairro) {
     var resultado = null;
     //verifica se o endereco ja existe para adicionar um novo
-    var isEndereco = await enderecosPersistence.existeEnderecoPedidos(logradouro, numero, cep, estado, cidade, bairro)
+    var isEndereco = await enderecosPersistence.existeEndereco(logradouro, numero, cep, estado, cidade, bairro)
     if (!isEndereco) {
         resultado = await enderecosPersistence.adicionarEndereco(idCliente, logradouro, numero, cep, estado, cidade, bairro)
+    }else{
+        resultado = { success: false, mensagem: "Endereco ja existe" }
     }
     return resultado
 }

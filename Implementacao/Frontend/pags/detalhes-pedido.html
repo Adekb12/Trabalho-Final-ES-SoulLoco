@@ -27,6 +27,7 @@
         <script>
             const params = new URLSearchParams(window.location.search);
             const idPedido = params.get('idPedido');
+            
             console.log(idPedido)
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframeItensPedido').src = `itens-pedido.html?idPedido=${idPedido}`;
@@ -47,7 +48,7 @@
                     try {
                         const response = await axios.get(`http://localhost:3000/usuarios/${idPedido}`)
                         idCliente = response.data[0].idcliente;
-                        window.location.href = `enderecos.html?idCliente=${idCliente}`;
+                        window.location.href = `enderecos.html?idCliente=${idCliente}&idPedido=${idPedido}`;
                     } catch (error) {
                         console.log(error)
                     }
@@ -84,7 +85,7 @@
             <input id="bpt" class="botao-total" type="button" value="Calcular Total">
             <p class="campo">Total: R$ </p>
             <p id="campo-endereco">
-                <input id="btn-alt" class="botao" type="button" value="Alterar">
+                <input id="btn-alt" class="botao" type="button" value="Escolher Endereco">
                 <span id="end" class="campo">Endereco</span>
             </p>
             <p>

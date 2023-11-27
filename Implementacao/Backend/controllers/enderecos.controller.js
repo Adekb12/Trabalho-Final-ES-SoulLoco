@@ -17,8 +17,14 @@ async function adicionarEndereco(req, res) {
     const bairro = req.body.bairro;
 
     var resultado = null;
-    if (verificarCep(cep) && validarNumero(numero)) {
-        resultado = await enderecosServices.adicionarEndereco(idCliente, logradouro, numero, cep, estado, cidade, bairro);
+    if (verificarCep(cep)) {
+        if(validarNumero(numero)){
+            resultado = await enderecosServices.adicionarEndereco(idCliente, logradouro, numero, cep, estado, cidade, bairro);
+        }else{
+            resultado = { success: false, mensagem: "Numero invalido" }
+        }
+    }else{
+        resultado = { success: false, mensagem: "CEP invalido" }
     }
     res.send(resultado)
 }
