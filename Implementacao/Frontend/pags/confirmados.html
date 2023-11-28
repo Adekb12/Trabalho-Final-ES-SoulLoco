@@ -22,16 +22,11 @@
         </div>
     </header>
     <main>
-        <iframe id="iframePedidosRealizados" frameborder="0"></iframe>
+        <iframe id="iframePedidosConfirmados" frameborder="0"></iframe>
 
         <script>
-            const params = new URLSearchParams(window.location.search);
-            const idPedido = params.get('idPedido')
-            const idCliente = params.get('idCliente');
-
-            console.log(idCliente)
             // Atualizar o src do iframe usando JavaScript
-            document.getElementById('iframePedidosRealizados').src = `pedidos-historico.html?idCliente=${idCliente}`;
+            document.getElementById('iframePedidosConfirmados').src = `pedidos-confirmados.html`;
 
             document.addEventListener('DOMContentLoaded', async function () {
 
@@ -40,7 +35,7 @@
                 document.getElementById('sair').addEventListener('click', sair);
 
                 function voltarCardapio() {
-                    window.location.href = `cardapio-cliente.html?idPedido=${idPedido}`;
+                    window.location.href = `cardapio-gerente.html`;
                 }
 
                 function sair() {
