@@ -15,6 +15,10 @@
                 window.location.href = `cardapio-gerente.html`
             });
 
+            document.getElementById('sair').addEventListener('click', function () {
+                window.location.href = `index.html`;
+            });
+
             document.querySelector('.btn-add').addEventListener('click', function () {
                 // Obtém os valores atuais dos campos do formulário
                 const imagem = document.getElementById('imageInput').value;
@@ -39,12 +43,19 @@
                     } else {
                         if (response.data.mensagem == "Esse nome já existe!") {
                             console.log("Esse nome já existe!")
-                            //tratar para aparecer uma mensagem para o usuário que o nome do item já existe
+                            document.getElementById('nome-repetido').style.display = 'block';
+                            document.getElementById('preco-invalido').style.display = 'none';
+                            document.getElementById('erro-sistema').style.display = 'none';
                         } else if (response.data.mensagem == "Preço inválido!") {
                             console.log("Preço inválido!!!")
-                            //tratar para aparecer uma mensagem para o usuário que o preço é inválido
+                            document.getElementById('nome-repetido').style.display = 'none';
+                            document.getElementById('preco-invalido').style.display = 'block';
+                            document.getElementById('erro-sistema').style.display = 'none';
                         } else {
-                            console.error('Erro no login:', response.data.mensagem);
+                            console.error('Erro:', response.data.mensagem);
+                            document.getElementById('nome-repetido').style.display = 'none';
+                            document.getElementById('preco-invalido').style.display = 'none';
+                            document.getElementById('erro-sistema').style.display = 'block';
                         }
 
                     }
@@ -58,24 +69,10 @@
 
 <body>
     <header>
-        <div class="bem-vindo" id="container">
-            <div class="bem-vindo">
-                <p id="laranja">
-                    Bem-vindo ao Soul Loco!<br>
-                    Aqui o sabor vem com a alma mexicana <br> <br>
-                </p>
-                <p class="bem-vindo-text">
-                    Selecione os itens que você gostaria de pedir e clique em <br>
-                    "Visualizar Detalhes do Pedido" para realizar o pedido
-                </p>
-            </div>
-        </div>
-        <div id="menu">
-            <form method="post">
-                <p>
-                    <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair"></button><br><br><br>
-                </p>
-            </form>
+        <div id="cabecalho">
+            <p>
+                <button id="sair"><img class="icone" src="../imagens/botao-logout.png" alt="Sair"></button><br><br><br>
+            </p>
         </div>
     </header>
     <main>
@@ -93,6 +90,7 @@
                 <div class="form-group">
                     <label for="nameInput">Nome:</label>
                     <input type="text" id="nameInput" name="nameInput">
+                    <div id="nome-repetido" class="erro">Algum item já possui esse nome</div>
                 </div>
 
                 <div class="form-group">
@@ -103,6 +101,8 @@
                 <div class="form-group">
                     <label for="priceInput">Preço:</label>
                     <input type="text" id="priceInput" name="priceInput">
+                    <div id="preco-invalido" class="erro">Preço inválido</div>
+                    <div id="erro-sistema" class="erro">Erro! Verifique o servidor</div>
                 </div>
             </div>
 

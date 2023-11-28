@@ -12,11 +12,14 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    padding-right: 5%;
 }
 
 #tela {
     text-align: right;
-    padding: 10% 5%;
 }
 
 form {
@@ -33,6 +36,7 @@ h1 {
     color: rgb(221, 108, 2);
     font-family: 'Montserrat';
     font-style: italic;
+    margin-bottom: 20px;
 }
 
 input {
@@ -43,7 +47,7 @@ input {
     margin-top: 25px;
     border-radius: 25px;
     font-size: medium;
-    margin: 10px;
+    margin: 20px 10px;
 }
 
 .campoDigitavel {

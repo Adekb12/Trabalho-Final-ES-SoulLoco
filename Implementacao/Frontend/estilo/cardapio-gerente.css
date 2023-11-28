@@ -35,7 +35,7 @@ header {
     padding: 0px;
 }
 
-div {
+#bem-vindo {
     background-color: rgba(0, 0, 0, 0.623);
     width: 380px;
     padding: 20px;
@@ -71,7 +71,7 @@ button:hover {
     background-color: transparent;
 }
 
-form>p {
+#botoes > p {
     text-align: right;
 }
 
