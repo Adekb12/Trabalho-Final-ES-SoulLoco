@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soul Loco</title>
-    <link rel="stylesheet" href="../estilo/andamento.css">
+    <link rel="stylesheet" href="../estilo/historico.css">
     <link rel="shortcut icon" href="../imagens/favicon.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
@@ -22,15 +22,16 @@
         </div>
     </header>
     <main>
-        <iframe id="iframePedidosAndamento" frameborder="0"></iframe>
+        <iframe id="iframePedidosRealizados" frameborder="0"></iframe>
 
         <script>
             const params = new URLSearchParams(window.location.search);
-            const idPedido = params.get('idPedido');
-            
-            console.log(idPedido)
+            const idPedido = params.get('idPedido')
+            const idCliente = params.get('idCliente');
+
+            console.log(idCliente)
             // Atualizar o src do iframe usando JavaScript
-            document.getElementById('iframePedidosAndamento').src = `pedidos-andamento.html`;
+            document.getElementById('iframePedidosRealizados').src = `pedidos-historico.html?idCliente=${idCliente}`;
 
             document.addEventListener('DOMContentLoaded', async function () {
 

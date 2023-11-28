@@ -74,9 +74,11 @@
             });
 
             function definirEndereco(endereco) {
-                localStorage.setItem('enderecoEscolhido', JSON.stringify(endereco));
+                localStorage.setItem('enderecoEscolhido', endereco.logradouro + ", " + endereco.numero + " - " + endereco.cidade + ", " + endereco.cep);
                 const evento = new CustomEvent('irParaDetalhes', { bubbles: true, composed: true });
                 window.parent.document.dispatchEvent(evento);
+
+                localStorage.setItem('idEndPed', endereco.idendereco);
             }
 
             function exibirDialogoRemocao(idEndereco) {
@@ -106,6 +108,11 @@
                         const endc = document.querySelector(`[endbtn-id="${idEndereco}"]`).closest('.en-dc');
                         if (endc) {
                             endc.remove();
+
+                            if(idEndereco == localStorage.getItem('idEndPed')){
+                                localStorage.setItem('enderecoEscolhido', "Indefinido");
+                                localStorage.setItem('idEndPed', null);
+                            }
                         } else {
                             console.error('Endereço não encontrado para remoção:', idEndereco);
                         }

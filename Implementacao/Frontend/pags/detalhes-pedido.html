@@ -27,8 +27,7 @@
         <script>
             const params = new URLSearchParams(window.location.search);
             const idPedido = params.get('idPedido');
-
-            console.log(idPedido)
+            //console.log(idPedido)
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframeItensPedido').src = `itens-pedido.html?idPedido=${idPedido}`;
 
@@ -44,6 +43,9 @@
                 document.getElementById('sair').addEventListener('click', sair);
 
                 document.getElementById('btn-alt').addEventListener('click', await irEndereco);
+
+                document.getElementById('confirm').addEventListener('click', await confirmarPedido);
+
 
                 function voltarCardapio() {
                     window.location.href = `cardapio-cliente.html?idPedido=${idPedido}`;
@@ -64,14 +66,31 @@
                     }
                 }
 
-                // if (enderecoEscolhido) {
-                //     console.log(enderecoEscolhido[0])
-                //     var spanEndereco = document.getElementById('end');
-                //     spanEndereco.textContent = enderecoEscolhido.logradouro + ", " + enderecoEscolhido.numero + " - " + enderecoEscolhido.cidade + ", " + enderecoEscolhido.cep
-                // } else {
-                //     var spanEndereco = document.getElementById('end');
-                //     spanEndereco.textContent = "Nenhum endereço escolhido"
-                // }
+                if (enderecoEscolhido && enderecoEscolhido != "Indefinido") {
+                    var spanEndereco = document.getElementById('end');
+                    spanEndereco.textContent = enderecoEscolhido
+                } else {
+                    var spanEndereco = document.getElementById('end');
+                    spanEndereco.textContent = "Nenhum endereço escolhido"
+                }
+
+                var idEndereco = localStorage.getItem('idEndPed');
+                var idCliente = null;
+                if (idEndereco) {
+                    try {
+                        const response = await axios.put(`http://localhost:3000/pedidos/${idPedido}`, {
+                            idEndereco: idEndereco
+                        })
+                        if (response.data.success) {
+                            idCliente = response.data.idCliente;
+                        } else {
+                            console.log(response.data.message)
+                        }
+
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
 
                 async function calcularPrecoTotal() {
                     var precoTotal = 0;
@@ -98,6 +117,19 @@
                         console.error('Erro ao acessar o BD de itens pedidos: ', error);
                     }
                 }
+
+                async function confirmarPedido() {
+                    if (idEndereco && idEndereco != null) {
+                        const r = await axios.put(`http://localhost:3000/pedidos/${idPedido}/Confirmado`)
+                        console.log("Pedido confirmado")
+                        //avisar o usuário que o pedido foi confirmado
+                        localStorage.clear()
+                        window.location.href = `tela-inicial.html?idCliente=${idCliente}`;
+                    } else {
+                        console.log("Endereço não definido")
+                        //avisar o usuário que ele precisa definir o endereço antes de confirmar pedido
+                    }
+                }
             });
         </script>
         <div id="endereco">
@@ -108,7 +140,7 @@
                 <span id="end" class="campo">Endereco</span>
             </p>
             <p>
-                <input class="botao" type="button" value="Confirmar">
+                <input id="confirm" class="botao" type="button" value="Confirmar">
                 <input id="cancelar" class="botao" type="button" value="Cancelar">
             </p>
         </div>

@@ -50,8 +50,6 @@ async function visualizarPedidosCliente(idCliente) {
 }
 
 async function existePedido(idPedido) {
-    // conectar no BD
-    // executar operação SQL
 
     const conn = await BD.conectar();
     try {
@@ -66,8 +64,6 @@ async function existePedido(idPedido) {
 }
 
 async function cancelarPedido(idPedido) {
-    // conectar no BD
-    // executar operação SQL
 
     var resultado = null;
     const conn = await BD.conectar();
@@ -84,4 +80,35 @@ async function cancelarPedido(idPedido) {
     return resultado
 }
 
-export default { criarPedido, visualizarPedidos, visualizarPedidosCliente, existePedido, cancelarPedido }
+async function adicionarEndereco(idPedido, idEndereco) {
+    var resultado = null;
+    const conn = await BD.conectar();
+    try {
+        var query = await conn.query("update pedidos set idendereco=$2 where idPedido=$1 returning *", [idPedido, idEndereco]);
+        resultado = { success: true, idCliente: query.rows[0].idcliente, mensagem: "Adicionado com sucesso" };
+    } catch (err) {
+        console.log(err)
+        resultado = { success: false, mensagem: "Erro ao adicionar no BD!" };
+    } finally {
+        conn.release()
+    }
+    return resultado
+}
+
+async function alterarStatus(idPedido, statusPedido) {
+    var resultado = null;
+    const conn = await BD.conectar();
+    try {
+        var query = await conn.query("update pedidos set statusPedido=$2 where idPedido=$1", [idPedido, statusPedido]);
+        resultado = { success: true }
+    } catch (err) {
+        console.log(err)
+        resultado = { success: false }
+    } finally {
+        conn.release()
+    }
+    return resultado
+}
+
+
+export default { criarPedido, visualizarPedidos, visualizarPedidosCliente, existePedido, cancelarPedido, adicionarEndereco, alterarStatus }

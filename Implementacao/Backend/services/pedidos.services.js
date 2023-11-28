@@ -25,11 +25,29 @@ async function existePedido(idPedido) {
 async function cancelarPedido(idPedido) {
 
     var resultado = null;
-    //verifica se o pedido nao esta vazio para ser cancelado
-    if (existePedido(idPedido)){
+
+    if (existePedido(idPedido)) {
         resultado = await pedidosPersistence.cancelarPedido(idPedido)
     }
     return resultado
 }
 
-export default { criarPedido, visualizarPedidos, visualizarPedidosCliente, existePedido, cancelarPedido }
+async function adicionarEndereco(idPedido, idEndereco) {
+
+    var resultado = null;
+    if (existePedido(idPedido)) {
+        resultado = await pedidosPersistence.adicionarEndereco(idPedido, idEndereco)
+    } else {
+        resultado = { success: false, mensagem: "idPedido nao encontrado" }
+    }
+    return resultado
+}
+
+async function alterarStatus(idPedido, statusPedido) {
+
+    var resultado = null;
+    resultado = await pedidosPersistence.alterarStatus(idPedido, statusPedido)
+    return resultado
+}
+
+export default { criarPedido, visualizarPedidos, visualizarPedidosCliente, existePedido, cancelarPedido, adicionarEndereco, alterarStatus }
