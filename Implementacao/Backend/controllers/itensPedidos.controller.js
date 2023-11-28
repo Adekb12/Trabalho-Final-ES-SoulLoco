@@ -39,7 +39,6 @@ async function removerItemPedido(req, res) {
 async function alterarQuantidadeItemPedido(req, res) {
     const idItemPedido = req.params.idItemPedido;
     const quantidade = req.body.quantidade;
-    console.log(idItemPedido + "?????" + quantidade)
     //validar os dados
     var resultado = null
     if (verificarQuantidade(quantidade)) {

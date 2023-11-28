@@ -11,6 +11,8 @@
     <script>
         const paramIdpedido = new URLSearchParams(window.location.search);
         const idPedido = paramIdpedido.get('idPedido');
+        const eventT = new CustomEvent('calcularTotal', { bubbles: true, composed: true });
+
         document.addEventListener('DOMContentLoaded', async function () {
             const pedidoContainer = document.querySelector('#pedido-container');
             // Função para carregar os itens do cardápio
@@ -67,6 +69,7 @@
             }
 
             await carregarItensPedido();
+            window.parent.document.dispatchEvent(eventT);
 
             pedidoContainer.addEventListener('input', function (event) {
                 const quantidadeInput = event.target.closest('.qntd');
@@ -85,6 +88,7 @@
                     const novoPreco = precoItem * novaQTDE;
                     const precoElement = itemPed.querySelector('.item-ped-preco');
                     precoElement.textContent = `Preço: R$ ${novoPreco.toFixed(2)}`;
+                    window.parent.document.dispatchEvent(eventT);
                 } catch (error) {
                     console.error('Erro ao alterar o item: ', error);
                 }
@@ -124,6 +128,7 @@
                         const itemPed = document.querySelector(`[data-id="${idItemPedido}"]`).closest('.item-ped');
                         if (itemPed) {
                             itemPed.remove();
+                            window.parent.document.dispatchEvent(eventT);
                         } else {
                             console.error('Elemento do pedido não encontrado para remoção:', idItemPedido);
                         }

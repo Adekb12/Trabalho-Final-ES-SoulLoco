@@ -9,7 +9,7 @@ import cors from 'cors'
 
 const app = express()
 
-// Configuração básica do CORS
+// Configuração básica do CORSs
 app.use(cors());
 
 app.use(express.json())
@@ -18,9 +18,9 @@ app.use(bodyParser.urlencoded({ extend: true }))
 
 app.use("/usuarios", usuariosRouter)
 app.use("/cardapio", cardapioRouter)
-app.use("/pedidos", pedidosRouter)
 app.use("/pedidos/itensPedidos", itensPedidosRouter)
 app.use("/pedidos/enderecos", enderecosRouter)
+app.use("/pedidos", pedidosRouter)
 
 const port = 3000
 app.listen(port, mensagemServisor)

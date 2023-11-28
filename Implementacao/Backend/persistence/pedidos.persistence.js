@@ -6,7 +6,6 @@ async function criarPedido(idCliente, dataPedido, statusPedido) {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("insert into pedidos (idCliente, dataPedido, statusPedido) values ($1, $2, $3) returning idPedido", [idCliente, dataPedido, statusPedido]);
-        console.log(query.rows)
         resultado = query.rows;
     } catch (err) {
         console.log(err)
@@ -22,7 +21,6 @@ async function visualizarPedidos() {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("select* from pedidos where statusPedido='Confirmado'");
-        console.log(query.rows)
         resultado = query.rows;
     } catch (err) {
         console.log(err)
@@ -38,7 +36,6 @@ async function visualizarPedidosCliente(idCliente) {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("select* from pedidos where idCliente=$1", [idCliente]);
-        console.log(query.rows)
         resultado = query.rows;
     } catch (err) {
         console.log(err)
@@ -69,7 +66,6 @@ async function cancelarPedido(idPedido) {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("delete from pedidos where idPedido=$1 returning *", [idPedido]);
-        console.log(query.rows)
         resultado = query.rows;
     } catch (err) {
         console.log(err)
@@ -102,7 +98,7 @@ async function alterarStatus(idPedido, statusPedido) {
         var query = await conn.query("update pedidos set statusPedido=$2 where idPedido=$1", [idPedido, statusPedido]);
         resultado = { success: true }
     } catch (err) {
-        console.log(err)
+        console.log(err + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         resultado = { success: false }
     } finally {
         conn.release()

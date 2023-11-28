@@ -30,13 +30,14 @@
             //console.log(idPedido)
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframeItensPedido').src = `itens-pedido.html?idPedido=${idPedido}`;
-
             var enderecoEscolhido = localStorage.getItem('enderecoEscolhido');
 
 
 
             document.addEventListener('DOMContentLoaded', async function () {
-                document.getElementById('bpt').addEventListener('click', await calcularPrecoTotal);
+                window.addEventListener('calcularTotal', function () {
+                    calcularPrecoTotal()
+                });
 
                 document.getElementById('btn-voltar').addEventListener('click', voltarCardapio);
 
@@ -133,7 +134,6 @@
             });
         </script>
         <div id="endereco">
-            <input id="bpt" class="botao-total" type="button" value="Calcular Total">
             <p class="campo">Total: R$ </p>
             <p id="campo-endereco">
                 <input id="btn-alt" class="botao" type="button" value="Editar Endereço">

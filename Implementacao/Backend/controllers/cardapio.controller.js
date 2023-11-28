@@ -3,7 +3,6 @@ import cardapioServices from '../services/cardapio.services.js'
 async function visualizarItens(req, res) {
     var resultado = null
     resultado = await cardapioServices.visualizarItens()
-    console.log(resultado)
     res.send(JSON.stringify(resultado))
 }
 

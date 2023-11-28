@@ -45,7 +45,6 @@ async function cadastrarCliente(nome, email, senha, idCliente) {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("insert into usuarios (nome, email, senha, isCliente) values ($1, $2, $3, $4) returning idusuario", [nome, email, senha, idCliente]);
-        console.log(query.rows)
         resultado = query.rows;
     } catch (err) {
         console.log(err)

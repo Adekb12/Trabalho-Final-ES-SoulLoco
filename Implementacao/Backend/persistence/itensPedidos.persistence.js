@@ -20,7 +20,6 @@ async function adicionarItemPedido(idPedido, idItemCardapio, quantidade) {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("insert into itensPedidos (idPedido, idItemCardapio, quantidade) values ($1, $2, $3) returning *", [idPedido, idItemCardapio, quantidade]);
-        console.log(query.rows)
         resultado = { success: true, mensagem: "Item adicionado" }
     } catch (err) {
         console.log(err)
@@ -39,7 +38,6 @@ async function removerItemPedido(idItemPedido) {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("delete from itenspedidos where idItemPedido=$1 returning *", [idItemPedido]);
-        console.log(query.rows)
         resultado = { success: true, mensagem: "Item de pedido removido" };
     } catch (err) {
         console.log(err)
@@ -59,7 +57,6 @@ async function alterarQuantidadeItemPedido(idItemPedido, quantidade) {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("update itensPedidos set quantidade = $2 where idItemPedido = $1 returning *", [idItemPedido, quantidade]);
-        console.log(query.rows);
         resultado = query.rows;
     } catch (err) {
         console.log(err)

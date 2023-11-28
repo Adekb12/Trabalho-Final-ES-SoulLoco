@@ -6,7 +6,6 @@ async function visualizarItens() {
     try {
         var query = await conn.query("select* from cardapio order by nome");
         resultado = query.rows;
-        console.log(resultado)
     } catch (err) {
         console.log(err)
     } finally {
@@ -45,8 +44,6 @@ async function adicionarItem(nome, imagem, descricao, preco) {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("insert into cardapio (nome, imagem, descricao, preco) values ($1, $2, $3, $4) returning *", [nome, imagem, descricao, preco]);
-
-        console.log(query.rows)
         resultado = { success: true, mensagem: "Adicionado com sucesso!" };
     } catch (err) {
         console.log(err)
@@ -128,7 +125,6 @@ async function removerItem(idItem) {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("delete from cardapio where idItem=$1", [idItem]);
-        console.log(query.rows)
         resultado = { success: true, mensagem: "Removido com sucesso!" };
     } catch (err) {
         console.log(err)
@@ -148,7 +144,6 @@ async function alterarItem(idItem, nome, imagem, descricao, preco) {
     const conn = await BD.conectar();
     try {
         var query = await conn.query("update cardapio set nome=$2, imagem=$3, descricao=$4, preco=$5 where idItem=$1 returning *", [idItem, nome, imagem, descricao, preco]);
-        console.log(query.rows)
         resultado = { success: true, mensagem: "Alterado com sucesso!" };
     } catch (err) {
         console.log(err)
