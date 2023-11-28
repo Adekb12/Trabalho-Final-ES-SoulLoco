@@ -36,10 +36,13 @@
                         if (response.data.mensagem == "Email nao cadastrado") {
                             console.log("Email não cadastrado");
                             document.getElementById('email-invalido').style.display = 'block';
+                            document.getElementById('senha-incorreta').style.display = 'none';
+                            document.getElementById('erro-servidor').style.display = 'none';
                         } else if (response.data.mensagem == "Senha incorreta") {
                             console.log("Senha do usuário incorreta")
                             document.getElementById('email-invalido').style.display = 'none'
                             document.getElementById('senha-incorreta').style.display = 'block';
+                            document.getElementById('erro-servidor').style.display = 'none';
                         } else {
                             document.getElementById('email-invalido').style.display = 'none';
                             document.getElementById('senha-incorreta').style.display = 'none';

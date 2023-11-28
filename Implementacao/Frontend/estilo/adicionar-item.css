@@ -1,5 +1,6 @@
-.bem-vindo-text{
-    color: white;
+@charset "UTF-8";
+
+* {
     padding: 0px;
     margin: 0px;
 }
@@ -18,38 +19,17 @@ body {
     height: 95vh;
 }
 
-main {
-    background-color: rgba(165, 42, 42, 0.432);
-    padding: 20px;
-    border-radius: 25px;
-    flex-grow: 1;
+header {
+    display: flex;
+    flex-grow: 0;
     flex-basis: auto;
-    width: 93vw;
+    width: 100%;
 }
 
-#laranja {
-    color: rgb(221, 108, 2);
-    line-height: 30px;
-}
-
-form>p {
-    text-align: right;
-}
-
-.bem-vindo {
-    background-color: rgba(0, 0, 0, 0.623);
-    width: 380px;
-    padding: 20px;
-    border-radius: 25px;
-    text-align: center;
-}
-
-#container {
+#cabecalho {
     height: fit-content;
-    width: 50%;
-    background-color: transparent;
-    margin: 0px;
-    padding: 0px;
+    width: 100%;
+    text-align: right;
 }
 
 .icone {
@@ -67,32 +47,33 @@ button:hover {
     cursor: pointer;
 }
 
-#menu {
-    width: 50%;
-    padding: 0px;
-    padding-top: 20px;
-    text-align: right;
-    background-color: transparent;
+main {
+    background-color: rgba(165, 42, 42, 0.432);
+    border-radius: 25px;
+    flex-grow: 1;
+    flex-basis: auto;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
 }
 
-
-header {
-    display: flex;
-    flex-grow: 0;
-    flex-basis: auto;
-    padding-bottom: 20px;
+#container {
+    height: fit-content;
+    width: 50%;
+    background-color: transparent;
+    margin: 0px;
+    padding: 0px;
 }
 
 .edit-window {
     background-color: rgb(221, 71, 2);
-    border: 1px solid #ccc;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 400px;
     margin: auto;
-    margin-top: 10vh;
 }
 
 .edit-window h2 {
@@ -105,7 +86,6 @@ header {
 
 .form-container {
     background-color: #ed7625;
-    /* Cor de fundo para o formulário */
     padding: 15px;
     border-radius: 8px;
 }
@@ -119,6 +99,7 @@ header {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
+    margin: 4px 0px;
 }
 
 .btn-container {
@@ -138,4 +119,12 @@ header {
     cursor: pointer;
     background-color: #4caf50;
     color: #fff;
+}
+
+.erro {
+    background-color: transparent;
+    color: red;
+    font-family: 'Montserrat';
+    font-size: medium;
+    display: none;
 }
