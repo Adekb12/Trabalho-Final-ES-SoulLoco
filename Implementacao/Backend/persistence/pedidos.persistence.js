@@ -65,8 +65,9 @@ async function cancelarPedido(idPedido) {
     var resultado = null;
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("delete from pedidos where idPedido=$1 returning *", [idPedido]);
-        resultado = query.rows;
+        await conn.query("delete from itensPedidos where idPedido=$1", [idPedido])
+        await conn.query("delete from pedidos where idPedido=$1", [idPedido]);
+        resultado = { success: true, mensagem: "Pedido cancelado" };
     } catch (err) {
         console.log(err)
     } finally {

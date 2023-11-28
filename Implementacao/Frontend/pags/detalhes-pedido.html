@@ -7,6 +7,7 @@
     <title>Soul Loco</title>
     <link rel="stylesheet" href="../estilo/detalhes-pedido.css">
     <link rel="shortcut icon" href="../imagens/favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
@@ -27,7 +28,7 @@
         <script>
             const params = new URLSearchParams(window.location.search);
             const idPedido = params.get('idPedido');
-            //console.log(idPedido)
+
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframeItensPedido').src = `itens-pedido.html?idPedido=${idPedido}`;
             var enderecoEscolhido = localStorage.getItem('enderecoEscolhido');
@@ -46,6 +47,8 @@
                 document.getElementById('btn-alt').addEventListener('click', await irEndereco);
 
                 document.getElementById('confirm').addEventListener('click', await confirmarPedido);
+
+                document.getElementById('cancelar').addEventListener('click', exibirConfirmacaoCancelar);
 
 
                 function voltarCardapio() {
@@ -103,7 +106,6 @@
                             var qtd = itemPedido.quantidade;
                             try {
                                 const response2 = await axios.get(`http://localhost:3000/cardapio/${idItem}`);
-                                console.log(response2.data)
                                 if (response2.data.success) {
                                     const item = response2.data.item;
                                     const preco = parseFloat(item.preco).toFixed(2);
@@ -131,6 +133,41 @@
                         //avisar o usuário que ele precisa definir o endereço antes de confirmar pedido
                     }
                 }
+
+                function exibirConfirmacaoCancelar() {
+                    Swal.fire({
+                        title: 'Cancelar pedido?',
+                        text: `Cancelar pedido removerá todos os itens do seu pedido e você seja redirecionado para a tela inicial`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sim!',
+                        cancelButtonText: 'Não',
+                        customClass: {
+                            confirmButton: 'swal-btn',
+                            cancelButton: 'swal-btn',
+                        },
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            cancelarPedido();
+                        }
+                    });
+                }
+
+                async function cancelarPedido() {
+                    try {
+                        const response = await axios.delete(`http://localhost:3000/pedidos/${idPedido}`)
+                        if (response.data.success) {
+                            window.location.href = `tela-inicial.html?idCliente=${idCliente}`
+                        } else {
+                            console.log(response.data.mensagem)
+                        } s
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }
+
             });
         </script>
         <div id="endereco">

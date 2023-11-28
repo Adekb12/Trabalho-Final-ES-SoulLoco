@@ -73,7 +73,7 @@ main {
     margin-bottom: 15px;
 }
 
-#form > p {
+#form>p {
     display: inline-block;
     margin-right: 30%;
 }
@@ -127,4 +127,8 @@ label {
 iframe {
     height: 90%;
     width: 100%;
+}
+
+.swal-btn {
+    width: 100px;
 }

@@ -125,6 +125,10 @@ iframe {
     background-color: rgb(250, 164, 66);
 }
 
+.swal-btn {
+    width: 100px;
+}
+
 #cancelar {
     background-color: rgb(148, 6, 6);
     margin: 0px;

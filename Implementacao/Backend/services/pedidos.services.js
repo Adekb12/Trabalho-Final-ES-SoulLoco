@@ -28,6 +28,8 @@ async function cancelarPedido(idPedido) {
 
     if (existePedido(idPedido)) {
         resultado = await pedidosPersistence.cancelarPedido(idPedido)
+    } else {
+        resultado = { success: false, mensagem: "Id do Pedido não encontrado!" }
     }
     return resultado
 }
