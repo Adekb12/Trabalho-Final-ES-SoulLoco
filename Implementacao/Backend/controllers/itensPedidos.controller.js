@@ -27,11 +27,7 @@ async function removerItemPedido(req, res) {
     const idItemPedido = req.params.idItemPedido;
     var resultado = null;
 
-    if (true) { //seu coloco await pedidosPersistence.existePedido(idPedido) dá erro de muitas conexões
-        resultado = await itensPedidosServices.removerItemPedido(idItemPedido);
-    } else {
-        resultado = { success: false, mensagem: "Id do pedido não existe" };
-    }
+    resultado = await itensPedidosServices.removerItemPedido(idItemPedido);
 
     res.send(resultado)
 }

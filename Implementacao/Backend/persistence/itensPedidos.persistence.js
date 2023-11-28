@@ -56,7 +56,7 @@ async function alterarQuantidadeItemPedido(idItemPedido, quantidade) {
     var resultado = null;
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("update itensPedidos set quantidade = $2 where idItemPedido = $1 returning *", [idItemPedido, quantidade]);
+        var query = await conn.query("update itensPedidos set quantidade = $2 where idItemPedido = $1", [idItemPedido, quantidade]);
         resultado = query.rows;
     } catch (err) {
         console.log(err)
@@ -81,12 +81,13 @@ async function existeItemCardapio(idItemCardapio) {
         conn.release()
     }
 }
-async function existeItemPedido(idPedido) {
+
+async function existeItemPedido(idPedido, idItemCardapio) {
 
     const conn = await BD.conectar();
     try {
-        var query = await conn.query("select * from itensPedidos where idPedido =$1", [idPedido]);
-        return query.rows.length > 0
+        var query = await conn.query("select * from itensPedidos where idPedido =$1 and IdItemCardapio=$2", [idPedido, idItemCardapio]);
+        return query.rows
     } catch (err) {
         console.log(err)
         return false
