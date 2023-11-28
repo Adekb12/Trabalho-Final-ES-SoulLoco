@@ -12,15 +12,22 @@ body {
     background-size: cover;
 }
 
+#tela {
+    text-align: center;
+    padding-top: 5%;
+}
+
 form {
-    height: 430px;
+    display: inline-block;
+    height: fit-content;
     width: 350px;
     padding: 20px;
     background-color: rgba(237, 232, 241, 0.76);
     border-radius: 30px;
-    position: relative;
-    left: 37%;
-    top: 15%;
+}
+
+div {
+    text-align: left;
 }
 
 h1 {
@@ -44,6 +51,7 @@ input {
     margin-bottom: 15px;
     border-radius: 25px;
     font-size: medium;
+    margin: 10px;
 }
 
 .campoDigitavel {
@@ -57,10 +65,16 @@ input {
     background-color: rgb(221, 108, 2);
     color: white;
     font-size: larger;
-    position: relative;
-    left: 21%;
 }
 
 #cadastrar:hover {
     background-color: rgb(250, 164, 66);
+}
+
+.erro {
+    background-color: transparent;
+    color: red;
+    font-family: 'Montserrat';
+    font-size: medium;
+    display: none;
 }
