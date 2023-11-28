@@ -26,8 +26,8 @@
 
                     if (response.data.length === 0) {
                         console.log('O e-mail já existe. Avisar o usuário ou realizar outra ação.');
+                        document.getElementById('email-cadastrado').style.display = 'inline-block';
                     } else {
-
                         const idCliente = response.data[0].idusuario;
                         window.location.href = `tela-inicial.html?idCliente=${idCliente}`;
                     }
@@ -40,27 +40,28 @@
 </head>
 
 <body>
-    <form action="http://localhost:3000/usuarios" method="post">
-        <h1>Cadastre-se</h1>
-        <p>
-            <label for="nome">Nome</label><br>
-            <input class="campoDigitavel" type="text" name="nome" id="idnome" required placeholder="Digite seu nome">
-        </p>
-        <p>
-            <label for="email">E-mail</label><br>
-            <input class="campoDigitavel" type="email" name="email" id="idemail" required
-                placeholder="Digite seu e-mail">
-        </p>
-        <p>
-            <label for="senha">Senha</label><br>
-            <input class="campoDigitavel" type="password" name="senha" id="idsenha" required minlength="8"
-                placeholder="Digite sua senha" >
-        </p>
-        <p>
-            <input id="cadastrar" type="button" value="Cadastrar">
-        </p>
-    </form>
-
+    <div id="tela">
+        <form action="http://localhost:3000/usuarios" method="post">
+            <h1>Cadastre-se</h1>
+            <p>
+                <div><label for="nome">Nome</label></div>
+                <input class="campoDigitavel" type="text" name="nome" id="idnome" placeholder="Digite seu nome">
+            </p>
+            <p>
+                <div><label for="email">E-mail</label></div>
+                <input class="campoDigitavel" type="email" name="email" id="idemail" placeholder="Digite seu e-mail">
+                <div id="email-cadastrado" class="erro">E-mail já cadastrado</div>
+            </p>
+            <p>
+                <div><label for="senha">Senha</label></div>
+                <input class="campoDigitavel" type="password" name="senha" id="idsenha"
+                    placeholder="Digite sua senha">
+            </p>
+            <p>
+                <input id="cadastrar" type="button" value="Cadastrar">
+            </p>
+        </form>
+    </div>
 </body>
 
 </html>

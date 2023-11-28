@@ -2,6 +2,8 @@
 
 * {
     font-family: Arial, Helvetica, sans-serif;
+    padding: 0px;
+    margin: 0px;
 }
 
 body {
@@ -12,16 +14,19 @@ body {
     background-size: cover;
 }
 
+#tela {
+    text-align: right;
+    padding: 10% 5%;
+}
+
 form {
-    height: 350px;
+    display: inline-block;
+    height: fit-content;
     width: 300px;
-    padding: 20px;
+    padding: 30px 20px;
     text-align: center;
     background-color: rgba(237, 232, 241, 0.534);
     border-radius: 25px;
-    position: relative;
-    left: 70%;
-    top: 18%
 }
 
 h1 {
@@ -38,6 +43,7 @@ input {
     margin-top: 25px;
     border-radius: 25px;
     font-size: medium;
+    margin: 10px;
 }
 
 .campoDigitavel {
@@ -63,4 +69,12 @@ input {
 
 #entrar:hover {
     background-color: red;
+}
+
+.erro {
+    background-color: transparent;
+    color: red;
+    font-family: 'Montserrat';
+    font-size: medium;
+    display: none;
 }

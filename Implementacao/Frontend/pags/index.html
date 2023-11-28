@@ -34,15 +34,18 @@
                         }
                     } else {
                         if (response.data.mensagem == "Email nao cadastrado") {
-                            console.log("Email usuário não cadastrado")
-                            //tratar para aparecer uma mensagem para o usuário que ele ainda não se cadastrou no sistema
+                            console.log("Email não cadastrado");
+                            document.getElementById('email-invalido').style.display = 'block';
                         } else if (response.data.mensagem == "Senha incorreta") {
                             console.log("Senha do usuário incorreta")
-                            //tratar para aparecer uma mensagem para o usuário que a senha está incorreta
+                            document.getElementById('email-invalido').style.display = 'none'
+                            document.getElementById('senha-incorreta').style.display = 'block';
                         } else {
+                            document.getElementById('email-invalido').style.display = 'none';
+                            document.getElementById('senha-incorreta').style.display = 'none';
                             console.error('Erro no login:', response.data.mensagem);
+                            document.getElementById('erro-servidor').style.display = 'block';
                         }
-
                     }
                 } catch (error) {
                     console.error('Erro na requisição:', error);
@@ -57,21 +60,24 @@
 </head>
 
 <body>
-    <form action="http://localhost:3000/usuarios" method="post">
-        <h1>Bem-Vindo</h1>
-        <p>
-            <input class="campoDigitavel" type="email" name="email" id="idemail" required
-                placeholder="Digite seu e-mail">
-        </p>
-        <p>
-            <input class="campoDigitavel" type="password" name="senha" id="idsenha" required minlength="8"
-                placeholder="Digite sua senha">
-        </p>
-        <p>
-            <input id="cadastrar" type="button" value="Cadastrar">
-            <input id="entrar" type="button" value="Entrar">
-        </p>
-    </form>
+    <div id="tela">
+        <form action="http://localhost:3000/usuarios" method="post">
+            <h1>Bem-Vindo</h1>
+            <p>
+                <input class="campoDigitavel" type="email" name="email" id="idemail" placeholder="Digite seu e-mail">
+                <div id="email-invalido" class="erro">E-mail não cadastrado</div>
+            </p>
+            <p>
+                <input class="campoDigitavel" type="password" name="senha" id="idsenha" placeholder="Digite sua senha">
+                <div id="senha-incorreta" class="erro">Senha incorreta</div>
+                <div id="erro-servidor" class="erro">Falha no login</div>
+            </p>
+            <p>
+                <input id="cadastrar" type="button" value="Cadastrar">
+                <input id="entrar" type="button" value="Entrar">
+            </p>
+        </form>
+    </div>
 </body>
 
 </html>
