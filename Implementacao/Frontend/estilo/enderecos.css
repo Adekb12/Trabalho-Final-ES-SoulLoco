@@ -132,3 +132,11 @@ iframe {
 .swal-btn {
     width: 100px;
 }
+
+.erro {
+    background-color: transparent;
+    color: red;
+    font-family: 'Montserrat';
+    font-size: medium;
+    display: none;
+}

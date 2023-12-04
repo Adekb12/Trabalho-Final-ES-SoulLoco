@@ -27,6 +27,8 @@
             <p>
                 <label for="cep">CEP</label> <br>
                 <input id="id-cep" class="campo-texto" type="text" required> <br>
+                <span id="cep-invalido" class="erro">CEP inválido! Use o formato XXXXX-XXX</span>
+                <span id="numero-invalido" class="erro">Número inválido</span>
                 <label for="estado">Estado</label> <br>
                 <input id="id-estado" class="campo-texto" type="text" required> <br>
                 <label for="cidade">Cidade</label> <br>
@@ -39,6 +41,8 @@
                 <input id="id-logra" class="campo-texto" type="text" required> <br>
                 <label for="Numero">Número</label> <br>
                 <input id="id-num" class="campo-texto" type="text" required> <br>
+                <span id="endereco-cadastrado" class="erro">Esse endereço já está cadastrado</span>
+                <span id="erro-sistema" class="erro">Erro ao tentar cadastrar endereço</span>
                 <br><br><br><br><br>
                 <input class="botao" type="button" value="Adicionar endereço">
             </p>
@@ -70,8 +74,10 @@
                         window.location.href = `detalhes-pedido.html?idPedido=${idPedido}`;
                     }
 
+                    document.getElementById('sair').addEventListener('click', sair);
+
                     function sair() {
-                        localStorage.clear()
+                        console.log('Sair');
                         window.location.href = `index.html`;
                     }
 
@@ -117,27 +123,42 @@
                             });
 
                             if (response.data.success) {
+                                document.getElementById('numero-invalido').style.display = 'none';
+                                document.getElementById('cep-invalido').style.display = 'none';
+                                document.getElementById('endereco-cadastrado').style.display = 'none';
+                                document.getElementById('erro-sistema').style.display = 'none';
                                 document.getElementById('iframeEnderecos').contentWindow.location.reload();
                             } else {
                                 if (response.data.mensagem == "Numero invalido") {
                                     console.log("Numero invalido")
-                                    //tratar para aparecer uma mensagem para o usuário 
+                                    document.getElementById('numero-invalido').style.display = 'inline-block';
+                                    document.getElementById('cep-invalido').style.display = 'none';
+                                    document.getElementById('endereco-cadastrado').style.display = 'none';
+                                    document.getElementById('erro-sistema').style.display = 'none';
                                 } else if (response.data.mensagem == "CEP invalido") {
                                     console.log("CEP invalido")
-                                    //tratar para aparecer uma mensagem para o usuário 
+                                    document.getElementById('numero-invalido').style.display = 'none';
+                                    document.getElementById('cep-invalido').style.display = 'inline-block';
+                                    document.getElementById('endereco-cadastrado').style.display = 'none';
+                                    document.getElementById('erro-sistema').style.display = 'none';
                                 } else if (response.data.mensagem == "Endereco ja existe") {
                                     console.log("Endereco ja existe")
-                                    //tratar para aparecer uma mensagem para o usuário
+                                    document.getElementById('numero-invalido').style.display = 'none';
+                                    document.getElementById('cep-invalido').style.display = 'none';
+                                    document.getElementById('endereco-cadastrado').style.display = 'inline-block';
+                                    document.getElementById('erro-sistema').style.display = 'none';
                                 } else {
                                     console.error('Erro no login:', response.data.mensagem);
+                                    document.getElementById('numero-invalido').style.display = 'none';
+                                    document.getElementById('cep-invalido').style.display = 'none';
+                                    document.getElementById('endereco-cadastrado').style.display = 'none';
+                                    document.getElementById('erro-sistema').style.display = 'inline-block';
                                 }
-
                             }
                         } catch (error) {
                             console.error('Erro na requisição:', error);
                         }
                     }
-
                 })
             </script>
         </div>
