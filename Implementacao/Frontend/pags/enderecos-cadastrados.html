@@ -12,7 +12,7 @@
         const paramId = new URLSearchParams(window.location.search);
         const idCliente = paramId.get('idCliente');
         const idPedido = paramId.get('idPedido');
-
+        console.log(idPedido)
         document.addEventListener('DOMContentLoaded', async function () {
             const enderecoContainer = document.querySelector('#endereco-container');
             // Função para carregar os itens do cardápio
@@ -109,7 +109,7 @@
                         if (endc) {
                             endc.remove();
 
-                            if(idEndereco == localStorage.getItem('idEndPed')){
+                            if (idEndereco == localStorage.getItem('idEndPed')) {
                                 localStorage.setItem('enderecoEscolhido', "Indefinido");
                                 localStorage.setItem('idEndPed', null);
                             }

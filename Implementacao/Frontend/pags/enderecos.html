@@ -18,7 +18,7 @@
         </div>
         <div id="metade2">
             <p id="icones">
-                <button onclick=""><img class="icone" src="../imagens/botao-logout.png" alt="Sair" srcset=""></button>
+                <button id="sair"><img class="icone" src="../imagens/botao-logout.png" alt="Sair" srcset=""></button>
             </p>
         </div>
     </header>
@@ -58,6 +58,7 @@
                 document.getElementById('iframeEnderecos').src = `enderecos-cadastrados.html?idCliente=${idCliente}&idPedido=${idPedido}`;
 
                 document.addEventListener('DOMContentLoaded', function () {
+                    document.getElementById('sair').addEventListener('click', sair);
 
                     window.addEventListener('irParaDetalhes', function () {
                         voltarDetalhes()
@@ -67,6 +68,11 @@
 
                     function voltarDetalhes() {
                         window.location.href = `detalhes-pedido.html?idPedido=${idPedido}`;
+                    }
+
+                    function sair() {
+                        localStorage.clear()
+                        window.location.href = `index.html`;
                     }
 
                     document.querySelector('.botao').addEventListener('click', async function () {
@@ -90,9 +96,9 @@
                             confirmButtonText: 'Sim!',
                             cancelButtonText: 'Cancelar',
                             customClass: {
-                            confirmButton: 'swal-btn',
-                            cancelButton: 'swal-btn'
-                        },
+                                confirmButton: 'swal-btn',
+                                cancelButton: 'swal-btn'
+                            },
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 adicionarEndereco(logradouro, numero, cep, estado, cidade, bairro);

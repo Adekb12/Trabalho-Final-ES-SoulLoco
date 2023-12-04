@@ -32,7 +32,7 @@
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframeItensPedido').src = `itens-pedido.html?idPedido=${idPedido}`;
             var enderecoEscolhido = localStorage.getItem('enderecoEscolhido');
-
+            var idEndereco = localStorage.getItem('idEndPed');
 
 
             document.addEventListener('DOMContentLoaded', async function () {
@@ -56,6 +56,7 @@
                 }
 
                 function sair() {
+                    localStorage.clear()
                     window.location.href = `index.html`;
                 }
 
@@ -78,23 +79,22 @@
                     spanEndereco.textContent = "Nenhum endereço escolhido"
                 }
 
-                var idEndereco = localStorage.getItem('idEndPed');
                 var idCliente = null;
-                if (idEndereco) {
-                    try {
-                        const response = await axios.put(`http://localhost:3000/pedidos/${idPedido}`, {
-                            idEndereco: idEndereco
-                        })
-                        if (response.data.success) {
-                            idCliente = response.data.idCliente;
-                        } else {
-                            console.log(response.data.message)
-                        }
+                // if (idEndereco) {
+                //     try {
+                //         const response = await axios.put(`http://localhost:3000/pedidos/${idPedido}`, {
+                //             idEndereco: idEndereco
+                //         })
+                //         if (response.data.success) {
+                //             idCliente = response.data.idCliente;
+                //         } else {
+                //             console.log(response.data.message)
+                //         }
 
-                    } catch (error) {
-                        console.log(error)
-                    }
-                }
+                //     } catch (error) {
+                //         console.log(error)
+                //     }
+                // }
 
                 async function calcularPrecoTotal() {
                     var precoTotal = 0;
@@ -127,6 +127,18 @@
                         console.log("Pedido confirmado")
                         //avisar o usuário que o pedido foi confirmado
                         localStorage.clear()
+                        try {
+                            const response = await axios.put(`http://localhost:3000/pedidos/${idPedido}`, {
+                                idEndereco: idEndereco
+                            })
+                            if (response.data.success) {
+                                idCliente = response.data.idCliente;
+                            } else {
+                                console.log(response.data.message)
+                            }
+                        } catch (error) {
+                            console.log(error)
+                        }
                         window.location.href = `tela-inicial.html?idCliente=${idCliente}`;
                     } else {
                         console.log("Endereço não definido")
