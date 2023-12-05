@@ -62,6 +62,7 @@
                 document.getElementById('iframeEnderecos').src = `enderecos-cadastrados.html?idCliente=${idCliente}&idPedido=${idPedido}`;
 
                 document.addEventListener('DOMContentLoaded', function () {
+                    document.getElementById('sair').addEventListener('click', sair);
 
                     window.addEventListener('irParaDetalhes', function () {
                         voltarDetalhes()
@@ -101,9 +102,9 @@
                             confirmButtonText: 'Sim!',
                             cancelButtonText: 'Cancelar',
                             customClass: {
-                            confirmButton: 'swal-btn',
-                            cancelButton: 'swal-btn'
-                        },
+                                confirmButton: 'swal-btn',
+                                cancelButton: 'swal-btn'
+                            },
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 adicionarEndereco(logradouro, numero, cep, estado, cidade, bairro);

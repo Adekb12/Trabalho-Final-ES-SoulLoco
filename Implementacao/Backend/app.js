@@ -1,10 +1,10 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import usuariosRouter from './routes/usuarios.routes.js'
-import cardapioRouter from './routes/cardapio.routes.js'
-import pedidosRouter from './routes/pedidos.routes.js'
-import itensPedidosRouter from './routes/itensPedidos.routes.js'
-import enderecosRouter from './routes/enderecos.routes.js'
+import usuariosRouter from './src/routes/usuarios.routes.js'
+import cardapioRouter from './src/routes/cardapio.routes.js'
+import pedidosRouter from './src/routes/pedidos.routes.js'
+import itensPedidosRouter from './src/routes/itensPedidos.routes.js'
+import enderecosRouter from './src/routes/enderecos.routes.js'
 import cors from 'cors'
 
 const app = express()
