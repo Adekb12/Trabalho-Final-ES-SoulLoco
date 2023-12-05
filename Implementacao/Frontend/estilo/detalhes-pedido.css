@@ -57,9 +57,13 @@ main {
     flex-grow: 1;
     flex-basis: auto;
     width: 93vw;
+    display: flex;
+    flex-flow: column;
 }
 
 iframe {
+    flex-grow: 0;
+    flex-basis: auto;
     height: 60%;
     width: 100%;
 }
@@ -69,7 +73,8 @@ iframe {
     font-style: italic;
     font-size: medium;
     text-align: right;
-    height: 40%;
+    flex-grow: 1;
+    flex-basis: auto;
     width: 100%;
 }
 
@@ -89,6 +94,10 @@ iframe {
 #end {
     width: 70%;
     text-align: center;
+}
+
+#botoes {
+    width: 100%;
 }
 
 .botao {
@@ -119,4 +128,12 @@ iframe {
 
 #cancelar:hover {
     background-color: red;
+}
+
+.erro {
+    background-color: transparent;
+    color: red;
+    font-family: 'Montserrat';
+    font-size: medium;
+    display: none;
 }

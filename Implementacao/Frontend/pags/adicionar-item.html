@@ -42,17 +42,14 @@
                         window.location.href = `cardapio-gerente.html`
                     } else {
                         if (response.data.mensagem == "Esse nome já existe!") {
-                            console.log("Esse nome já existe!")
                             document.getElementById('nome-repetido').style.display = 'block';
                             document.getElementById('preco-invalido').style.display = 'none';
                             document.getElementById('erro-sistema').style.display = 'none';
                         } else if (response.data.mensagem == "Preço inválido!") {
-                            console.log("Preço inválido!!!")
                             document.getElementById('nome-repetido').style.display = 'none';
                             document.getElementById('preco-invalido').style.display = 'block';
                             document.getElementById('erro-sistema').style.display = 'none';
                         } else {
-                            console.error('Erro:', response.data.mensagem);
                             document.getElementById('nome-repetido').style.display = 'none';
                             document.getElementById('preco-invalido').style.display = 'none';
                             document.getElementById('erro-sistema').style.display = 'block';

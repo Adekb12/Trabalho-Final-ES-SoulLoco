@@ -124,13 +124,11 @@
                 async function confirmarPedido() {
                     if (idEndereco && idEndereco != null) {
                         const r = await axios.put(`http://localhost:3000/pedidos/${idPedido}/Confirmado`)
-                        console.log("Pedido confirmado")
-                        //avisar o usuário que o pedido foi confirmado
+                        document.getElementById('pedido-confirmado').style.display = 'inline-block';
                         localStorage.clear()
                         window.location.href = `tela-inicial.html?idCliente=${idCliente}`;
                     } else {
-                        console.log("Endereço não definido")
-                        //avisar o usuário que ele precisa definir o endereço antes de confirmar pedido
+                        document.getElementById('endereco-indefindo').style.display = 'inline-block';
                     }
                 }
 
@@ -176,7 +174,8 @@
                 <input id="btn-alt" class="botao" type="button" value="Editar Endereço">
                 <span id="end" class="campo">Endereco</span>
             </p>
-            <p>
+            <p id="botoes">
+                <span id="endereco-indefinido" class="erro">Defina um endereço antes de confirmar o pedido</span>
                 <input id="confirm" class="botao" type="button" value="Confirmar">
                 <input id="cancelar" class="botao" type="button" value="Cancelar">
             </p>

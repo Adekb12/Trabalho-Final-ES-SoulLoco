@@ -54,13 +54,17 @@
                         window.location.href = `itens-cardapio-gerente.html`
                     } else {
                         if (response.data.mensagem == "Esse nome já existe!") {
-                            console.log("Esse nome já existe!")
-                            //tratar para aparecer uma mensagem para o usuário que o nome do item já existe
+                            document.getElementById('nome-repetido').style.display = 'block';
+                            document.getElementById('preco-invalido').style.display = 'none';
+                            document.getElementById('erro-sistema').style.display = 'none';
                         } else if (response.data.mensagem == "Preço inválido!") {
-                            console.log("Preço inválido!!!")
-                            //tratar para aparecer uma mensagem para o usuário que o preço é inválido
+                            document.getElementById('nome-repetido').style.display = 'none';
+                            document.getElementById('preco-invalido').style.display = 'block';
+                            document.getElementById('erro-sistema').style.display = 'none';
                         } else {
-                            console.error('Erro no login:', response.data.mensagem);
+                            document.getElementById('nome-repetido').style.display = 'none';
+                            document.getElementById('preco-invalido').style.display = 'none';
+                            document.getElementById('erro-sistema').style.display = 'block';
                         }
 
                     }
@@ -88,6 +92,7 @@
             <div class="form-group">
                 <label for="nameInput">Novo nome:</label>
                 <input type="text" id="nameInput" name="nameInput">
+                <div id="nome-repetido" class="erro">Algum item já possui esse nome</div>
             </div>
 
             <div class="form-group">
@@ -98,6 +103,8 @@
             <div class="form-group">
                 <label for="priceInput">Novo preço:</label>
                 <input type="text" id="priceInput" name="priceInput">
+                <div id="preco-invalido" class="erro">Preço inválido</div>
+                <div id="erro-sistema" class="erro">Erro! Verifique o servidor</div>
             </div>
         </div>
 
