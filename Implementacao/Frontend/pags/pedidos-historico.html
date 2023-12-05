@@ -18,7 +18,6 @@
             async function carregarHistoricoPedidos() {
                 try {
                     const response = await axios.get(`http://localhost:3000/pedidos/${idCliente}`);
-                    console.log(response.data)
                     response.data.forEach(async pedido => {
                         const pedidoCli = document.createElement('div');
                         pedidoCli.id = pedido.idpedido;

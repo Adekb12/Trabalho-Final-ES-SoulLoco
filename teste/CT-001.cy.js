@@ -1,5 +1,5 @@
-describe('Visualizar histórico de pedidos', () => {
-    it('Deve visualizar os o histórico de pedidos do cliente', () => {
+describe('Visualizar itens do cardápio', () => {
+    it('Deve visualizar os itens que estão no cardápio', () => {
         // Visite a página de endereços
         cy.visit('http://127.0.0.1:5500/Implementacao/Frontend/pags/index.html');
 
@@ -10,8 +10,6 @@ describe('Visualizar histórico de pedidos', () => {
         cy.url().should('include', 'http://127.0.0.1:5500/Implementacao/Frontend/pags/tela-inicial.html?idCliente=1');
         cy.get('input#realizar').click();
 
-        cy.get('input#historico.formHeader').click();
-
-        cy.iframe('#iframePedidosRealizados', { timeout: 5000 }).find('.ped').should('be.visible').should('have.length.greaterThan', 0);
+        cy.iframe('#iframeCardapio').find('.card-item').should('be.visible').should('have.length.greaterThan', 0);
     });
 });

@@ -57,7 +57,6 @@
                 const params = new URLSearchParams(window.location.search);
                 const idCliente = params.get('idCliente');
                 const idPedido = params.get('idPedido');
-
                 // Atualizar o src do iframe usando JavaScript
                 document.getElementById('iframeEnderecos').src = `enderecos-cadastrados.html?idCliente=${idCliente}&idPedido=${idPedido}`;
 
@@ -71,7 +70,7 @@
                     document.getElementById('btn-voltar').addEventListener('click', voltarDetalhes);
 
                     function voltarDetalhes() {
-                        window.location.href = `detalhes-pedido.html?idPedido=${idPedido}`;
+                        window.location.href = `detalhes-pedido.html?idPedido=${idPedido}&idCliente=${idCliente}`;
                     }
 
                     document.getElementById('sair').addEventListener('click', sair);

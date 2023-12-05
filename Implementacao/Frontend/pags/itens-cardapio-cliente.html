@@ -61,7 +61,9 @@
                     const nome = botaoAdd.getAttribute('data-nm')
                     const qtdInput = document.getElementById(`qtd-${idItem}`);
                     const qtd = Number(qtdInput.value)
-                    exibirConfirmarAdicao(idItem, nome, qtd);
+                    if (qtd > 0) {
+                        exibirConfirmarAdicao(idItem, nome, qtd);
+                    }
                 }
             });
 

@@ -29,7 +29,6 @@
             const idPedido = params.get('idPedido')
             const idCliente = params.get('idCliente');
 
-            console.log(idCliente)
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframePedidosRealizados').src = `pedidos-historico.html?idCliente=${idCliente}`;
 
@@ -40,7 +39,7 @@
                 document.getElementById('sair').addEventListener('click', sair);
 
                 function voltarCardapio() {
-                    window.location.href = `cardapio-cliente.html?idPedido=${idPedido}`;
+                    window.location.href = `cardapio-cliente.html?idPedido=${idPedido}&idCliente=${idCliente}`;
                 }
 
                 function sair() {

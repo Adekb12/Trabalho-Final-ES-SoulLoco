@@ -13,9 +13,6 @@
         // Obtém o valor do parâmetro 'idCliente'
         const idCliente = params.get('idCliente');
 
-        // Agora, 'idCliente' contém o valor passado na URL
-        console.log('ID do Cliente:', idCliente);
-
         document.addEventListener('DOMContentLoaded', function () {
 
             document.getElementById('realizar').addEventListener('click', realizar);
@@ -35,6 +32,7 @@
                     if (response.data.length === 0) {
                         console.log('Não foi possível criar um pedido');
                     } else {
+                        console.log("TLC: " + idCliente)
                         const idPedido = response.data[0].idpedido;
                         window.location.href = `cardapio-cliente.html?idPedido=${idPedido}&idCliente=${idCliente}`;
                     }

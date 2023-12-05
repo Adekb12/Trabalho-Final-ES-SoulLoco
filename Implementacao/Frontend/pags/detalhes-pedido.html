@@ -28,7 +28,8 @@
         <script>
             const params = new URLSearchParams(window.location.search);
             const idPedido = params.get('idPedido');
-
+            const idCliente = params.get('idCliente');
+            console.log("DP: " + idCliente)
             // Atualizar o src do iframe usando JavaScript
             document.getElementById('iframeItensPedido').src = `itens-pedido.html?idPedido=${idPedido}`;
             var enderecoEscolhido = localStorage.getItem('enderecoEscolhido');
@@ -52,7 +53,7 @@
 
 
                 function voltarCardapio() {
-                    window.location.href = `cardapio-cliente.html?idPedido=${idPedido}`;
+                    window.location.href = `cardapio-cliente.html?idPedido=${idPedido}&idCliente=${idCliente}`;
                 }
 
                 function sair() {
@@ -61,10 +62,9 @@
                 }
 
                 async function irEndereco() {
-                    var idCliente = null;
                     try {
-                        const response = await axios.get(`http://localhost:3000/usuarios/${idPedido}`)
-                        idCliente = response.data[0].idcliente;
+                        // const response = await axios.get(`http://localhost:3000/usuarios/${idPedido}`)
+                        // idCliente = response.data[0].idcliente;
                         window.location.href = `enderecos.html?idCliente=${idCliente}&idPedido=${idPedido}`;
                     } catch (error) {
                         console.log(error)
@@ -79,22 +79,7 @@
                     spanEndereco.textContent = "Nenhum endereço escolhido"
                 }
 
-                var idCliente = null;
-                // if (idEndereco) {
-                //     try {
-                //         const response = await axios.put(`http://localhost:3000/pedidos/${idPedido}`, {
-                //             idEndereco: idEndereco
-                //         })
-                //         if (response.data.success) {
-                //             idCliente = response.data.idCliente;
-                //         } else {
-                //             console.log(response.data.message)
-                //         }
 
-                //     } catch (error) {
-                //         console.log(error)
-                //     }
-                // }
 
                 async function calcularPrecoTotal() {
                     var precoTotal = 0;
@@ -124,8 +109,8 @@
                 async function confirmarPedido() {
                     if (idEndereco && idEndereco != null) {
                         const r = await axios.put(`http://localhost:3000/pedidos/${idPedido}/Confirmado`)
-                        document.getElementById('pedido-confirmado').style.display = 'inline-block';
-                        localStorage.clear()
+                        // document.getElementById('pedido-confirmado').style.display = 'inline-block';
+
                         try {
                             const response = await axios.put(`http://localhost:3000/pedidos/${idPedido}`, {
                                 idEndereco: idEndereco
@@ -138,9 +123,11 @@
                         } catch (error) {
                             console.log(error)
                         }
+                        localStorage.clear()
                         window.location.href = `tela-inicial.html?idCliente=${idCliente}`;
                     } else {
-                        document.getElementById('endereco-indefindo').style.display = 'inline-block';
+                        // document.getElementById('endereco-indefindo').style.display = 'inline-block';
+                        alert("Endereço não definido");
                     }
                 }
 
@@ -183,7 +170,7 @@
         <div id="endereco">
             <p class="campo">Total: R$ </p>
             <p id="campo-endereco">
-                <input id="btn-alt" class="botao" type="button" value="Editar Endereço">
+                <input id="btn-alt" class="botao" type="button" value="Definir Endereço">
                 <span id="end" class="campo">Endereco</span>
             </p>
             <p id="botoes">
